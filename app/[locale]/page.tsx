@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { PrimaryButton } from "@/components/ui/PrimaryButton";
@@ -6,10 +7,16 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getLocaleParam } from "@/lib/i18n/locale-param";
 import { localizedHref } from "@/lib/i18n/path";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 
 type Props = {
   params: Promise<{ locale: string }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const locale = await getLocaleParam(params);
+  return buildPageMetadata(locale, "home");
+}
 
 export default async function Home({ params }: Props) {
   const locale = await getLocaleParam(params);

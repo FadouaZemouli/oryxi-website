@@ -6,6 +6,8 @@ import { Header } from "@/components/layout/Header";
 import { localeDir, locales } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getLocaleParam } from "@/lib/i18n/locale-param";
+import { ogImage, siteName } from "@/lib/seo/config";
+import { ogLocale } from "@/lib/seo/metadata";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,6 +44,12 @@ export async function generateMetadata({
   return {
     title: dict.meta.home,
     description: dict.meta.siteDescription,
+    openGraph: {
+      type: "website",
+      siteName,
+      locale: ogLocale(locale),
+      images: [ogImage],
+    },
   };
 }
 

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PagePlaceholder } from "@/components/ui/PagePlaceholder";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getLocaleParam } from "@/lib/i18n/locale-param";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -9,12 +10,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const locale = await getLocaleParam(params);
-  const dict = getDictionary(locale);
-
-  return {
-    title: dict.meta.projects,
-    description: dict.placeholder.metaDescription,
-  };
+  return buildPageMetadata(locale, "projects");
 }
 
 export default async function ProjectsPage({ params }: Props) {
