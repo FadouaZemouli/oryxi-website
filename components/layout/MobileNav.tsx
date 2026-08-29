@@ -2,15 +2,42 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { navItems, quoteHref } from "@/lib/navigation";
+import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { PrimaryButton } from "@/components/ui/PrimaryButton";
+import type { Locale } from "@/lib/i18n/config";
+
+type NavLink = {
+  href: string;
+  label: string;
+};
 
 type MobileNavProps = {
   open: boolean;
   onClose: () => void;
+  items: readonly NavLink[];
+  quoteHref: string;
+  quoteLabel: string;
+  locale: Locale;
+  languageLabels: {
+    label: string;
+    en: string;
+    ar: string;
+  };
+  closeLabel: string;
+  navLabel: string;
 };
 
-export function MobileNav({ open, onClose }: MobileNavProps) {
+export function MobileNav({
+  open,
+  onClose,
+  items,
+  quoteHref,
+  quoteLabel,
+  locale,
+  languageLabels,
+  closeLabel,
+  navLabel,
+}: MobileNavProps) {
   const pathname = usePathname();
 
   return (
@@ -18,16 +45,16 @@ export function MobileNav({ open, onClose }: MobileNavProps) {
       <button
         type="button"
         className="fixed inset-0 z-40 bg-oms-dark/40"
-        aria-label="Close menu"
+        aria-label={closeLabel}
         onClick={onClose}
       />
       <nav
         id="mobile-navigation"
-        aria-label="Mobile"
+        aria-label={navLabel}
         className="relative z-50 border-t border-oms-gray/60 bg-oms-white"
       >
         <ul className="flex flex-col px-4 py-4 sm:px-6">
-          {navItems.map((item) => {
+          {items.map((item) => {
             const isActive = pathname === item.href;
 
             return (
@@ -47,9 +74,10 @@ export function MobileNav({ open, onClose }: MobileNavProps) {
             );
           })}
         </ul>
-        <div className="border-t border-oms-gray/60 px-4 py-4 sm:px-6">
+        <div className="flex flex-col gap-4 border-t border-oms-gray/60 px-4 py-4 sm:px-6">
+          <LanguageSwitcher locale={locale} labels={languageLabels} />
           <PrimaryButton href={quoteHref} className="w-full">
-            Request a Quote
+            {quoteLabel}
           </PrimaryButton>
         </div>
       </nav>

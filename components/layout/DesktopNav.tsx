@@ -2,15 +2,24 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { navItems } from "@/lib/navigation";
 
-export function DesktopNav() {
+type NavLink = {
+  href: string;
+  label: string;
+};
+
+type DesktopNavProps = {
+  items: readonly NavLink[];
+  ariaLabel: string;
+};
+
+export function DesktopNav({ items, ariaLabel }: DesktopNavProps) {
   const pathname = usePathname();
 
   return (
-    <nav aria-label="Primary" className="hidden lg:block">
-      <ul className="flex items-center gap-5 xl:gap-6">
-        {navItems.map((item) => {
+    <nav aria-label={ariaLabel} className="hidden min-w-0 lg:block">
+      <ul className="flex items-center gap-4 xl:gap-6">
+        {items.map((item) => {
           const isActive = pathname === item.href;
 
           return (

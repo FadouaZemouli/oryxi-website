@@ -19,5 +19,5 @@
 body {
   background: var(--oms-white);
   color: var(--oms-dark);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-geist-sans), var(--font-arabic), system-ui, sans-serif;
 }

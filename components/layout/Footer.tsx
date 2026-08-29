@@ -1,14 +1,25 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import type { Dictionary } from "@/lib/i18n/get-dictionary";
+import type { Locale } from "@/lib/i18n/config";
+import { localizedHref } from "@/lib/i18n/path";
 import { navItems } from "@/lib/navigation";
 
-export function Footer() {
+type FooterProps = {
+  locale: Locale;
+  dict: Dictionary;
+};
+
+export function Footer({ locale, dict }: FooterProps) {
+  const homeHref = localizedHref(locale, "/");
+  const year = new Date().getFullYear();
+
   return (
     <footer className="mt-auto border-t border-oms-dark bg-oms-dark text-oms-white">
       <Container className="grid gap-8 py-10 sm:grid-cols-2 lg:grid-cols-3">
         <div>
-          <Link href="/" className="inline-block bg-oms-white px-3 py-2">
+          <Link href={homeHref} className="inline-block bg-oms-white px-3 py-2">
             <Image
               src="/logos/oms-logo.png"
               alt="ORYXI Maintenance Services"
@@ -18,23 +29,21 @@ export function Footer() {
             />
           </Link>
           <p className="mt-4 text-sm font-medium">ORYXI Maintenance Services</p>
-          <p className="mt-2 text-sm leading-6 text-oms-gray">
-            Professional maintenance and technical services.
-          </p>
+          <p className="mt-2 text-sm leading-6 text-oms-gray">{dict.footer.tagline}</p>
         </div>
 
-        <nav aria-label="Footer">
+        <nav aria-label={dict.footer.pages}>
           <p className="text-sm font-semibold tracking-wide uppercase text-oms-gray">
-            Pages
+            {dict.footer.pages}
           </p>
           <ul className="mt-4 space-y-2">
             {navItems.map((item) => (
-              <li key={item.href}>
+              <li key={item.path}>
                 <Link
-                  href={item.href}
+                  href={localizedHref(locale, item.path)}
                   className="text-sm text-oms-white transition-colors hover:text-oms-gray"
                 >
-                  {item.label}
+                  {dict.nav[item.key]}
                 </Link>
               </li>
             ))}
@@ -43,10 +52,10 @@ export function Footer() {
 
         <div>
           <p className="text-sm font-semibold tracking-wide uppercase text-oms-gray">
-            Contact
+            {dict.footer.contact}
           </p>
           <p className="mt-4 text-sm leading-6 text-oms-gray">
-            Company contact details will be added here once approved.
+            {dict.footer.contactPlaceholder}
           </p>
         </div>
       </Container>
@@ -54,8 +63,7 @@ export function Footer() {
       <div className="border-t border-white/10">
         <Container className="py-4">
           <p className="text-xs text-oms-gray">
-            Copyright {new Date().getFullYear()} ORYXI Maintenance Services. All
-            rights reserved.
+            {dict.footer.copyright.replace("{year}", String(year))}
           </p>
         </Container>
       </div>

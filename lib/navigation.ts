@@ -1,11 +1,11 @@
 export const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About Us" },
-  { href: "/services", label: "Services" },
-  { href: "/projects", label: "Projects" },
-  { href: "/amc-contracts", label: "AMC Contracts" },
-  { href: "/emergency-service", label: "Emergency Service" },
-  { href: "/contact", label: "Contact Us" },
+  { path: "/", key: "home" },
+  { path: "/about", key: "about" },
+  { path: "/services", key: "services" },
+  { path: "/projects", key: "projects" },
+  { path: "/amc-contracts", key: "amcContracts" },
+  { path: "/emergency-service", key: "emergencyService" },
+  { path: "/contact", key: "contact" },
 ] as const;
 
-export const quoteHref = "/request-quote";
+export type NavItemKey = (typeof navItems)[number]["key"];
