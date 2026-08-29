@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/Container";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
 import type { Locale } from "@/lib/i18n/config";
 import { localizedHref } from "@/lib/i18n/path";
-import { navItems } from "@/lib/navigation";
+import { footerNavItems } from "@/lib/navigation";
 
 type FooterProps = {
   locale: Locale;
@@ -37,7 +37,7 @@ export function Footer({ locale, dict }: FooterProps) {
             {dict.footer.pages}
           </p>
           <ul className="mt-4 space-y-2">
-            {navItems.map((item) => (
+            {footerNavItems.map((item) => (
               <li key={item.path}>
                 <Link
                   href={localizedHref(locale, item.path)}

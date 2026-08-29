@@ -6,15 +6,23 @@ import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { PrimaryButton } from "@/components/ui/PrimaryButton";
 import type { Locale } from "@/lib/i18n/config";
 
-type NavLink = {
+export type MobileNavLink = {
   href: string;
   label: string;
 };
 
+export type MobileNavItem =
+  | { type: "link"; href: string; label: string }
+  | {
+      type: "group";
+      label: string;
+      children: readonly MobileNavLink[];
+    };
+
 type MobileNavProps = {
   open: boolean;
   onClose: () => void;
-  items: readonly NavLink[];
+  items: readonly MobileNavItem[];
   quoteHref: string;
   quoteLabel: string;
   locale: Locale;
@@ -55,6 +63,37 @@ export function MobileNav({
       >
         <ul className="flex flex-col px-4 py-4 sm:px-6">
           {items.map((item) => {
+            if (item.type === "group") {
+              return (
+                <li key={item.label} className="py-1">
+                  <p className="pt-2 pb-1 text-sm font-semibold text-oms-burgundy">
+                    {item.label}
+                  </p>
+                  <ul className="border-s border-oms-gray/60 ps-4">
+                    {item.children.map((child) => {
+                      const isActive = pathname === child.href;
+
+                      return (
+                        <li key={child.href}>
+                          <Link
+                            href={child.href}
+                            onClick={onClose}
+                            className={`block py-2.5 text-base ${
+                              isActive
+                                ? "font-semibold text-oms-burgundy"
+                                : "font-medium text-oms-dark"
+                            }`}
+                          >
+                            {child.label}
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </li>
+              );
+            }
+
             const isActive = pathname === item.href;
 
             return (

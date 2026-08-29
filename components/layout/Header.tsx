@@ -3,15 +3,15 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { DesktopNav } from "@/components/layout/DesktopNav";
+import { DesktopNav, type DesktopNavItem } from "@/components/layout/DesktopNav";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
-import { MobileNav } from "@/components/layout/MobileNav";
+import { MobileNav, type MobileNavItem } from "@/components/layout/MobileNav";
 import { Container } from "@/components/ui/Container";
 import { PrimaryButton } from "@/components/ui/PrimaryButton";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
 import type { Locale } from "@/lib/i18n/config";
 import { localizedHref } from "@/lib/i18n/path";
-import { navItems } from "@/lib/navigation";
+import { primaryNavItems, serviceNavItems } from "@/lib/navigation";
 
 type HeaderProps = {
   locale: Locale;
@@ -22,10 +22,43 @@ export function Header({ locale, dict }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const homeHref = localizedHref(locale, "/");
   const quoteHref = localizedHref(locale, "/request-quote");
-  const items = navItems.map((item) => ({
+  const serviceLinks = serviceNavItems.map((item) => ({
     href: localizedHref(locale, item.path),
     label: dict.nav[item.key],
   }));
+
+  const desktopItems: DesktopNavItem[] = primaryNavItems.map((item) => {
+    if ("children" in item) {
+      return {
+        type: "menu",
+        label: dict.nav[item.key],
+        menuLabel: dict.header.servicesMenu,
+        children: serviceLinks,
+      };
+    }
+
+    return {
+      type: "link",
+      href: localizedHref(locale, item.path),
+      label: dict.nav[item.key],
+    };
+  });
+
+  const mobileItems: MobileNavItem[] = primaryNavItems.map((item) => {
+    if ("children" in item) {
+      return {
+        type: "group",
+        label: dict.nav[item.key],
+        children: serviceLinks,
+      };
+    }
+
+    return {
+      type: "link",
+      href: localizedHref(locale, item.path),
+      label: dict.nav[item.key],
+    };
+  });
 
   return (
     <header className="sticky top-0 z-50 border-b border-oms-gray/70 bg-oms-white">
@@ -45,7 +78,7 @@ export function Header({ locale, dict }: HeaderProps) {
           />
         </Link>
 
-        <DesktopNav items={items} ariaLabel={dict.header.primaryNav} />
+        <DesktopNav items={desktopItems} ariaLabel={dict.header.primaryNav} />
 
         <div className="flex items-center gap-2 sm:gap-3">
           <LanguageSwitcher locale={locale} labels={dict.language} />
@@ -80,7 +113,7 @@ export function Header({ locale, dict }: HeaderProps) {
       <MobileNav
         open={menuOpen}
         onClose={() => setMenuOpen(false)}
-        items={items}
+        items={mobileItems}
         quoteHref={quoteHref}
         quoteLabel={dict.nav.requestQuote}
         locale={locale}

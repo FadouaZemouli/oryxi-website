@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import type { Locale } from "@/lib/i18n/config";
 import { locales } from "@/lib/i18n/config";
-import { getDictionary } from "@/lib/i18n/get-dictionary";
+import { getDictionary, type Dictionary } from "@/lib/i18n/get-dictionary";
 import { localizedHref } from "@/lib/i18n/path";
 import {
   ogImage,
@@ -34,6 +34,18 @@ export function ogLocale(locale: Locale): string {
   return locale === "ar" ? "ar_QA" : "en_QA";
 }
 
+function pageDescription(dict: Dictionary, page: PageKey): string {
+  if (page === "home") {
+    return dict.meta.siteDescription;
+  }
+
+  if (page === "qcddServices") {
+    return dict.meta.qcddServicesDescription;
+  }
+
+  return dict.placeholder.metaDescription;
+}
+
 export function buildPageMetadata(
   locale: Locale,
   page: PageKey,
@@ -42,8 +54,7 @@ export function buildPageMetadata(
   const path = pagePaths[page];
   const canonical = localeUrl(locale, path);
   const title = dict.meta[page];
-  const description =
-    page === "home" ? dict.meta.siteDescription : dict.placeholder.metaDescription;
+  const description = pageDescription(dict, page);
   const languages = languageAlternates(path);
   const alternateLocale = locales
     .filter((item) => item !== locale)
