@@ -4,8 +4,8 @@ export const navItems = [
   { href: "/services", label: "Services" },
   { href: "/projects", label: "Projects" },
   { href: "/amc-contracts", label: "AMC Contracts" },
-  { href: "/emergency", label: "Emergency Service" },
+  { href: "/emergency-service", label: "Emergency Service" },
   { href: "/contact", label: "Contact Us" },
 ] as const;
 
-export const quoteHref = "/contact";
+export const quoteHref = "/request-quote";
