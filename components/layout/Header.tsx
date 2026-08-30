@@ -1,87 +1,81 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { DesktopNav, type DesktopNavItem } from "@/components/layout/DesktopNav";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { MobileNav, type MobileNavItem } from "@/components/layout/MobileNav";
+import { SiteLogo } from "@/components/layout/SiteLogo";
 import { Container } from "@/components/ui/Container";
 import { PrimaryButton } from "@/components/ui/PrimaryButton";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
 import type { Locale } from "@/lib/i18n/config";
 import { localizedHref } from "@/lib/i18n/path";
-import { primaryNavItems, serviceNavItems } from "@/lib/navigation";
+import { primaryNavItems } from "@/lib/navigation";
 
 type HeaderProps = {
   locale: Locale;
   dict: Dictionary;
 };
 
+function normalizePathname(pathname: string) {
+  if (pathname.length > 1 && pathname.endsWith("/")) {
+    return pathname.slice(0, -1);
+  }
+
+  return pathname;
+}
+
+function syncHeaderPathAttributes(pathname: string, locale: Locale) {
+  const root = document.documentElement;
+  const isHome = pathname === `/${locale}`;
+  root.dataset.omsHeader = isHome ? "home" : "inner";
+  root.dataset.omsPath = pathname;
+}
+
 export function Header({ locale, dict }: HeaderProps) {
+  const pathname = normalizePathname(usePathname());
   const [menuOpen, setMenuOpen] = useState(false);
   const homeHref = localizedHref(locale, "/");
   const quoteHref = localizedHref(locale, "/request-quote");
-  const serviceLinks = serviceNavItems.map((item) => ({
+
+  // Keep React markup pathname-stable for chrome classes. Sync document
+  // attributes after mount / on client navigations for CSS variants.
+  useEffect(() => {
+    syncHeaderPathAttributes(pathname, locale);
+  }, [pathname, locale]);
+
+  const navItems: DesktopNavItem[] = primaryNavItems.map((item) => ({
     href: localizedHref(locale, item.path),
     label: dict.nav[item.key],
   }));
 
-  const desktopItems: DesktopNavItem[] = primaryNavItems.map((item) => {
-    if ("children" in item) {
-      return {
-        type: "menu",
-        label: dict.nav[item.key],
-        menuLabel: dict.header.servicesMenu,
-        children: serviceLinks,
-      };
-    }
-
-    return {
-      type: "link",
-      href: localizedHref(locale, item.path),
-      label: dict.nav[item.key],
-    };
-  });
-
-  const mobileItems: MobileNavItem[] = primaryNavItems.map((item) => {
-    if ("children" in item) {
-      return {
-        type: "group",
-        label: dict.nav[item.key],
-        children: serviceLinks,
-      };
-    }
-
-    return {
-      type: "link",
-      href: localizedHref(locale, item.path),
-      label: dict.nav[item.key],
-    };
-  });
+  const mobileItems: MobileNavItem[] = navItems;
 
   return (
-    <header className="sticky top-0 z-50 border-b border-oms-gray/70 bg-oms-white">
-      <Container className="relative z-50 flex items-center justify-between gap-3 bg-oms-white py-3">
+    <header className="oms-site-header sticky top-0 z-50 border-b">
+      <Container className="oms-site-header-bar relative z-50 flex items-center justify-between gap-3 py-3">
         <Link
           href={homeHref}
           className="shrink-0"
           onClick={() => setMenuOpen(false)}
         >
-          <Image
-            src="/logos/oms-logo.png"
-            alt="ORYXI Maintenance Services"
-            width={913}
-            height={600}
-            className="h-10 w-auto sm:h-12"
-            priority
-          />
+          <SiteLogo priority className="h-10 w-auto sm:h-12" />
         </Link>
 
-        <DesktopNav items={desktopItems} ariaLabel={dict.header.primaryNav} />
+        <DesktopNav
+          items={navItems}
+          ariaLabel={dict.header.primaryNav}
+          pathname={pathname}
+        />
 
         <div className="flex items-center gap-2 sm:gap-3">
-          <LanguageSwitcher locale={locale} labels={dict.language} />
+          <LanguageSwitcher
+            locale={locale}
+            labels={dict.language}
+            pathname={pathname}
+          />
           <PrimaryButton
             href={quoteHref}
             className="px-3 py-2 text-xs sm:px-4 sm:py-2.5 sm:text-sm"
@@ -90,7 +84,7 @@ export function Header({ locale, dict }: HeaderProps) {
           </PrimaryButton>
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center border border-oms-gray text-oms-dark lg:hidden"
+            className="oms-header-menu-btn inline-flex h-10 w-10 items-center justify-center border lg:hidden"
             aria-expanded={menuOpen}
             aria-controls="mobile-navigation"
             aria-label={menuOpen ? dict.header.closeMenu : dict.header.openMenu}
@@ -98,13 +92,13 @@ export function Header({ locale, dict }: HeaderProps) {
           >
             <span aria-hidden="true" className="flex flex-col gap-1.5">
               <span
-                className={`block h-0.5 w-5 bg-oms-dark transition ${menuOpen ? "translate-y-2 rotate-45" : ""}`}
+                className={`oms-header-menu-icon block h-0.5 w-5 transition ${menuOpen ? "translate-y-2 rotate-45" : ""}`}
               />
               <span
-                className={`block h-0.5 w-5 bg-oms-dark transition ${menuOpen ? "opacity-0" : ""}`}
+                className={`oms-header-menu-icon block h-0.5 w-5 transition ${menuOpen ? "opacity-0" : ""}`}
               />
               <span
-                className={`block h-0.5 w-5 bg-oms-dark transition ${menuOpen ? "-translate-y-2 -rotate-45" : ""}`}
+                className={`oms-header-menu-icon block h-0.5 w-5 transition ${menuOpen ? "-translate-y-2 -rotate-45" : ""}`}
               />
             </span>
           </button>
@@ -120,6 +114,7 @@ export function Header({ locale, dict }: HeaderProps) {
         languageLabels={dict.language}
         closeLabel={dict.header.closeMenu}
         navLabel={dict.header.primaryNav}
+        pathname={pathname}
       />
     </header>
   );

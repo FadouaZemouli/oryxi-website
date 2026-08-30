@@ -3,7 +3,6 @@ import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { PrimaryButton } from "@/components/ui/PrimaryButton";
 import { SecondaryButton } from "@/components/ui/SecondaryButton";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getLocaleParam } from "@/lib/i18n/locale-param";
 import { localizedHref } from "@/lib/i18n/path";
@@ -24,11 +23,16 @@ export default async function Home({ params }: Props) {
 
   return (
     <main className="flex-1">
-      <Container className="py-12 sm:py-16">
-        <SectionHeading
-          title={dict.home.title}
-          description={dict.home.description}
-        />
+      {/* Phase 1 scaffold — replace with components/home/* in Phase 2 */}
+      <Container className="oms-section">
+        <header className="text-start">
+          <h1 className="text-2xl font-semibold tracking-tight text-oms-dark sm:text-3xl">
+            {dict.home.title}
+          </h1>
+          <p className="mt-3 max-w-2xl text-base leading-7 text-oms-dark/80">
+            {dict.home.description}
+          </p>
+        </header>
 
         <div className="mt-8 grid gap-6 md:grid-cols-2">
           <Card title={dict.home.sharedLayoutTitle}>

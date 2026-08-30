@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { switchLocalePath } from "@/lib/i18n/path";
 import type { Locale } from "@/lib/i18n/config";
 
@@ -12,10 +11,14 @@ type LanguageSwitcherProps = {
     en: string;
     ar: string;
   };
+  pathname: string;
 };
 
-export function LanguageSwitcher({ locale, labels }: LanguageSwitcherProps) {
-  const pathname = usePathname();
+export function LanguageSwitcher({
+  locale,
+  labels,
+  pathname,
+}: LanguageSwitcherProps) {
   const nextLocale: Locale = locale === "en" ? "ar" : "en";
   const href = switchLocalePath(pathname, nextLocale);
   const label = nextLocale === "en" ? labels.en : labels.ar;
@@ -26,7 +29,7 @@ export function LanguageSwitcher({ locale, labels }: LanguageSwitcherProps) {
         href={href}
         hrefLang={nextLocale}
         lang={nextLocale}
-        className="text-sm font-medium text-oms-dark whitespace-nowrap hover:text-oms-burgundy"
+        className="oms-header-lang text-sm font-medium whitespace-nowrap transition-colors hover:text-oms-burgundy"
       >
         {label}
       </Link>

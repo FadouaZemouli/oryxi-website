@@ -5,6 +5,11 @@
   --oms-gray: #babdc0;
   --oms-white: #ffffff;
   --oms-dark: #0b1726;
+  --oms-charcoal: #152233;
+  --oms-muted: #9aa3ad;
+  --oms-border: color-mix(in srgb, var(--oms-gray) 70%, transparent);
+  --oms-section-space: 4.5rem;
+  --oms-section-space-lg: 6rem;
 }
 
 @theme inline {
@@ -12,6 +17,9 @@
   --color-oms-gray: var(--oms-gray);
   --color-oms-white: var(--oms-white);
   --color-oms-dark: var(--oms-dark);
+  --color-oms-charcoal: var(--oms-charcoal);
+  --color-oms-muted: var(--oms-muted);
+  --color-oms-border: var(--oms-border);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -20,4 +28,123 @@ body {
   background: var(--oms-white);
   color: var(--oms-dark);
   font-family: var(--font-geist-sans), var(--font-arabic), system-ui, sans-serif;
+}
+
+/* Premium section foundations for later homepage bands */
+.oms-section {
+  padding-block: var(--oms-section-space);
+}
+
+@media (min-width: 640px) {
+  .oms-section {
+    padding-block: var(--oms-section-space-lg);
+  }
+}
+
+.oms-section-dark {
+  background: var(--oms-dark);
+  color: var(--oms-white);
+}
+
+.oms-section-charcoal {
+  background: var(--oms-charcoal);
+  color: var(--oms-white);
+}
+
+.oms-full-bleed {
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+}
+
+.oms-tech-border {
+  border: 1px solid var(--oms-border);
+}
+
+.oms-tech-border-dark {
+  border: 1px solid color-mix(in srgb, var(--oms-white) 12%, transparent);
+}
+
+.oms-text-on-dark {
+  color: var(--oms-white);
+}
+
+.oms-text-muted-on-dark {
+  color: var(--oms-muted);
+}
+
+.oms-reveal {
+  transition:
+    opacity 400ms ease,
+    transform 400ms ease;
+}
+
+/* Header chrome variants — driven by html[data-oms-header], not React ternaries */
+.oms-site-header {
+  border-color: var(--oms-border);
+  background: var(--oms-white);
+  color: var(--oms-dark);
+}
+
+.oms-site-header-bar {
+  background: var(--oms-white);
+}
+
+.oms-nav-link,
+.oms-header-lang {
+  color: var(--oms-dark);
+}
+
+.oms-header-menu-btn {
+  border-color: var(--oms-gray);
+  color: var(--oms-dark);
+}
+
+.oms-header-menu-icon {
+  background: var(--oms-dark);
+}
+
+html[data-oms-header="home"] .oms-site-header {
+  border-color: color-mix(in srgb, var(--oms-white) 10%, transparent);
+  background: var(--oms-dark);
+  color: var(--oms-white);
+}
+
+html[data-oms-header="home"] .oms-site-header-bar {
+  background: var(--oms-dark);
+}
+
+html[data-oms-header="home"] .oms-nav-link,
+html[data-oms-header="home"] .oms-header-lang {
+  color: var(--oms-white);
+}
+
+html[data-oms-header="home"] .oms-nav-link[aria-current="page"],
+html[data-oms-header="home"] .oms-nav-link:hover,
+html[data-oms-header="home"] .oms-header-lang:hover {
+  color: var(--oms-burgundy);
+}
+
+html[data-oms-header="home"] .oms-header-menu-btn {
+  border-color: color-mix(in srgb, var(--oms-white) 25%, transparent);
+  color: var(--oms-white);
+}
+
+html[data-oms-header="home"] .oms-header-menu-icon {
+  background: var(--oms-white);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .oms-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

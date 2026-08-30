@@ -21,16 +21,33 @@ export const en = {
     openMenu: "Open menu",
     closeMenu: "Close menu",
     primaryNav: "Primary",
-    servicesMenu: "Services menu",
   },
   footer: {
-    pages: "Pages",
+    quickLinks: "Quick Links",
+    services: "Services",
     contact: "Contact",
     contactPlaceholder:
       "Company contact details will be added here once approved.",
     copyright:
-      "Copyright {year} ORYXI Maintenance Services. All rights reserved.",
-    tagline: "Professional maintenance and technical services.",
+      "© {year} ORYXI Maintenance Services. All rights reserved.",
+    summary: "Professional maintenance and technical services.",
+    serviceLabels: {
+      engineeringServices: "Engineering Services",
+      fireLifeSafety: "Fire & Life Safety",
+      qcddServices: "QCDD Services",
+      amcContractsFooter: "AMC / Maintenance Contracts",
+      emergencyService: "Emergency Service",
+      pumpSolutions: "Pump Solutions",
+    },
+    peerless: {
+      eyebrow: "Pump Solutions",
+      brand: "Peerless Pump",
+      tagline: "Fire pumps, spare parts, maintenance, and technical support.",
+      firePumps: "Fire Pumps",
+      spareParts: "Spare Parts",
+      maintenance: "Maintenance",
+      technicalSupport: "Technical Support",
+    },
   },
   placeholder: {
     description:

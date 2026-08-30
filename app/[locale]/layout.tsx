@@ -65,11 +65,17 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={dir}
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} ${notoArabic.variable} h-full antialiased ${
         locale === "ar" ? "font-[family-name:var(--font-arabic)]" : ""
       }`}
     >
       <body className="min-h-full flex flex-col bg-oms-white text-oms-dark">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var l=${JSON.stringify(locale)};var p=location.pathname.replace(/\\/$/,"")||"/";var r=document.documentElement;r.setAttribute("data-oms-header",p==="/"+l?"home":"inner");r.setAttribute("data-oms-path",p);})();`,
+          }}
+        />
         <Header locale={locale} dict={dict} />
         {children}
         <Footer locale={locale} dict={dict} />
