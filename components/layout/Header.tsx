@@ -61,7 +61,11 @@ export function Header({ locale, dict }: HeaderProps) {
           className="shrink-0"
           onClick={() => setMenuOpen(false)}
         >
-          <SiteLogo priority className="h-10 w-auto sm:h-12" />
+          <SiteLogo
+            surface="header"
+            priority
+            className="h-10 w-auto sm:h-12"
+          />
         </Link>
 
         <DesktopNav

@@ -56,15 +56,16 @@ export const en = {
     metaDescription: "This page is a placeholder. Content coming soon.",
   },
   home: {
-    title: "Website under development",
-    description:
-      "This page is a temporary layout preview for the shared header, footer, and reusable components. Homepage content will be added after approval.",
-    sharedLayoutTitle: "Shared layout",
-    sharedLayoutBody:
-      "The header, desktop navigation, mobile navigation, and footer are now reusable across pages.",
-    brandComponentsTitle: "Brand components",
-    brandComponentsBody:
-      "Section wrappers, headings, cards, and primary and secondary buttons use the OMS brand colors and official logo.",
+    hero: {
+      titleLine1: "ENGINEERING SAFETY.",
+      titleLine2: "PROTECTING WHAT MATTERS.",
+      supporting:
+        "Engineering, Fire & Life Safety, QCDD Services, maintenance and pump solutions.",
+      ctaServices: "Explore Our Services",
+    },
+    expertise: {
+      label: "Areas of expertise",
+    },
   },
   meta: {
     siteDescription: "Professional maintenance and technical services.",

@@ -1,11 +1,19 @@
 import Link from "next/link";
 
-const classes =
-  "inline-flex items-center justify-center rounded-sm border border-oms-burgundy bg-transparent px-4 py-2.5 text-sm font-medium text-oms-burgundy transition-colors hover:bg-oms-burgundy hover:text-oms-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-oms-burgundy";
+const baseClasses =
+  "inline-flex items-center justify-center rounded-sm border bg-transparent px-4 py-2.5 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-oms-burgundy";
+
+const toneClasses = {
+  default:
+    "border-oms-burgundy text-oms-burgundy hover:bg-oms-burgundy hover:text-oms-white",
+  onDark:
+    "border-white/35 text-oms-white hover:border-oms-burgundy hover:bg-oms-burgundy hover:text-oms-white",
+} as const;
 
 type SecondaryButtonProps = {
   children: React.ReactNode;
   className?: string;
+  tone?: keyof typeof toneClasses;
 } & (
   | { href: string; type?: never }
   | { href?: undefined; type?: "button" | "submit" }
@@ -14,9 +22,11 @@ type SecondaryButtonProps = {
 export function SecondaryButton({
   children,
   className = "",
+  tone = "default",
   ...props
 }: SecondaryButtonProps) {
-  const classNameValue = `${classes} ${className}`.trim();
+  const classNameValue =
+    `${baseClasses} ${toneClasses[tone]} ${className}`.trim();
 
   if (props.href) {
     return (

@@ -1,14 +1,16 @@
 import Image from "next/image";
 
-/**
- * Official OMS logo paths.
- * Keep `default` pointing at the current opaque asset.
- * When a transparent derivative is approved, set `transparent` and
- * prefer it for `onDark` surfaces — do not invent or download assets.
- */
 const logoSources = {
-  default: "/logos/oms-logo.png",
-  // transparent: "/logos/oms-logo-transparent.png",
+  default: {
+    src: "/logos/oms-logo.png",
+    width: 913,
+    height: 600,
+  },
+  transparent: {
+    src: "/logos/oms-logo-transparent.png",
+    width: 1672,
+    height: 941,
+  },
 } as const;
 
 type LogoVariant = keyof typeof logoSources;
@@ -16,41 +18,82 @@ type LogoVariant = keyof typeof logoSources;
 type SiteLogoProps = {
   className?: string;
   /**
-   * Visual surface context. `onDark` wraps the opaque RGB logo in a
-   * white plate until a transparent asset is available.
+   * `default` — opaque artwork on light surfaces.
+   * `onDark` — transparent artwork, no plate.
+   * `header` — both assets; CSS selects by `html[data-oms-header]`.
    */
-  surface?: "default" | "onDark";
-  /** Prefer a specific source when multiple assets exist. */
+  surface?: "default" | "onDark" | "header";
   source?: LogoVariant;
   priority?: boolean;
   sizes?: string;
 };
 
-export function SiteLogo({
-  className = "h-10 w-auto sm:h-12",
-  surface = "default",
-  source = "default",
-  priority = false,
-  sizes = "160px",
-}: SiteLogoProps) {
-  const src = logoSources[source];
-  const image = (
+function LogoImage({
+  variant,
+  className,
+  sizes,
+  priority,
+  alt,
+}: {
+  variant: LogoVariant;
+  className: string;
+  sizes: string;
+  priority: boolean;
+  alt: string;
+}) {
+  const asset = logoSources[variant];
+
+  return (
     <Image
-      src={src}
-      alt="ORYXI Maintenance Services"
-      width={913}
-      height={600}
+      src={asset.src}
+      alt={alt}
+      width={asset.width}
+      height={asset.height}
       className={className}
       sizes={sizes}
       priority={priority}
     />
   );
+}
 
-  if (surface === "onDark") {
+export function SiteLogo({
+  className = "h-10 w-auto sm:h-12",
+  surface = "default",
+  source,
+  priority = false,
+  sizes = "160px",
+}: SiteLogoProps) {
+  if (surface === "header") {
     return (
-      <span className="inline-flex bg-oms-white px-3 py-2">{image}</span>
+      <span className="oms-site-logo">
+        <LogoImage
+          variant="default"
+          className={`oms-logo-on-light ${className}`.trim()}
+          sizes={sizes}
+          priority={priority}
+          alt="ORYXI Maintenance Services"
+        />
+        <LogoImage
+          variant="transparent"
+          className={`oms-logo-on-dark ${className}`.trim()}
+          sizes={sizes}
+          priority={priority}
+          alt="ORYXI Maintenance Services"
+        />
+      </span>
     );
   }
 
-  return image;
+  const variant: LogoVariant =
+    source ?? (surface === "onDark" ? "transparent" : "default");
+
+  return (
+    <LogoImage
+      variant={variant}
+      className={className}
+      sizes={sizes}
+      priority={priority}
+      alt="ORYXI Maintenance Services"
+    />
+  );
 }
