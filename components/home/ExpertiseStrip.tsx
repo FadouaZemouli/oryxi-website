@@ -10,36 +10,24 @@ type ExpertiseStripProps = {
 };
 
 const expertiseItems = [
+  { key: "fireFightingSystems", path: "/services" },
+  { key: "fireAlarmSystems", path: "/services" },
   { key: "engineeringServices", path: "/services" },
-  { key: "fireLifeSafety", path: "/services" },
-  { key: "qcddServices", path: "/qcdd-services" },
-  { key: "pumpSolutions", path: null },
+  { key: "electromechanicalMaintenance", path: "/services" },
 ] as const;
 
 export function ExpertiseStrip({ locale, dict }: ExpertiseStripProps) {
   return (
-    <section
+    <div
       className="oms-expertise"
+      role="region"
       aria-label={dict.home.expertise.label}
     >
       <Container className="oms-expertise-inner">
         <ul className="oms-expertise-list">
           {expertiseItems.map((item, index) => {
-            const label = dict.footer.serviceLabels[item.key];
+            const label = dict.home.expertise.items[item.key];
             const indexLabel = String(index + 1).padStart(2, "0");
-
-            if (item.path === null) {
-              return (
-                <li key={item.key} className="oms-expertise-item">
-                  <span className="oms-expertise-index" aria-hidden="true">
-                    {indexLabel}
-                  </span>
-                  <span className="oms-expertise-label oms-expertise-label-static">
-                    {label}
-                  </span>
-                </li>
-              );
-            }
 
             return (
               <li key={item.key} className="oms-expertise-item">
@@ -57,6 +45,6 @@ export function ExpertiseStrip({ locale, dict }: ExpertiseStripProps) {
           })}
         </ul>
       </Container>
-    </section>
+    </div>
   );
 }

@@ -25,6 +25,8 @@ export function TextInput({
   describedBy,
   invalid,
 }: TextInputProps) {
+  const isolateLtr = type === "email" || type === "tel";
+
   return (
     <input
       id={id}
@@ -38,7 +40,8 @@ export function TextInput({
       aria-required={required}
       aria-invalid={invalid || undefined}
       aria-describedby={describedBy}
-      className={`${controlClassName} ${invalid ? controlErrorClassName : ""}`.trim()}
+      dir={isolateLtr ? "ltr" : undefined}
+      className={`${controlClassName} ${isolateLtr ? "oms-ltr-value" : ""} ${invalid ? controlErrorClassName : ""}`.trim()}
     />
   );
 }

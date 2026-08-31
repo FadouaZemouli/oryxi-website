@@ -23,15 +23,24 @@ export const ar: typeof en = {
     openMenu: "فتح القائمة",
     closeMenu: "إغلاق القائمة",
     primaryNav: "القائمة الرئيسية",
+    navAbout: "من نحن",
+    navContact: "اتصل بنا",
   },
   footer: {
     quickLinks: "روابط سريعة",
     services: "الخدمات",
     contact: "التواصل",
-    contactPlaceholder: "ستُضاف بيانات التواصل هنا بعد اعتمادها.",
     copyright:
       "© {year} ORYXI Maintenance Services. جميع الحقوق محفوظة.",
-    summary: "خدمات صيانة وخدمات فنية متخصصة.",
+    summary:
+      "خدمات الحماية من الحرائق والخدمات الهندسية والصيانة الكهروميكانيكية في قطر.",
+    contactDetails: {
+      phone: "+974 4039 7445",
+      phoneTel: "+97440397445",
+      email: "info@oms.com.qa",
+      website: "www.oms.com.qa",
+      websiteHref: "https://oms.com.qa",
+    },
     serviceLabels: {
       engineeringServices: "الخدمات الهندسية",
       fireLifeSafety: "السلامة من الحرائق والحماية",
@@ -57,18 +66,38 @@ export const ar: typeof en = {
   },
   home: {
     hero: {
-      titleLine1: "السلامة الهندسية.",
-      titleLine2: "حماية ما يهم.",
+      eyebrowLead: "الحماية من الحرائق والهندسة",
+      eyebrowTrail: "حلول",
+      titleLine1: "متكاملة",
+      titleLine2: "الحماية من الحرائق",
+      titleLine3: "والهندسة",
+      titleLine4: "حلول",
       supporting:
-        "الخدمات الهندسية، السلامة من الحرائق والحماية، خدمات الدفاع المدني، الصيانة وحلول المضخات.",
+        "نقدم هندسة وصيانة قائمة على الأداء للأنظمة الحيوية عبر قطاع البيئة المبنية.",
       ctaServices: "استكشف خدماتنا",
+      artLabel: "رسم هندسي لمضخة إطفاء",
+      mediaLabel: "عمليات OMS الميدانية والمنشآت",
     },
     expertise: {
       label: "مجالات الخبرة",
+      items: {
+        fireFightingSystems: "أنظمة مكافحة الحرائق",
+        fireAlarmSystems: "أنظمة إنذار الحريق",
+        engineeringServices: "الخدمات الهندسية",
+        electromechanicalMaintenance: "الصيانة الكهروميكانيكية",
+      },
+    },
+    about: {
+      eyebrow: "عن OMS",
+      titleLine1: "صُمِّمت للموثوقية.",
+      titleLine2: "بُنيت حول السلامة.",
+      body: "تقدم ORYXI Maintenance Services خدمات هندسية وصيانة وخدمات فنية متخصصة، مع تركيز واضح على السلامة والموثوقية والتنفيذ المنضبط.",
+      cta: "تعرّف على OMS",
     },
   },
   meta: {
-    siteDescription: "خدمات صيانة وخدمات فنية متخصصة.",
+    siteDescription:
+      "خدمات الحماية من الحرائق والخدمات الهندسية والصيانة الكهروميكانيكية في قطر.",
     home: "ORYXI Maintenance Services",
     about: "من نحن | ORYXI Maintenance Services",
     services: "خدماتنا | ORYXI Maintenance Services",

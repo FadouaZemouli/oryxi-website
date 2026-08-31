@@ -23,36 +23,27 @@ export function Footer({ locale, dict }: FooterProps) {
     dict.footer.peerless.maintenance,
     dict.footer.peerless.technicalSupport,
   ];
+  const contact = dict.footer.contactDetails;
 
   return (
-    <footer className="mt-auto border-t border-oms-charcoal bg-oms-dark text-oms-white">
-      <Container className="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+    <footer className="oms-footer mt-auto">
+      <Container className="oms-footer-grid">
         <div>
           <Link href={homeHref} className="inline-block">
-            <SiteLogo
-              surface="onDark"
-              className="h-12 w-auto"
-              sizes="180px"
-            />
+            <SiteLogo surface="default" className="h-12 w-auto" sizes="180px" />
           </Link>
-          <p className="mt-5 text-sm font-medium tracking-wide text-oms-white">
-            ORYXI Maintenance Services
-          </p>
-          <p className="mt-3 max-w-xs text-sm leading-6 text-oms-muted">
-            {dict.footer.summary}
-          </p>
+          <p className="oms-footer-brand">ORYXI Maintenance Services</p>
+          <p className="oms-footer-summary">{dict.footer.summary}</p>
         </div>
 
         <nav aria-label={dict.footer.quickLinks}>
-          <p className="text-xs font-semibold tracking-[0.14em] uppercase text-oms-burgundy">
-            {dict.footer.quickLinks}
-          </p>
-          <ul className="mt-5 space-y-2.5">
+          <p className="oms-footer-heading">{dict.footer.quickLinks}</p>
+          <ul className="oms-footer-list">
             {footerQuickLinkItems.map((item) => (
               <li key={item.key}>
                 <Link
                   href={localizedHref(locale, item.path)}
-                  className="text-sm text-oms-white transition-colors hover:text-oms-burgundy"
+                  className="oms-footer-link"
                 >
                   {dict.nav[item.key]}
                 </Link>
@@ -62,17 +53,15 @@ export function Footer({ locale, dict }: FooterProps) {
         </nav>
 
         <nav aria-label={dict.footer.services}>
-          <p className="text-xs font-semibold tracking-[0.14em] uppercase text-oms-burgundy">
-            {dict.footer.services}
-          </p>
-          <ul className="mt-5 space-y-2.5">
+          <p className="oms-footer-heading">{dict.footer.services}</p>
+          <ul className="oms-footer-list">
             {footerServiceItems.map((item) => {
               const label = dict.footer.serviceLabels[item.key];
 
               if (item.path === null) {
                 return (
                   <li key={item.key}>
-                    <span className="text-sm text-oms-muted">{label}</span>
+                    <span className="oms-footer-static">{label}</span>
                   </li>
                 );
               }
@@ -81,7 +70,7 @@ export function Footer({ locale, dict }: FooterProps) {
                 <li key={item.key}>
                   <Link
                     href={localizedHref(locale, item.path)}
-                    className="text-sm text-oms-white transition-colors hover:text-oms-burgundy"
+                    className="oms-footer-link"
                   >
                     {label}
                   </Link>
@@ -92,49 +81,64 @@ export function Footer({ locale, dict }: FooterProps) {
         </nav>
 
         <div>
-          <p className="text-xs font-semibold tracking-[0.14em] uppercase text-oms-burgundy">
-            {dict.footer.contact}
-          </p>
-          <p className="mt-5 text-sm leading-6 text-oms-muted">
-            {dict.footer.contactPlaceholder}
-          </p>
+          <p className="oms-footer-heading">{dict.footer.contact}</p>
+          <ul className="oms-footer-list">
+            <li>
+              <a
+                href={`tel:${contact.phoneTel}`}
+                className="oms-footer-link oms-ltr-value"
+              >
+                {contact.phone}
+              </a>
+            </li>
+            <li>
+              <a
+                href={`mailto:${contact.email}`}
+                className="oms-footer-link oms-ltr-value"
+              >
+                {contact.email}
+              </a>
+            </li>
+            <li>
+              <a
+                href={contact.websiteHref}
+                className="oms-footer-link oms-ltr-value"
+                rel="noopener noreferrer"
+              >
+                {contact.website}
+              </a>
+            </li>
+          </ul>
         </div>
       </Container>
 
-      <div className="border-t border-white/10">
-        <Container className="py-10">
-          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+      <div className="oms-footer-peerless">
+        <Container>
+          <div className="oms-footer-peerless-row">
             <div>
               {/* Official Peerless mark slot — text placeholder until approved asset. */}
-              <p className="text-xs font-semibold tracking-[0.18em] uppercase text-oms-muted">
+              <p className="oms-footer-peerless-eyebrow">
                 {dict.footer.peerless.eyebrow}
               </p>
-              <p className="mt-3 text-lg font-semibold tracking-[0.12em] text-oms-white uppercase">
+              <p className="oms-footer-peerless-brand">
                 {dict.footer.peerless.brand}
               </p>
-              <p className="mt-2 text-sm text-oms-muted">
+              <p className="oms-footer-peerless-tagline">
                 {dict.footer.peerless.tagline}
               </p>
             </div>
-            <ul className="flex flex-wrap gap-x-6 gap-y-2">
+            <ul className="oms-footer-peerless-tags">
               {peerlessLabels.map((label) => (
-                <li
-                  key={label}
-                  className="text-xs tracking-[0.08em] text-oms-muted uppercase"
-                >
-                  {label}
-                </li>
+                <li key={label}>{label}</li>
               ))}
             </ul>
           </div>
         </Container>
       </div>
 
-      <div className="border-t border-white/10">
-        <Container className="py-4">
-          <p className="text-xs text-oms-muted">
-            {dict.footer.copyright.replace("{year}", String(year))}
-          </p>
+      <div className="oms-footer-copyright">
+        <Container>
+          <p>{dict.footer.copyright.replace("{year}", String(year))}</p>
         </Container>
       </div>
     </footer>

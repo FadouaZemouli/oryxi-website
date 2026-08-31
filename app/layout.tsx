@@ -5,7 +5,8 @@ import { siteName, siteOrigin } from "@/lib/seo/config";
 export const metadata: Metadata = {
   metadataBase: new URL(siteOrigin),
   title: siteName,
-  description: "Professional maintenance and technical services.",
+  description:
+    "Fire protection, engineering and electromechanical maintenance services in Qatar.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

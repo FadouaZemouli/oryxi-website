@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ExpertiseStrip } from "@/components/home/ExpertiseStrip";
+import { AboutTeaser } from "@/components/home/AboutTeaser";
 import { Hero } from "@/components/home/Hero";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getLocaleParam } from "@/lib/i18n/locale-param";
@@ -19,9 +19,9 @@ export default async function Home({ params }: Props) {
   const dict = getDictionary(locale);
 
   return (
-    <main className="flex-1 bg-oms-dark">
+    <main className="flex-1 bg-oms-white">
       <Hero locale={locale} dict={dict} />
-      <ExpertiseStrip locale={locale} dict={dict} />
+      <AboutTeaser locale={locale} dict={dict} />
     </main>
   );
 }

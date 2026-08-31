@@ -21,16 +21,24 @@ export const en = {
     openMenu: "Open menu",
     closeMenu: "Close menu",
     primaryNav: "Primary",
+    navAbout: "About Us",
+    navContact: "Contact Us",
   },
   footer: {
     quickLinks: "Quick Links",
     services: "Services",
     contact: "Contact",
-    contactPlaceholder:
-      "Company contact details will be added here once approved.",
     copyright:
       "© {year} ORYXI Maintenance Services. All rights reserved.",
-    summary: "Professional maintenance and technical services.",
+    summary:
+      "Fire protection, engineering and electromechanical maintenance services in Qatar.",
+    contactDetails: {
+      phone: "+974 4039 7445",
+      phoneTel: "+97440397445",
+      email: "info@oms.com.qa",
+      website: "www.oms.com.qa",
+      websiteHref: "https://oms.com.qa",
+    },
     serviceLabels: {
       engineeringServices: "Engineering Services",
       fireLifeSafety: "Fire & Life Safety",
@@ -57,18 +65,38 @@ export const en = {
   },
   home: {
     hero: {
-      titleLine1: "ENGINEERING SAFETY.",
-      titleLine2: "PROTECTING WHAT MATTERS.",
+      eyebrowLead: "Fire Protection & Engineering",
+      eyebrowTrail: "Solutions",
+      titleLine1: "INTEGRATED",
+      titleLine2: "FIRE PROTECTION",
+      titleLine3: "& ENGINEERING",
+      titleLine4: "SOLUTIONS",
       supporting:
-        "Engineering, Fire & Life Safety, QCDD Services, maintenance and pump solutions.",
+        "Providing performance-based engineering and maintenance for critical systems across the built-environment industry landscape.",
       ctaServices: "Explore Our Services",
+      artLabel: "Fire pump engineering illustration",
+      mediaLabel: "OMS field and facility operations",
     },
     expertise: {
       label: "Areas of expertise",
+      items: {
+        fireFightingSystems: "Fire Fighting Systems",
+        fireAlarmSystems: "Fire Alarm Systems",
+        engineeringServices: "Engineering Services",
+        electromechanicalMaintenance: "Electromechanical Maintenance",
+      },
+    },
+    about: {
+      eyebrow: "About OMS",
+      titleLine1: "ENGINEERED FOR RELIABILITY.",
+      titleLine2: "BUILT AROUND SAFETY.",
+      body: "ORYXI Maintenance Services delivers professional engineering, maintenance, and technical services with a strong focus on safety, reliability, and disciplined execution.",
+      cta: "Discover OMS",
     },
   },
   meta: {
-    siteDescription: "Professional maintenance and technical services.",
+    siteDescription:
+      "Fire protection, engineering and electromechanical maintenance services in Qatar.",
     home: "ORYXI Maintenance Services",
     about: "About Us | ORYXI Maintenance Services",
     services: "Services | ORYXI Maintenance Services",
