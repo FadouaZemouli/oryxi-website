@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import { AboutTeaser } from "@/components/home/AboutTeaser";
-import { CoreServices } from "@/components/home/CoreServices";
-import { Hero } from "@/components/home/Hero";
+import { PagePlaceholder } from "@/components/ui/PagePlaceholder";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getLocaleParam } from "@/lib/i18n/locale-param";
 import { buildPageMetadata } from "@/lib/seo/metadata";
@@ -12,18 +10,18 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const locale = await getLocaleParam(params);
-  return buildPageMetadata(locale, "home");
+  return buildPageMetadata(locale, "pumpSelection");
 }
 
-export default async function Home({ params }: Props) {
+export default async function PumpSelectionPage({ params }: Props) {
   const locale = await getLocaleParam(params);
   const dict = getDictionary(locale);
 
   return (
-    <main className="flex-1 bg-oms-white">
-      <Hero locale={locale} dict={dict} />
-      <CoreServices locale={locale} dict={dict} />
-      <AboutTeaser locale={locale} dict={dict} />
-    </main>
+    <PagePlaceholder
+      title={dict.nav.pumpSelection}
+      description={dict.placeholder.description}
+      comingSoon={dict.placeholder.comingSoon}
+    />
   );
 }

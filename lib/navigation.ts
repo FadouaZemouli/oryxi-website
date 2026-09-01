@@ -2,6 +2,7 @@ export const primaryNavItems = [
   { path: "/", key: "home" },
   { path: "/about", key: "about" },
   { path: "/services", key: "services" },
+  { path: "/pump-selection", key: "pumpSelection" },
   { path: "/projects", key: "projects" },
   { path: "/contact", key: "contact" },
 ] as const;

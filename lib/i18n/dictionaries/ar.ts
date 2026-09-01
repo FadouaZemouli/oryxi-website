@@ -6,6 +6,7 @@ export const ar: typeof en = {
     about: "من نحن",
     services: "الخدمات",
     servicesOverview: "نظرة عامة على الخدمات",
+    pumpSelection: "اختيار المضخات",
     qcddServices: "خدمات الدفاع المدني",
     qcddServicesMenu: "خدمات إدارة الدفاع المدني القطري (QCDD)",
     projects: "المشاريع",
@@ -68,23 +69,33 @@ export const ar: typeof en = {
     hero: {
       eyebrowLead: "الحماية من الحرائق والهندسة",
       eyebrowTrail: "حلول",
-      titleLine1: "متكاملة",
-      titleLine2: "الحماية من الحرائق",
-      titleLine3: "والهندسة",
-      titleLine4: "حلول",
+      titleLine1: "مصمم للأمان.",
+      titleLine2: "",
+      titleLine3: "مبني على",
+      titleLine4: "",
+      titleAccent: "الثقة.",
       supporting:
-        "نقدم هندسة وصيانة قائمة على الأداء للأنظمة الحيوية عبر قطاع البيئة المبنية.",
+        "متخصصون في حلول الميكانيكا، الكهرباء، التكييف والحماية من الحرائق. نقوم بتصميم وتركيب وفحص وصيانة الأنظمة التي تحمي ما هو الأكثر أهمية.",
       ctaServices: "استكشف خدماتنا",
+      ctaQuote: "اطلب عرض سعر",
       artLabel: "رسم هندسي لمضخة إطفاء",
       mediaLabel: "عمليات OMS الميدانية والمنشآت",
     },
     expertise: {
-      label: "مجالات الخبرة",
+      label: "السلامة والموثوقية والخبرة",
       items: {
-        fireFightingSystems: "أنظمة مكافحة الحرائق",
-        fireAlarmSystems: "أنظمة إنذار الحريق",
-        engineeringServices: "الخدمات الهندسية",
-        electromechanicalMaintenance: "الصيانة الكهروميكانيكية",
+        safety: {
+          title: "السلامة",
+          description: "أنظمة متقدمة لتوفير حماية متكاملة.",
+        },
+        reliability: {
+          title: "الموثوقية",
+          description: "حلول هندسية لأداء ثابت وموثوق.",
+        },
+        expertise: {
+          title: "الخبرة",
+          description: "خبرة فنية يمكنك الاعتماد عليها.",
+        },
       },
     },
     about: {
@@ -94,6 +105,48 @@ export const ar: typeof en = {
       body: "تقدم ORYXI Maintenance Services خدمات هندسية وصيانة وخدمات فنية متخصصة، مع تركيز واضح على السلامة والموثوقية والتنفيذ المنضبط.",
       cta: "تعرّف على OMS",
     },
+    coreServices: {
+      eyebrow: "خدماتنا الأساسية",
+      titleLine1: "أنظمة هندسية.",
+      titleLine2: "أداء مثبت.",
+      supporting:
+        "نصمم ونركب ونفحص ونصون الأنظمة المتكاملة التي تحمي ما يهم أكثر.",
+      viewAll: "عرض جميع الخدمات",
+      items: {
+        mep: {
+          titleLine1: "خدمات MEP",
+          titleLine2: "",
+          description:
+            "حلول متكاملة للأنظمة الميكانيكية والكهربائية والصحية للمباني الحديثة.",
+          imageAlt:
+            "غرفة أنظمة MEP تضم أنابيب معزولة ومضخات صناعية ولوحات تحكم.",
+        },
+        electromechanical: {
+          titleLine1: "الخدمات الكهروميكانيكية",
+          titleLine2: "",
+          description:
+            "حلول كهربائية وميكانيكية متكاملة لعمليات فعالة وآمنة وموثوقة.",
+          imageAlt:
+            "غرفة خدمات كهروميكانيكية تضم لوحات كهربائية ومضخات وأنظمة أنابيب.",
+        },
+        engineering: {
+          titleLine1: "الخدمات الهندسية",
+          titleLine2: "",
+          description:
+            "خدمات هندسية متكاملة من التصميم وحتى التشغيل عبر مختلف التخصصات.",
+          imageAlt:
+            "ممر هندسي يضم مضخات وأنابيب معزولة وخزائن تحكم.",
+        },
+        hvac: {
+          titleLine1: "خدمات التكييف والتهوية",
+          titleLine2: "",
+          description:
+            "حلول للتهوية والتبريد وجودة الهواء لمختلف المساحات.",
+          imageAlt:
+            "غرفة أنظمة تكييف وتهوية تضم وحدات مناولة الهواء ومجاري الإمداد والراجع.",
+        },
+      },
+    },
   },
   meta: {
     siteDescription:
@@ -102,6 +155,7 @@ export const ar: typeof en = {
     about: "من نحن | ORYXI Maintenance Services",
     services: "خدماتنا | ORYXI Maintenance Services",
     projects: "المشاريع | ORYXI Maintenance Services",
+    pumpSelection: "اختيار المضخات | ORYXI Maintenance Services",
     amcContracts: "عقود الصيانة السنوية | ORYXI Maintenance Services",
     emergencyService: "خدمات الطوارئ | ORYXI Maintenance Services",
     contact: "اتصل بنا | ORYXI Maintenance Services",

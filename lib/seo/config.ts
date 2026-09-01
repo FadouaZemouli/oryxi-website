@@ -14,6 +14,7 @@ export const pagePaths = {
   services: "/services",
   qcddServices: "/qcdd-services",
   projects: "/projects",
+  pumpSelection: "/pump-selection",
   amcContracts: "/amc-contracts",
   emergencyService: "/emergency-service",
   contact: "/contact",

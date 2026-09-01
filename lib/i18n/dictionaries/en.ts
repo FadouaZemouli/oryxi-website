@@ -4,6 +4,7 @@ export const en = {
     about: "About",
     services: "Services",
     servicesOverview: "Services Overview",
+    pumpSelection: "Pump Selection",
     qcddServices: "QCDD Services",
     qcddServicesMenu: "Qatar Civil Defence Department (QCDD) Services",
     projects: "Projects",
@@ -67,23 +68,33 @@ export const en = {
     hero: {
       eyebrowLead: "Fire Protection & Engineering",
       eyebrowTrail: "Solutions",
-      titleLine1: "INTEGRATED",
-      titleLine2: "FIRE PROTECTION",
-      titleLine3: "& ENGINEERING",
-      titleLine4: "SOLUTIONS",
+      titleLine1: "ENGINEERED",
+      titleLine2: "FOR SAFETY.",
+      titleLine3: "BUILT ON",
+      titleLine4: "",
+      titleAccent: "TRUST.",
       supporting:
-        "Providing performance-based engineering and maintenance for critical systems across the built-environment industry landscape.",
+        "Specialized in MEP, electromechanical, HVAC and fire protection solutions. We engineer, install, inspect and maintain systems that protect what matters most.",
       ctaServices: "Explore Our Services",
+      ctaQuote: "Request a Quote",
       artLabel: "Fire pump engineering illustration",
       mediaLabel: "OMS field and facility operations",
     },
     expertise: {
-      label: "Areas of expertise",
+      label: "Safety, reliability, and expertise",
       items: {
-        fireFightingSystems: "Fire Fighting Systems",
-        fireAlarmSystems: "Fire Alarm Systems",
-        engineeringServices: "Engineering Services",
-        electromechanicalMaintenance: "Electromechanical Maintenance",
+        safety: {
+          title: "Safety",
+          description: "Advanced systems for complete protection.",
+        },
+        reliability: {
+          title: "Reliability",
+          description: "Engineered for consistent performance.",
+        },
+        expertise: {
+          title: "Expertise",
+          description: "Industry knowledge you can depend on.",
+        },
       },
     },
     about: {
@@ -93,6 +104,48 @@ export const en = {
       body: "ORYXI Maintenance Services delivers professional engineering, maintenance, and technical services with a strong focus on safety, reliability, and disciplined execution.",
       cta: "Discover OMS",
     },
+    coreServices: {
+      eyebrow: "Our Core Services",
+      titleLine1: "ENGINEERED SYSTEMS.",
+      titleLine2: "PROVEN PERFORMANCE.",
+      supporting:
+        "We design, install, inspect, and maintain integrated systems that protect what matters most.",
+      viewAll: "View All Services",
+      items: {
+        mep: {
+          titleLine1: "MEP",
+          titleLine2: "SERVICES",
+          description:
+            "Integrated MEP solutions for modern buildings.",
+          imageAlt:
+            "MEP plant room with insulated piping, industrial pumps, and control panels.",
+        },
+        electromechanical: {
+          titleLine1: "ELECTROMECHANICAL",
+          titleLine2: "SERVICES",
+          description:
+            "Integrated electrical and mechanical solutions for efficient, safe, and reliable operations.",
+          imageAlt:
+            "Electromechanical plant room with electrical switchgear, pumps, and service piping.",
+        },
+        engineering: {
+          titleLine1: "ENGINEERING",
+          titleLine2: "SERVICES",
+          description:
+            "End-to-end engineering services from design to commissioning across all disciplines.",
+          imageAlt:
+            "Engineering plant corridor with pumps, insulated pipework, and control cabinets.",
+        },
+        hvac: {
+          titleLine1: "HVAC",
+          titleLine2: "SERVICES",
+          description:
+            "Ventilation, cooling, and air quality solutions for every space.",
+          imageAlt:
+            "HVAC plant room with air handling units, supply and return ductwork, and chilled-water piping.",
+        },
+      },
+    },
   },
   meta: {
     siteDescription:
@@ -101,6 +154,7 @@ export const en = {
     about: "About Us | ORYXI Maintenance Services",
     services: "Services | ORYXI Maintenance Services",
     projects: "Projects | ORYXI Maintenance Services",
+    pumpSelection: "Pump Selection | ORYXI Maintenance Services",
     amcContracts: "AMC Contracts | ORYXI Maintenance Services",
     emergencyService: "Emergency Service | ORYXI Maintenance Services",
     contact: "Contact Us | ORYXI Maintenance Services",

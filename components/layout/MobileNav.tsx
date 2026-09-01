@@ -8,6 +8,10 @@ import type { Locale } from "@/lib/i18n/config";
 export type MobileNavItem = {
   href: string;
   label: string;
+  children?: readonly {
+    href: string | null;
+    label: string;
+  }[];
 };
 
 type MobileNavProps = {
@@ -69,6 +73,25 @@ export function MobileNav({
                 >
                   {item.label}
                 </Link>
+                {item.children?.map((child) =>
+                  child.href ? (
+                    <Link
+                      key={child.label}
+                      href={child.href}
+                      onClick={onClose}
+                      className="block py-3 ps-4 text-base font-medium text-oms-dark"
+                    >
+                      {child.label}
+                    </Link>
+                  ) : (
+                    <span
+                      key={child.label}
+                      className="oms-nav-submenu-static block py-3 ps-4 text-base font-medium text-oms-dark"
+                    >
+                      {child.label}
+                    </span>
+                  ),
+                )}
               </li>
             );
           })}
