@@ -18,10 +18,14 @@ export default async function AboutPage({ params }: Props) {
   const dict = getDictionary(locale);
 
   return (
-    <PagePlaceholder
-      title={dict.nav.about}
-      description={dict.placeholder.description}
-      comingSoon={dict.placeholder.comingSoon}
-    />
+    <>
+      <PagePlaceholder
+        title={dict.nav.about}
+        description={dict.placeholder.description}
+        comingSoon={dict.placeholder.comingSoon}
+      />
+      <div id="qcdd" className="h-0 overflow-hidden" aria-hidden="true" />
+      <div id="iso-certifications" className="h-0 overflow-hidden" aria-hidden="true" />
+    </>
   );
 }

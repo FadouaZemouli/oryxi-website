@@ -100,10 +100,148 @@ export const ar: typeof en = {
     },
     about: {
       eyebrow: "عن OMS",
-      titleLine1: "صُمِّمت للموثوقية.",
-      titleLine2: "بُنيت حول السلامة.",
-      body: "تقدم ORYXI Maintenance Services خدمات هندسية وصيانة وخدمات فنية متخصصة، مع تركيز واضح على السلامة والموثوقية والتنفيذ المنضبط.",
-      cta: "تعرّف على OMS",
+      titleLine1: "هندسة ترتكز على الموثوقية.",
+      titleLine2: "وأساسها",
+      titleAccent: "السلامة.",
+      body: "تقدم OMS حلولاً متقدمة في الأنظمة الكهروميكانيكية والحماية من الحرائق في دولة قطر. وبالتزامنا بالسلامة والجودة والابتكار، نقدم حلولاً تضمن استمرارية التشغيل وراحة البال.",
+      numbersEyebrow: "OMS بالأرقام",
+      proofPoints: {
+        experience: {
+          line1: "سنوات من الخبرة",
+          line2: "في الأنظمة الحيوية",
+        },
+        engineers: {
+          line1: "مهندسون مؤهلون",
+          line2: "وفرق معتمدة",
+        },
+        quality: {
+          line1: "أنظمة جودة",
+          line2: "ومعايير عالمية",
+        },
+        support: {
+          line1: "دعم واستجابة",
+          line2: "على مدار الساعة",
+        },
+      },
+    },
+    numbers: {
+      eyebrow: "OMS بالأرقام",
+      titleLine1: "خبرتنا.",
+      titleLine2: "تقاس بالإنجاز.",
+      body: "سجل من الإنجازات بُني على الخبرة الفنية والخدمة الموثوقة والشراكات طويلة الأمد في دولة قطر.",
+      metrics: {
+        experience: {
+          value: "+8",
+          label: "سنوات خبرة",
+        },
+        projects: {
+          value: "+100",
+          label: "مشروع ناجح",
+        },
+        clients: {
+          value: "+50",
+          label: "عملاء تم خدمتهم",
+        },
+        support: {
+          value: "24/7",
+          label: "دعم طوارئ",
+        },
+      },
+    },
+    compliance: {
+      eyebrow: "الامتثال والمعايير",
+      qcdd: {
+        title: "الامتثال لمتطلبات الدفاع المدني",
+        body: "حلول ودعم فني متوافق مع متطلبات الدفاع المدني القطري لأنظمة الحماية من الحريق والسلامة.",
+        cta: "اعرف المزيد",
+        imageAlt: "شعار الدفاع المدني القطري",
+      },
+      iso: {
+        title: "شهادة ISO",
+        body: "معتمد وفق المعايير الدولية للجودة والسلامة والإدارة البيئية.",
+        cta: "اعرف المزيد",
+        imageAlt: "شارة اعتماد ISO 9001:2015",
+      },
+      badges: {
+        iso9001: {
+          code: "ISO 9001:2015",
+          label: "إدارة الجودة",
+        },
+        iso14001: {
+          code: "ISO 14001:2015",
+          label: "الإدارة البيئية",
+        },
+        iso45001: {
+          code: "ISO 45001:2018",
+          label: "الصحة والسلامة المهنية",
+        },
+      },
+    },
+    featuredProjects: {
+      eyebrow: "مشاريع مختارة",
+      viewAll: "عرض جميع المشاريع",
+      qcddPrefix: "شهادة الدفاع المدني",
+      locations: {
+        doha: "الدوحة، قطر",
+        lusail: "لوسيل، قطر",
+        thePearl: "اللؤلؤة، قطر",
+      },
+      items: {
+        alEzzTower4: {
+          name: "Al Ezz Tower 4",
+          locationKey: "doha",
+          qcddYear: "2026",
+          imageAlt: "Al Ezz Tower 4 في الدوحة، قطر",
+        },
+        dolphinTower: {
+          name: "Dolphin Tower",
+          locationKey: "doha",
+          qcddYear: "2026",
+          imageAlt: "Dolphin Tower في الدوحة، قطر",
+        },
+        gewanIsland: {
+          name: "Gewan Island",
+          locationKey: "lusail",
+          qcddYear: "2025",
+          imageAlt: "Gewan Island في لوسيل، قطر",
+        },
+        madinaCentrale: {
+          name: "Madina Centrale",
+          locationKey: "thePearl",
+          qcddYear: "2024",
+          imageAlt: "Madina Centrale في اللؤلؤة، قطر",
+        },
+        qanatQuartier: {
+          name: "Qanat Quartier",
+          locationKey: "thePearl",
+          qcddYear: "2024–2025",
+          imageAlt: "Qanat Quartier في اللؤلؤة، قطر",
+        },
+        regencyResidenceTower: {
+          name: "Regency Residence Tower",
+          locationKey: "doha",
+          qcddYear: "2026",
+          imageAlt: "Regency Residence Tower في الدوحة، قطر",
+        },
+        rkhDohaMetro: {
+          name: "RKH Doha Metro Station",
+          locationKey: "doha",
+          qcddYear: "2026",
+          imageAlt: "RKH Doha Metro Station في الدوحة، قطر",
+        },
+        alKhaleejTower: {
+          name: "Al Khaleej Tower",
+          locationKey: "doha",
+          qcddYear: "2025",
+          imageAlt: "Al Khaleej Tower في الدوحة، قطر",
+        },
+        portoArabiaTower3: {
+          name: "Porto Arabia Tower 3",
+          locationKey: "thePearl",
+          qcddYear: "2026",
+          imageAlt: "Porto Arabia Tower 3 في اللؤلؤة، قطر",
+        },
+      },
     },
     coreServices: {
       eyebrow: "خدماتنا الأساسية",

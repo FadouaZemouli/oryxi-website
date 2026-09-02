@@ -98,11 +98,149 @@ export const en = {
       },
     },
     about: {
-      eyebrow: "About OMS",
+      eyebrow: "ABOUT OMS",
       titleLine1: "ENGINEERED FOR RELIABILITY.",
-      titleLine2: "BUILT AROUND SAFETY.",
-      body: "ORYXI Maintenance Services delivers professional engineering, maintenance, and technical services with a strong focus on safety, reliability, and disciplined execution.",
-      cta: "Discover OMS",
+      titleLine2: "BUILT AROUND",
+      titleAccent: "SAFETY.",
+      body: "OMS delivers advanced electromechanical and fire protection solutions across Qatar. With a commitment to safety, quality and innovation, we provide solutions that ensure operational continuity and peace of mind.",
+      numbersEyebrow: "OMS IN NUMBERS",
+      proofPoints: {
+        experience: {
+          line1: "Years of experience",
+          line2: "in critical systems",
+        },
+        engineers: {
+          line1: "Qualified engineers",
+          line2: "and certified teams",
+        },
+        quality: {
+          line1: "Quality systems",
+          line2: "and global standards",
+        },
+        support: {
+          line1: "24/7 support",
+          line2: "and response",
+        },
+      },
+    },
+    numbers: {
+      eyebrow: "OMS IN NUMBERS",
+      titleLine1: "OUR EXPERIENCE.",
+      titleLine2: "MEASURED IN IMPACT.",
+      body: "A track record built through technical expertise, reliable service and long-term partnerships across Qatar.",
+      metrics: {
+        experience: {
+          value: "8+",
+          label: "Years Experience",
+        },
+        projects: {
+          value: "100+",
+          label: "Successful Projects",
+        },
+        clients: {
+          value: "50+",
+          label: "Clients Served",
+        },
+        support: {
+          value: "24/7",
+          label: "Emergency Support",
+        },
+      },
+    },
+    compliance: {
+      eyebrow: "COMPLIANCE & STANDARDS",
+      qcdd: {
+        title: "QCDD COMPLIANCE",
+        body: "Solutions and technical support aligned with Qatar Civil Defence requirements for fire protection and life-safety systems.",
+        cta: "LEARN MORE",
+        imageAlt: "Qatar Civil Defence emblem",
+      },
+      iso: {
+        title: "ISO CERTIFICATE",
+        body: "Certified to international standards for quality, safety and environmental management.",
+        cta: "LEARN MORE",
+        imageAlt: "ISO 9001:2015 certification badge",
+      },
+      badges: {
+        iso9001: {
+          code: "ISO 9001:2015",
+          label: "Quality Management",
+        },
+        iso14001: {
+          code: "ISO 14001:2015",
+          label: "Environmental Management",
+        },
+        iso45001: {
+          code: "ISO 45001:2018",
+          label: "Occupational Health & Safety",
+        },
+      },
+    },
+    featuredProjects: {
+      eyebrow: "FEATURED PROJECTS",
+      viewAll: "VIEW ALL PROJECTS",
+      qcddPrefix: "QCDD Certificate",
+      locations: {
+        doha: "Doha, Qatar",
+        lusail: "Lusail, Qatar",
+        thePearl: "The Pearl, Qatar",
+      },
+      items: {
+        alEzzTower4: {
+          name: "Al Ezz Tower 4",
+          locationKey: "doha",
+          qcddYear: "2026",
+          imageAlt: "Al Ezz Tower 4 in Doha, Qatar",
+        },
+        dolphinTower: {
+          name: "Dolphin Tower",
+          locationKey: "doha",
+          qcddYear: "2026",
+          imageAlt: "Dolphin Tower in Doha, Qatar",
+        },
+        gewanIsland: {
+          name: "Gewan Island",
+          locationKey: "lusail",
+          qcddYear: "2025",
+          imageAlt: "Gewan Island in Lusail, Qatar",
+        },
+        madinaCentrale: {
+          name: "Madina Centrale",
+          locationKey: "thePearl",
+          qcddYear: "2024",
+          imageAlt: "Madina Centrale at The Pearl, Qatar",
+        },
+        qanatQuartier: {
+          name: "Qanat Quartier",
+          locationKey: "thePearl",
+          qcddYear: "2024–2025",
+          imageAlt: "Qanat Quartier at The Pearl, Qatar",
+        },
+        regencyResidenceTower: {
+          name: "Regency Residence Tower",
+          locationKey: "doha",
+          qcddYear: "2026",
+          imageAlt: "Regency Residence Tower in Doha, Qatar",
+        },
+        rkhDohaMetro: {
+          name: "RKH Doha Metro Station",
+          locationKey: "doha",
+          qcddYear: "2026",
+          imageAlt: "RKH Doha Metro Station in Doha, Qatar",
+        },
+        alKhaleejTower: {
+          name: "Al Khaleej Tower",
+          locationKey: "doha",
+          qcddYear: "2025",
+          imageAlt: "Al Khaleej Tower in Doha, Qatar",
+        },
+        portoArabiaTower3: {
+          name: "Porto Arabia Tower 3",
+          locationKey: "thePearl",
+          qcddYear: "2026",
+          imageAlt: "Porto Arabia Tower 3 at The Pearl, Qatar",
+        },
+      },
     },
     coreServices: {
       eyebrow: "Our Core Services",
