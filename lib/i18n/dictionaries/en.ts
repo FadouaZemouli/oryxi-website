@@ -285,11 +285,153 @@ export const en = {
       },
     },
   },
-  meta: {
+  aboutPage: {
+    hero: {
+      eyebrow: "ABOUT OMS",
+      titleLine1: "DELIVERING INTEGRATED SOLUTIONS.",
+      titleLine2Lead: "BUILDING",
+      titleAccent: "SAFER ENVIRONMENTS.",
+      titleLine2Trail: "",
+      supporting:
+        "Engineering, maintenance, fire protection and life-safety solutions delivered with technical expertise, reliability and a commitment to safer environments across Qatar.",
+    },
+    whoWeAre: {
+      eyebrow: "WHO WE ARE",
+      titleLine1: "ENGINEERING SOLUTIONS.",
+      titleLine2Lead: "BUILT AROUND",
+      titleAccent: "SAFETY.",
+      paragraphs: [
+        "ORYXI Maintenance Services delivers integrated engineering, electromechanical, HVAC, fire protection and life-safety solutions across Qatar.",
+        "Our work combines technical expertise, disciplined project delivery and reliable after-sales support to help clients maintain safe, efficient and dependable building systems.",
+        "From engineering and installation to inspection, maintenance and emergency support, OMS provides practical solutions designed around each project's operational requirements.",
+      ],
+    },
+    numbers: {
+      ariaLabel: "OMS in numbers",
+      metrics: {
+        experience: {
+          value: "8+",
+          label: "Years Experience",
+        },
+        projects: {
+          value: "100+",
+          label: "Successful Projects",
+        },
+        clients: {
+          value: "50+",
+          label: "Clients Served",
+        },
+        support: {
+          value: "24/7",
+          label: "Emergency Support",
+        },
+      },
+    },
+    values: {
+      eyebrow: "OUR VALUES",
+      title: "THE PRINCIPLES BEHIND OUR WORK.",
+      items: {
+        safety: {
+          title: "SAFETY FIRST",
+          description:
+            "Every solution begins with protecting people, property and operations.",
+        },
+        excellence: {
+          title: "TECHNICAL EXCELLENCE",
+          description:
+            "Engineering decisions are guided by knowledge, standards and practical experience.",
+        },
+        reliability: {
+          title: "RELIABILITY",
+          description:
+            "We build systems and partnerships designed to perform consistently over time.",
+        },
+        quality: {
+          title: "QUALITY DELIVERY",
+          description:
+            "We approach every project with discipline, attention to detail and accountability.",
+        },
+      },
+    },
+    qcdd: {
+      eyebrow: "QCDD COMPLIANCE",
+      title: "SUPPORTING COMPLIANCE WITH QATAR CIVIL DEFENCE REQUIREMENTS.",
+      imageAlt: "Qatar Civil Defence emblem",
+      paragraphs: [
+        "OMS supports fire protection and life-safety projects with engineering, technical documentation, inspection coordination and system support aligned with Qatar Civil Defence requirements.",
+        "Our team works across fire alarm, firefighting and related life-safety systems to help clients move projects through technical review, inspection and compliance processes efficiently and professionally.",
+      ],
+    },
+    iso: {
+      eyebrow: "ISO CERTIFICATION",
+      titleLine1: "QUALITY MANAGEMENT.",
+      titleLine2Lead: "BUILT TO",
+      titleAccent: "INTERNATIONAL STANDARDS.",
+      body: "OMS operates under internationally recognized management systems covering quality, environmental responsibility, and occupational health and safety. These standards support structured processes, consistent service delivery, responsible operations, safe working practices, and continual improvement across our engineering and maintenance activities.",
+      imageAlt: "ISO 9001:2015 certification badge",
+      standards: [
+        {
+          key: "iso9001",
+          index: "01",
+          code: "ISO 9001:2015",
+          label: "Quality Management System",
+          certificateNo: "Certificate No. QA61213A",
+        },
+        {
+          key: "iso14001",
+          index: "02",
+          code: "ISO 14001:2015",
+          label: "Environmental Management System",
+          certificateNo: "",
+        },
+        {
+          key: "iso45001",
+          index: "03",
+          code: "ISO 45001:2018",
+          label: "Occupational Health & Safety Management System",
+          certificateNo: "",
+        },
+      ],
+    },
+    whyOms: {
+      eyebrow: "WHY OMS",
+      title: "A PARTNER BUILT FOR LONG-TERM PERFORMANCE.",
+      points: {
+        engineering: {
+          title: "ENGINEERING-LED",
+          description: "Technical knowledge drives every project decision.",
+        },
+        capability: {
+          title: "MULTI-DISCIPLINE CAPABILITY",
+          description:
+            "MEP, electromechanical, HVAC, fire protection and maintenance under one experienced team.",
+        },
+        support: {
+          title: "RESPONSIVE SUPPORT",
+          description:
+            "Practical technical assistance before, during and after project delivery.",
+        },
+        relationships: {
+          title: "LONG-TERM RELATIONSHIPS",
+          description:
+            "Focused on dependable service and lasting client partnerships.",
+        },
+      },
+    },
+    cta: {
+      title: "HAVE A PROJECT TO DISCUSS?",
+      supporting:
+        "Let's talk about your requirements and the right solution for your project.",
+      quoteCta: "REQUEST A QUOTE",
+      contactCta: "CONTACT OMS",
+    },
+  },  meta: {
     siteDescription:
       "Fire protection, engineering and electromechanical maintenance services in Qatar.",
     home: "ORYXI Maintenance Services",
-    about: "About Us | ORYXI Maintenance Services",
+    about: "About OMS | ORYXI Maintenance Services",
+    aboutDescription:
+      "Learn about ORYXI Maintenance Services, our engineering expertise, safety-focused approach, QCDD compliance support and ISO 9001:2015 quality management system in Qatar.",
     services: "Services | ORYXI Maintenance Services",
     projects: "Projects | ORYXI Maintenance Services",
     pumpSelection: "Pump Selection | ORYXI Maintenance Services",

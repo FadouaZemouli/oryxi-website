@@ -39,6 +39,10 @@ function pageDescription(dict: Dictionary, page: PageKey): string {
     return dict.meta.siteDescription;
   }
 
+  if (page === "about") {
+    return dict.meta.aboutDescription;
+  }
+
   if (page === "qcddServices") {
     return dict.meta.qcddServicesDescription;
   }
