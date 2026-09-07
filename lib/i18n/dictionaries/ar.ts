@@ -6,12 +6,11 @@ export const ar: typeof en = {
     about: "من نحن",
     services: "الخدمات",
     servicesOverview: "نظرة عامة على الخدمات",
-    pumpSelection: "اختيار المضخات",
+    pumpSelection: "الشركاء",
     qcddServices: "خدمات الدفاع المدني",
     qcddServicesMenu: "خدمات إدارة الدفاع المدني القطري (QCDD)",
     projects: "المشاريع",
     amcContracts: "عقود الصيانة السنوية",
-    emergencyService: "خدمات الطوارئ",
     contact: "اتصل بنا",
     requestQuote: "طلب عرض سعر",
   },
@@ -28,6 +27,12 @@ export const ar: typeof en = {
     navContact: "اتصل بنا",
   },
   footer: {
+    company: "الشركة",
+    support: "الدعم",
+    location: "الدوحة، قطر",
+    brandSummary:
+      "نقدم حلول MEP والأنظمة الكهروميكانيكية المتكاملة مع التزام بالسلامة والجودة والأداء.",
+    partnerLabel: "شركاء منذ 2022",
     quickLinks: "روابط سريعة",
     services: "الخدمات",
     contact: "التواصل",
@@ -35,6 +40,28 @@ export const ar: typeof en = {
       "© {year} ORYXI Maintenance Services. جميع الحقوق محفوظة.",
     summary:
       "خدمات الحماية من الحرائق والخدمات الهندسية والصيانة الكهروميكانيكية في قطر.",
+    legal: {
+      privacy: "سياسة الخصوصية",
+      terms: "الشروط والأحكام",
+    },
+    columns: {
+      company: {
+        aboutOms: "عن OMS",
+        projects: "المشاريع",
+      },
+      services: {
+        mep: "خدمات MEP",
+        electromechanical: "الخدمات الكهروميكانيكية",
+        engineering: "الخدمات الهندسية",
+        hvac: "خدمات التكييف والتهوية",
+        qcdd: "خدمات الدفاع المدني",
+      },
+      support: {
+        amcContracts: "عقود الصيانة السنوية",
+        requestQuote: "طلب عرض سعر",
+        contact: "اتصل بنا",
+      },
+    },
     contactDetails: {
       phone: "+974 4039 7445",
       phoneTel: "+97440397445",
@@ -47,7 +74,6 @@ export const ar: typeof en = {
       fireLifeSafety: "السلامة من الحرائق والحماية",
       qcddServices: "خدمات الدفاع المدني",
       amcContractsFooter: "عقود الصيانة السنوية / عقود الصيانة",
-      emergencyService: "خدمات الطوارئ",
       pumpSolutions: "حلول المضخات",
     },
     peerless: {
@@ -243,6 +269,48 @@ export const ar: typeof en = {
         },
       },
     },
+    whyChooseOms: {
+      eyebrow: "لماذا تختار OMS",
+      proofPoints: {
+        safety: {
+          title: "تركيزنا على السلامة",
+          description: "السلامة هي جوهر كل ما نقوم به.",
+        },
+        expertise: {
+          title: "خبرة مثبتة",
+          description: "خبرة تقنية عميقة عبر عدة تخصصات.",
+        },
+        partner: {
+          title: "شريك موثوق",
+          description: "نبني علاقات طويلة الأمد قائمة على الثقة.",
+        },
+        delivery: {
+          title: "الالتزام بالمواعيد",
+          description: "نلتزم بالمواعيد النهائية دون المساومة على الجودة.",
+        },
+      },
+    },
+    projectCta: {
+      titleLead: "هل لديك",
+      titleAccent: "مشروع",
+      titleTrail: "ترغب في مناقشته؟",
+      supporting:
+        "فريقنا مستعد لفهم متطلباتك وتقديم الحل المناسب لمشروعك.",
+      imageAlt:
+        "لوحات تحكم مضخات الحريق في نظام حماية من الحرائق صناعي لـ OMS.",
+      actions: {
+        quote: {
+          line1: "اطلب",
+          line2: "عرض سعر",
+        },
+        call: {
+          heading: "اتصل بنا",
+        },
+        email: {
+          heading: "راسلنا",
+        },
+      },
+    },
     coreServices: {
       eyebrow: "خدماتنا الأساسية",
       titleLine1: "أنظمة هندسية.",
@@ -426,7 +494,188 @@ export const ar: typeof en = {
       quoteCta: "طلب عرض سعر",
       contactCta: "اتصل بـ OMS",
     },
-  },  meta: {
+  },
+  servicesPage: {
+    hero: {
+      eyebrow: "خدماتنا",
+      titleLine1: "حلول هندسية.",
+      titleAccent: "مصممة للأداء.",
+      supporting:
+        "حلول متكاملة في الميكانيكا والكهرباء والتكييف والحماية من الحرائق والصيانة، نقدمها عبر دورة حياة النظام بالكامل.",
+      cta: "استكشف خدماتنا",
+    },
+    nav: {
+      ariaLabel: "أقسام الخدمات",
+      items: {
+        mep: "خدمات MEP",
+        electromechanical: "الخدمات الكهروميكانيكية",
+        engineering: "الخدمات الهندسية",
+        hvac: "أنظمة التكييف",
+        fire: "الحماية من الحرائق وخدمات الدفاع المدني",
+        amc: "عقود الصيانة AMC",
+      },
+    },
+    showcase: {
+      ariaLabel: "عرض خدمات OMS",
+      prevLabel: "الخدمة السابقة",
+      nextLabel: "الخدمة التالية",
+      selectorAriaLabel: "اختر خدمة",
+      cta: "اطلب عرض سعر",
+      ctaArrow: "←",
+      selector: {
+        mep: "MEP",
+        electromechanical: "الكهروميكانيكية",
+        engineering: "الهندسية",
+        hvac: "التكييف",
+        qcdd: "QCDD",
+        amc: "الصيانة",
+      },
+      slides: {
+        mep: {
+          eyebrow: "خدمات MEP",
+          heading: "حلول MEP متكاملة لأداء متكامل وموثوق للمباني.",
+          description:
+            "حلول متكاملة للأنظمة الميكانيكية والكهربائية والصحية، مصممة لدعم أداء المباني بكفاءة وأمان وموثوقية.",
+          imageAlt:
+            "أنظمة MEP متكاملة تشمل المضخات والأنابيب والمعدات الميكانيكية",
+          capabilities: [
+            "الميكانيكا",
+            "الكهرباء",
+            "الأنظمة الصحية",
+            "التشغيل والاختبارات",
+          ],
+        },
+        electromechanical: {
+          eyebrow: "الخدمات الكهروميكانيكية",
+          heading: "أنظمة موثوقة مصممة لتحقيق أفضل أداء.",
+          description:
+            "حلول كهروميكانيكية متكاملة تدعم كفاءة الأنظمة وموثوقية التشغيل والأداء طويل الأمد.",
+          imageAlt:
+            "أنظمة ومعدات كهروميكانيكية مركّبة لدعم أداء المباني",
+          capabilities: [
+            "أنظمة القدرة",
+            "أنظمة التحكم",
+            "المعدات",
+            "الاختبارات",
+          ],
+        },
+        engineering: {
+          eyebrow: "الخدمات الهندسية",
+          heading: "حلول هندسية مصممة حول متطلبات مشروعك.",
+          description:
+            "خدمات هندسية وتصميم وتنسيق فني احترافي تدعم المشاريع من مرحلة التخطيط وحتى التنفيذ.",
+          imageAlt:
+            "فريق OMS الهندسي ينسّق الأنظمة الفنية في موقع المشروع",
+          capabilities: ["التصميم", "التخطيط", "التنسيق", "الدعم الفني"],
+        },
+        hvac: {
+          eyebrow: "أنظمة التكييف والتهوية",
+          heading: "راحة وكفاءة وأداء موثوق.",
+          description:
+            "حلول HVAC مصممة لتوفير تحكم موثوق بالمناخ وكفاءة في استهلاك الطاقة وأداء طويل الأمد.",
+          imageAlt:
+            "معدات وأنظمة HVAC للتحكم بالمناخ وراحة المباني",
+          capabilities: ["التبريد", "التهوية", "أنظمة التحكم", "الصيانة"],
+        },
+        qcdd: {
+          eyebrow: "خدمات استشارات QCDD",
+          heading: "دعم احترافي لمتطلبات الحماية من الحريق وسلامة الأرواح.",
+          description:
+            "استشارات وتنسيق فني لدعم متطلبات الحماية من الحريق وسلامة الأرواح وإجراءات QCDD.",
+          imageAlt:
+            "استشارات الحماية من الحريق وQCDD لدعم متطلبات سلامة الأرواح",
+          capabilities: [
+            "السلامة من الحريق",
+            "مراجعة التصميم",
+            "الامتثال",
+            "تنسيق QCDD",
+          ],
+        },
+        amc: {
+          eyebrow: "خدمات عقود الصيانة السنوية",
+          heading: "صيانة استباقية. أداء موثوق.",
+          description:
+            "خدمات صيانة سنوية مصممة للحفاظ على كفاءة الأنظمة وتعزيز الموثوقية ودعم التشغيل طويل الأمد.",
+          imageAlt:
+            "فنيو OMS ينفّذون أعمال الصيانة السنوية لأنظمة المباني",
+          capabilities: [
+            "الصيانة الوقائية",
+            "الفحص",
+            "الاختبارات",
+            "موثوقية الأنظمة",
+          ],
+        },
+      },
+    },
+    howWeWork: {
+      eyebrow: "كيف نعمل",
+      titleLine1: "من تحديد المتطلبات",
+      titleLine2: "إلى أداء موثوق.",
+      supporting:
+        "منهجية منظمة تضمن تنسيق كل مشروع، والالتزام بالمتطلبات، والتركيز على الأداء في جميع مراحل التنفيذ.",
+      steps: {
+        assess: {
+          title: "التقييم",
+          description:
+            "نحدد متطلبات المشروع، ونراجع الظروف القائمة، ونضع النطاق الفني المناسب للتنفيذ.",
+        },
+        engineer: {
+          title: "الهندسة والتخطيط",
+          description:
+            "يطور فريقنا الحل الهندسي والتصميم والتنسيق الفني المطلوب لضمان تنفيذ المشروع بكفاءة.",
+        },
+        deliver: {
+          title: "التنفيذ",
+          description:
+            "يتم تنفيذ الأعمال والتركيب والاختبارات والتشغيل مع التركيز على الجودة والسلامة والالتزام بالمتطلبات.",
+        },
+        support: {
+          title: "الدعم والصيانة",
+          description:
+            "بعد التسليم، تدعم OMS أداء الأنظمة من خلال الفحص والصيانة الوقائية والدعم الفني المستمر.",
+        },
+      },
+    },
+    whyChooseOms: {
+      eyebrow: "لماذا تختار OMS",
+      titleLine1: "شريك موثوق",
+      titleLine2: "لمستقبل أكثر أماناً.",
+      intro:
+        "نجمع بين الخبرة الفنية والمعرفة المتخصصة والالتزام بالجودة لتقديم حلول موثوقة ومستدامة في كل مشروع.",
+      reasons: {
+        compliance: {
+          title: "التركيز على الامتثال",
+          description:
+            "متوافقون مع متطلبات QCDD والمعايير الدولية.",
+        },
+        team: {
+          title: "فريق ذو خبرة",
+          description: "متخصصون ذوو خبرة عملية مثبتة في القطاع.",
+        },
+        quality: {
+          title: "الجودة أولاً",
+          description:
+            "نركز على السلامة والموثوقية والأداء طويل الأمد.",
+        },
+        partnership: {
+          title: "شراكة طويلة الأمد",
+          description:
+            "دعم مستمر لضمان استدامة وكفاءة تشغيل المباني.",
+        },
+      },
+    },
+    cta: {
+      eyebrow: "هل أنت مستعد لمناقشة مشروعك؟",
+      titleLine1: "لنبنِ مستقبلاً أكثر أماناً",
+      titleLine2: "وكفاءة.",
+      supporting:
+        "تواصل مع فريقنا للحصول على حل مصمم وفق متطلبات مشروعك.",
+      cta: "اطلب عرض سعر",
+      ctaArrow: "←",
+      imageAlt: "أفق الدوحة وأبراج قطر وقت الغروب",
+    },
+  },
+  meta: {
     siteDescription:
       "خدمات الحماية من الحرائق والخدمات الهندسية والصيانة الكهروميكانيكية في قطر.",
     home: "ORYXI Maintenance Services",
@@ -437,7 +686,6 @@ export const ar: typeof en = {
     projects: "المشاريع | ORYXI Maintenance Services",
     pumpSelection: "اختيار المضخات | ORYXI Maintenance Services",
     amcContracts: "عقود الصيانة السنوية | ORYXI Maintenance Services",
-    emergencyService: "خدمات الطوارئ | ORYXI Maintenance Services",
     contact: "اتصل بنا | ORYXI Maintenance Services",
     requestQuote: "طلب عرض سعر | ORYXI Maintenance Services",
     qcddServices: "خدمات الدفاع المدني | ORYXI Maintenance Services",
@@ -496,6 +744,80 @@ export const ar: typeof en = {
       service: "يُرجى اختيار الخدمة المطلوبة.",
       message: "يُرجى وصف نطاق العمل.",
       consent: "يُرجى تأكيد الموافقة للمتابعة.",
+    },
+  },
+  pumpSelectionPage: {
+    hero: {
+      eyebrow: "حلول مضخات Peerless",
+      titleLine1: "حلول ضخ موثوقة",
+      titleLine2: "لمستقبل أكثر",
+      titleAccent: "أماناً.",
+      supporting:
+        "حلول ضخ عالية الأداء لأنظمة الحماية من الحريق والتكييف والتطبيقات الصناعية، مدعومة بالخبرة الهندسية والدعم الموثوق.",
+      primaryCta: "استكشف المضخات",
+      secondaryCta: "اطلب عرض سعر",
+      imageAlt: "نظام مضخة Peerless حمراء داخل غرفة ميكانيكية صناعية",
+    },
+    intro: {
+      eyebrow: "علامة تجارية عالمية موثوقة",
+      heading: "PEERLESS PUMP",
+      statementLine1: "مصممة للأداء.",
+      statementLine2: "مبنية على قرن من الثقة.",
+      paragraph:
+        "على مدى ما يقارب 100 عام، كانت Peerless Pump رائدة عالمياً في تصميم وتصنيع مضخات عالية الجودة لأنظمة الحماية من الحريق والتكييف والتطبيقات الصناعية. في OMS، نفخر بأن نكون الوكيل المعتمد في قطر، ونقدم حلول Peerless Pump الأصلية مع الدعم الفني والخدمة المتخصصة.",
+      points: {
+        experience: "+100 عام من الخبرة",
+        reliability: "موثوقية مثبتة",
+        presence: "حضور عالمي",
+      },
+      logoCaption: "الوكيل المعتمد في قطر",
+      logoAlt: "Peerless Pump",
+    },
+    products: {
+      heading: "المنتجات",
+      intro:
+        "تقدم Peerless Pump مجموعة واسعة من المضخات مدعومة بخبرة تقارب 100 عام من الأداء والموثوقية.",
+      items: {
+        fire: {
+          name: "مضخات الحريق",
+          nameLine2: "",
+          alt: "مضخة حريق Peerless حمراء مع عدادات وأنابيب تصريف",
+        },
+        horizontal: {
+          name: "المضخات الأفقية",
+          nameLine2: "",
+          alt: "مضخة Peerless أفقية زرقاء من النوع المنقسم",
+        },
+        vertical: {
+          name: "مضخات التوربين",
+          nameLine2: "العمودية",
+          alt: "مضخة توربين عمودية زرقاء من Peerless",
+        },
+      },
+    },
+    award: {
+      eyebrow: "شركاؤنا",
+      heading: "PEERLESS PUMP",
+      statementLine1: "شراكة موثوقة.",
+      statementLine2: "أداء مثبت.",
+      body: "بصفتنا وكيلاً معتمداً لـ Peerless Pump في قطر، توفر OMS منتجات أصلية وخبرة فنية ودعماً متخصصاً لتقديم حلول ضخ موثوقة لأهم التطبيقات.",
+      imageAlt:
+        "جائزة تميز شريك الأعمال من Peerless Pump المقدمة إلى Oryxi Maintenance Services عام 2022",
+      highlights: {
+        reliability: "موثوقية مثبتة",
+        expertise: "خبرة في القطاع",
+        partnership: "شراكة موثوقة",
+      },
+    },
+    cta: {
+      eyebrow: "هل أنت مستعد لمناقشة مشروعك؟",
+      titleLine1: "لنبنِ معًا مستقبلاً",
+      titleLine2: "أكثر أمانًا وكفاءة.",
+      body: "تواصل مع فريقنا للحصول على حل مصمم وفق احتياجات مشروعك.",
+      cta: "اطلب عرض سعر",
+      ctaArrow: "←",
+      imageAlt:
+        "مهندسو OMS في غرفة محطة صناعية مع معدات ضخ وبرج أسباير في الخلفية",
     },
   },
   qcdd: {

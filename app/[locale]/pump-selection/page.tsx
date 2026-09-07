@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
-import { PagePlaceholder } from "@/components/ui/PagePlaceholder";
+import { PeerlessIntro } from "@/components/pump-selection/PeerlessIntro";
+import { PumpAward } from "@/components/pump-selection/PumpAward";
+import { PumpCta } from "@/components/pump-selection/PumpCta";
+import { PumpProducts } from "@/components/pump-selection/PumpProducts";
+import { PumpSelectionHero } from "@/components/pump-selection/PumpSelectionHero";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getLocaleParam } from "@/lib/i18n/locale-param";
 import { buildPageMetadata } from "@/lib/seo/metadata";
@@ -18,10 +22,12 @@ export default async function PumpSelectionPage({ params }: Props) {
   const dict = getDictionary(locale);
 
   return (
-    <PagePlaceholder
-      title={dict.nav.pumpSelection}
-      description={dict.placeholder.description}
-      comingSoon={dict.placeholder.comingSoon}
-    />
+    <main className="oms-pump-selection-page flex-1 bg-oms-white">
+      <PumpSelectionHero locale={locale} dict={dict} />
+      <PeerlessIntro dict={dict} />
+      <PumpProducts dict={dict} />
+      <PumpAward dict={dict} />
+      <PumpCta locale={locale} dict={dict} />
+    </main>
   );
 }

@@ -58,47 +58,63 @@ export function Header({ locale, dict }: HeaderProps) {
     const range = 280;
     const reduceQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     const desktopQuery = window.matchMedia("(min-width: 1024px)");
-    let raf = 0;
+    let cancelled = false;
+    let scrollRaf = 0;
+    let reflowRaf = 0;
+    let bootRaf = 0;
+    const visualViewport = window.visualViewport;
+
+    const readScrollY = () =>
+      window.scrollY || document.documentElement.scrollTop || 0;
+
+    const resetTravel = () => {
+      root.style.setProperty("--oms-logo-dx", "0px");
+      root.style.setProperty("--oms-logo-dy", "0px");
+      root.style.removeProperty("--oms-logo-x");
+      root.style.removeProperty("--oms-logo-y");
+    };
 
     const measureLogoTravel = () => {
-      const logo = document.querySelector<HTMLElement>(".oms-hero-brand-link");
+      const origin = document.querySelector<HTMLElement>(".oms-hero-brand");
       const slot = document.querySelector<HTMLElement>(".oms-header-logo-link");
       const canTravel =
         root.dataset.omsHeader === "home" &&
         desktopQuery.matches &&
-        logo !== null &&
+        origin !== null &&
         slot !== null;
 
-      if (!canTravel || !logo || !slot) {
-        root.style.setProperty("--oms-logo-dx", "0px");
-        root.style.setProperty("--oms-logo-dy", "0px");
+      if (!canTravel || !origin || !slot) {
+        resetTravel();
         return;
       }
 
-      const previousTransform = logo.style.transform;
-      logo.style.transform = "none";
-      const start = logo.getBoundingClientRect();
+      const start = origin.getBoundingClientRect();
       const end = slot.getBoundingClientRect();
-      logo.style.transform = previousTransform;
 
       if (start.width < 1 || end.width < 1) {
-        root.style.setProperty("--oms-logo-dx", "0px");
-        root.style.setProperty("--oms-logo-dy", "0px");
         return;
       }
 
+      // Placeholder is in document flow; the traveling mark is position:fixed.
+      // Convert the placeholder to the viewport box it has at scrollY === 0.
+      const startTop = start.top + readScrollY();
+      const startInline =
+        root.dir === "rtl" ? root.clientWidth - start.right : start.left;
+
+      root.style.setProperty("--oms-logo-x", `${startInline.toFixed(2)}px`);
+      root.style.setProperty("--oms-logo-y", `${startTop.toFixed(2)}px`);
       root.style.setProperty(
         "--oms-logo-dx",
         `${(end.left - start.left).toFixed(2)}px`,
       );
       root.style.setProperty(
         "--oms-logo-dy",
-        `${(end.top - start.top).toFixed(2)}px`,
+        `${(end.top - startTop).toFixed(2)}px`,
       );
     };
 
     const syncScroll = () => {
-      const y = window.scrollY;
+      const y = readScrollY();
       const reduce = reduceQuery.matches;
       const progress = reduce
         ? y > 8
@@ -110,46 +126,99 @@ export function Header({ locale, dict }: HeaderProps) {
       root.style.setProperty("--oms-logo-progress", progress.toFixed(4));
     };
 
-    const onScroll = () => {
-      if (raf) {
+    const applyLogoTravel = () => {
+      if (cancelled) {
         return;
       }
 
-      raf = window.requestAnimationFrame(() => {
+      syncScroll();
+      measureLogoTravel();
+    };
+
+    const onScroll = () => {
+      if (scrollRaf) {
+        return;
+      }
+
+      scrollRaf = window.requestAnimationFrame(() => {
         syncScroll();
-        raf = 0;
+        scrollRaf = 0;
       });
     };
 
     const onReflow = () => {
-      measureLogoTravel();
-      syncScroll();
+      if (reflowRaf) {
+        return;
+      }
+
+      reflowRaf = window.requestAnimationFrame(() => {
+        applyLogoTravel();
+        reflowRaf = 0;
+      });
     };
 
-    measureLogoTravel();
-    syncScroll();
+    applyLogoTravel();
+    bootRaf = window.requestAnimationFrame(() => {
+      if (cancelled) {
+        return;
+      }
+
+      applyLogoTravel();
+      bootRaf = window.requestAnimationFrame(() => {
+        if (cancelled) {
+          return;
+        }
+
+        applyLogoTravel();
+        bootRaf = 0;
+      });
+    });
 
     reduceQuery.addEventListener("change", onReflow);
     desktopQuery.addEventListener("change", onReflow);
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onReflow, { passive: true });
+    window.addEventListener("orientationchange", onReflow);
+    window.addEventListener("pageshow", applyLogoTravel);
+    window.addEventListener("load", applyLogoTravel);
+    visualViewport?.addEventListener("resize", onReflow);
 
+    const origin = document.querySelector(".oms-hero-brand");
     const slot = document.querySelector(".oms-header-logo-link");
     const observer = new ResizeObserver(onReflow);
-    observer.observe(root);
+    if (origin) {
+      observer.observe(origin);
+    }
     if (slot) {
       observer.observe(slot);
     }
 
+    document.fonts?.ready.then(() => {
+      if (!cancelled) {
+        onReflow();
+      }
+    }).catch(() => {});
+
     return () => {
-      if (raf) {
-        window.cancelAnimationFrame(raf);
+      cancelled = true;
+      if (scrollRaf) {
+        window.cancelAnimationFrame(scrollRaf);
+      }
+      if (reflowRaf) {
+        window.cancelAnimationFrame(reflowRaf);
+      }
+      if (bootRaf) {
+        window.cancelAnimationFrame(bootRaf);
       }
 
       reduceQuery.removeEventListener("change", onReflow);
       desktopQuery.removeEventListener("change", onReflow);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onReflow);
+      window.removeEventListener("orientationchange", onReflow);
+      window.removeEventListener("pageshow", applyLogoTravel);
+      window.removeEventListener("load", applyLogoTravel);
+      visualViewport?.removeEventListener("resize", onReflow);
       observer.disconnect();
     };
   }, [pathname, locale]);

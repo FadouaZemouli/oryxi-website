@@ -4,12 +4,11 @@ export const en = {
     about: "About",
     services: "Services",
     servicesOverview: "Services Overview",
-    pumpSelection: "Pump Selection",
+    pumpSelection: "Partners",
     qcddServices: "QCDD Services",
     qcddServicesMenu: "Qatar Civil Defence Department (QCDD) Services",
     projects: "Projects",
     amcContracts: "AMC Contracts",
-    emergencyService: "Emergency Service",
     contact: "Contact",
     requestQuote: "Request a Quote",
   },
@@ -26,6 +25,12 @@ export const en = {
     navContact: "Contact Us",
   },
   footer: {
+    company: "Company",
+    support: "Support",
+    location: "Doha, Qatar",
+    brandSummary:
+      "Delivering integrated MEP and electromechanical solutions with a commitment to safety, quality and performance.",
+    partnerLabel: "PARTNERS SINCE 2022",
     quickLinks: "Quick Links",
     services: "Services",
     contact: "Contact",
@@ -33,6 +38,28 @@ export const en = {
       "© {year} ORYXI Maintenance Services. All rights reserved.",
     summary:
       "Fire protection, engineering and electromechanical maintenance services in Qatar.",
+    legal: {
+      privacy: "Privacy Policy",
+      terms: "Terms & Conditions",
+    },
+    columns: {
+      company: {
+        aboutOms: "About OMS",
+        projects: "Projects",
+      },
+      services: {
+        mep: "MEP Services",
+        electromechanical: "Electromechanical Services",
+        engineering: "Engineering Services",
+        hvac: "HVAC Services",
+        qcdd: "QCDD Services",
+      },
+      support: {
+        amcContracts: "AMC Contracts",
+        requestQuote: "Request a Quote",
+        contact: "Contact Us",
+      },
+    },
     contactDetails: {
       phone: "+974 4039 7445",
       phoneTel: "+97440397445",
@@ -45,7 +72,6 @@ export const en = {
       fireLifeSafety: "Fire & Life Safety",
       qcddServices: "QCDD Services",
       amcContractsFooter: "AMC / Maintenance Contracts",
-      emergencyService: "Emergency Service",
       pumpSolutions: "Pump Solutions",
     },
     peerless: {
@@ -242,6 +268,48 @@ export const en = {
         },
       },
     },
+    whyChooseOms: {
+      eyebrow: "WHY CHOOSE OMS",
+      proofPoints: {
+        safety: {
+          title: "Focused on Safety",
+          description: "Safety is at the core of everything we do.",
+        },
+        expertise: {
+          title: "Proven Expertise",
+          description: "Deep technical know-how across multiple disciplines.",
+        },
+        partner: {
+          title: "Reliable Partner",
+          description: "We build long-term relationships based on trust.",
+        },
+        delivery: {
+          title: "On-Time Delivery",
+          description: "We meet deadlines without compromising quality.",
+        },
+      },
+    },
+    projectCta: {
+      titleLead: "HAVE A",
+      titleAccent: "PROJECT",
+      titleTrail: "TO DISCUSS?",
+      supporting:
+        "Our team is ready to understand your requirements and deliver the right solution for your project.",
+      imageAlt:
+        "OMS fire pump control panels in an industrial fire protection system.",
+      actions: {
+        quote: {
+          line1: "REQUEST",
+          line2: "A QUOTE",
+        },
+        call: {
+          heading: "CALL US",
+        },
+        email: {
+          heading: "EMAIL US",
+        },
+      },
+    },
     coreServices: {
       eyebrow: "Our Core Services",
       titleLine1: "ENGINEERED SYSTEMS.",
@@ -425,7 +493,193 @@ export const en = {
       quoteCta: "REQUEST A QUOTE",
       contactCta: "CONTACT OMS",
     },
-  },  meta: {
+  },
+  servicesPage: {
+    hero: {
+      eyebrow: "OUR SERVICES",
+      titleLine1: "ENGINEERED SOLUTIONS.",
+      titleAccent: "BUILT TO PERFORM.",
+      supporting:
+        "Integrated MEP, electromechanical, HVAC, fire protection and maintenance solutions delivered across the complete system lifecycle.",
+      cta: "EXPLORE OUR SERVICES",
+    },
+    nav: {
+      ariaLabel: "Service sections",
+      items: {
+        mep: "MEP Services",
+        electromechanical: "Electromechanical Services",
+        engineering: "Engineering Services",
+        hvac: "HVAC Systems",
+        fire: "Fire Protection & QCDD Services",
+        amc: "AMC & Maintenance",
+      },
+    },
+    showcase: {
+      ariaLabel: "OMS services showcase",
+      prevLabel: "Previous service",
+      nextLabel: "Next service",
+      selectorAriaLabel: "Select a service",
+      cta: "GET A QUOTE",
+      ctaArrow: "→",
+      selector: {
+        mep: "MEP",
+        electromechanical: "ELECTROMECHANICAL",
+        engineering: "ENGINEERING",
+        hvac: "HVAC",
+        qcdd: "QCDD",
+        amc: "AMC",
+      },
+      slides: {
+        mep: {
+          eyebrow: "MEP SERVICES",
+          heading: "INTEGRATED MEP SOLUTIONS FOR COMPLETE BUILDING PERFORMANCE.",
+          description:
+            "Mechanical, electrical and plumbing systems designed to support safe, efficient and reliable building performance.",
+          imageAlt:
+            "Integrated MEP systems including pumps, piping and mechanical plant equipment",
+          capabilities: [
+            "MECHANICAL",
+            "ELECTRICAL",
+            "PLUMBING",
+            "COMMISSIONING",
+          ],
+        },
+        electromechanical: {
+          eyebrow: "ELECTROMECHANICAL SERVICES",
+          heading: "RELIABLE SYSTEMS. ENGINEERED FOR PERFORMANCE.",
+          description:
+            "Integrated electromechanical solutions supporting reliable operation, system efficiency and long-term performance.",
+          imageAlt:
+            "Electromechanical systems and equipment installed for building performance",
+          capabilities: [
+            "POWER SYSTEMS",
+            "CONTROL SYSTEMS",
+            "EQUIPMENT",
+            "TESTING",
+          ],
+        },
+        engineering: {
+          eyebrow: "ENGINEERING SERVICES",
+          heading: "ENGINEERING SOLUTIONS BUILT AROUND YOUR PROJECT.",
+          description:
+            "Professional engineering, design and technical coordination supporting projects from planning through implementation.",
+          imageAlt:
+            "OMS engineering team coordinating technical systems on a project site",
+          capabilities: [
+            "DESIGN",
+            "PLANNING",
+            "COORDINATION",
+            "TECHNICAL SUPPORT",
+          ],
+        },
+        hvac: {
+          eyebrow: "HVAC SYSTEMS",
+          heading: "COMFORT, EFFICIENCY AND PERFORMANCE.",
+          description:
+            "HVAC solutions designed to deliver dependable climate control, energy efficiency and long-term system performance.",
+          imageAlt:
+            "HVAC equipment and ducting systems for climate control and building comfort",
+          capabilities: ["COOLING", "VENTILATION", "CONTROLS", "MAINTENANCE"],
+        },
+        qcdd: {
+          eyebrow: "QCDD CONSULTATION SERVICES",
+          heading: "NAVIGATING FIRE & LIFE SAFETY REQUIREMENTS WITH CONFIDENCE.",
+          description:
+            "Professional consultation and technical coordination supporting fire and life-safety requirements and QCDD processes.",
+          imageAlt:
+            "Fire protection and QCDD consultation supporting life-safety compliance",
+          capabilities: [
+            "FIRE SAFETY",
+            "DESIGN REVIEW",
+            "COMPLIANCE",
+            "QCDD COORDINATION",
+          ],
+        },
+        amc: {
+          eyebrow: "AMC SERVICES",
+          heading: "PROACTIVE MAINTENANCE. RELIABLE PERFORMANCE.",
+          description:
+            "Annual maintenance services designed to protect system performance, improve reliability and support long-term asset operation.",
+          imageAlt:
+            "OMS technicians performing annual maintenance on building systems",
+          capabilities: [
+            "PREVENTIVE MAINTENANCE",
+            "INSPECTION",
+            "TESTING",
+            "SYSTEM RELIABILITY",
+          ],
+        },
+      },
+    },
+    howWeWork: {
+      eyebrow: "HOW WE WORK",
+      titleLine1: "FROM REQUIREMENT",
+      titleLine2: "TO RELIABLE PERFORMANCE.",
+      supporting:
+        "A structured approach that keeps every project coordinated, compliant and performance-focused.",
+      steps: {
+        assess: {
+          title: "ASSESS",
+          description:
+            "We understand the project requirements, inspect existing conditions and define the appropriate technical scope.",
+        },
+        engineer: {
+          title: "ENGINEER",
+          description:
+            "Our team develops the engineering approach, system design and technical coordination required for delivery.",
+        },
+        deliver: {
+          title: "DELIVER",
+          description:
+            "Installation, execution, testing and commissioning are carried out with focus on quality, safety and compliance.",
+        },
+        support: {
+          title: "SUPPORT",
+          description:
+            "After delivery, OMS supports system performance through inspection, preventive maintenance and ongoing technical support.",
+        },
+      },
+    },
+    whyChooseOms: {
+      eyebrow: "WHY CHOOSE OMS",
+      titleLine1: "A TRUSTED PARTNER",
+      titleLine2: "FOR A SAFER TOMORROW.",
+      intro:
+        "We combine technical expertise, industry knowledge and a commitment to quality to deliver reliable and sustainable solutions across every project.",
+      reasons: {
+        compliance: {
+          title: "COMPLIANCE FOCUSED",
+          description:
+            "Aligned with QCDD requirements and international standards.",
+        },
+        team: {
+          title: "EXPERIENCED TEAM",
+          description:
+            "Skilled professionals with proven industry experience.",
+        },
+        quality: {
+          title: "QUALITY DRIVEN",
+          description:
+            "Focused on safety, reliability and long-term performance.",
+        },
+        partnership: {
+          title: "LONG-TERM PARTNERSHIP",
+          description:
+            "Ongoing support for sustainable building operations.",
+        },
+      },
+    },
+    cta: {
+      eyebrow: "READY TO DISCUSS YOUR PROJECT?",
+      titleLine1: "LET’S BUILD A SAFER,",
+      titleLine2: "MORE EFFICIENT TOMORROW.",
+      supporting: "Get in touch with our team for a tailored solution.",
+      cta: "GET A QUOTE",
+      ctaArrow: "→",
+      imageAlt: "Doha skyline and Qatar towers at sunset",
+    },
+  },
+  meta: {
     siteDescription:
       "Fire protection, engineering and electromechanical maintenance services in Qatar.",
     home: "ORYXI Maintenance Services",
@@ -436,7 +690,6 @@ export const en = {
     projects: "Projects | ORYXI Maintenance Services",
     pumpSelection: "Pump Selection | ORYXI Maintenance Services",
     amcContracts: "AMC Contracts | ORYXI Maintenance Services",
-    emergencyService: "Emergency Service | ORYXI Maintenance Services",
     contact: "Contact Us | ORYXI Maintenance Services",
     requestQuote: "Request a Quote | ORYXI Maintenance Services",
     qcddServices: "QCDD Services | ORYXI Maintenance Services",
@@ -497,6 +750,81 @@ export const en = {
       service: "Please select a service.",
       message: "Please describe the scope of work.",
       consent: "Please confirm consent to continue.",
+    },
+  },
+  pumpSelectionPage: {
+    hero: {
+      eyebrow: "PEERLESS PUMP SOLUTIONS",
+      titleLine1: "RELIABLE PUMPING",
+      titleLine2: "SOLUTIONS FOR A",
+      titleAccent: "SAFER TOMORROW.",
+      supporting:
+        "High-performance pumping solutions for fire protection, HVAC and industrial applications, backed by proven engineering and dependable support.",
+      primaryCta: "EXPLORE PUMPS",
+      secondaryCta: "REQUEST A QUOTE",
+      imageAlt:
+        "Red Peerless Pump system in an industrial mechanical room",
+    },
+    intro: {
+      eyebrow: "A TRUSTED GLOBAL BRAND",
+      heading: "PEERLESS PUMP",
+      statementLine1: "ENGINEERED FOR PERFORMANCE.",
+      statementLine2: "BUILT ON A CENTURY OF TRUST.",
+      paragraph:
+        "For nearly 100 years, Peerless Pump has been a global leader in the design and manufacture of high-quality pumps for fire protection, HVAC, and industrial applications. At OMS, we are proud to be an authorized dealer in Qatar, delivering genuine Peerless Pump solutions with expert support and service.",
+      points: {
+        experience: "100+ Years of Experience",
+        reliability: "Proven Reliability",
+        presence: "Global Presence",
+      },
+      logoCaption: "AUTHORIZED DEALER IN QATAR",
+      logoAlt: "Peerless Pump",
+    },
+    products: {
+      heading: "PRODUCTS",
+      intro:
+        "Peerless Pump offers a wide variety of pumps with nearly 100 years of experience and reliability behind them.",
+      items: {
+        fire: {
+          name: "FIRE",
+          nameLine2: "",
+          alt: "Red Peerless fire pump with gauges and discharge piping",
+        },
+        horizontal: {
+          name: "HORIZONTAL",
+          nameLine2: "",
+          alt: "Blue Peerless horizontal split-case pump",
+        },
+        vertical: {
+          name: "VERTICAL",
+          nameLine2: "TURBINE",
+          alt: "Blue Peerless vertical turbine pump",
+        },
+      },
+    },
+    award: {
+      eyebrow: "OUR PARTNERS",
+      heading: "PEERLESS PUMP",
+      statementLine1: "TRUSTED PARTNERS.",
+      statementLine2: "PROVEN PERFORMANCE.",
+      body: "As an authorized dealer of Peerless Pump in Qatar, OMS provides genuine products, technical expertise, and dedicated support to deliver reliable pumping solutions for your most critical applications.",
+      imageAlt:
+        "Peerless Pump Business Partner Excellence Award presented to Oryxi Maintenance Services in 2022",
+      highlights: {
+        reliability: "Proven Reliability",
+        expertise: "Industry Expertise",
+        partnership: "Trusted Partnership",
+      },
+    },
+    cta: {
+      eyebrow: "READY TO DISCUSS YOUR PROJECT?",
+      titleLine1: "LET’S BUILD A SAFER,",
+      titleLine2: "MORE EFFICIENT TOMORROW.",
+      body: "Get in touch with our team for a tailored solution.",
+      cta: "GET A QUOTE",
+      ctaArrow: "→",
+      imageAlt:
+        "OMS engineers in an industrial plant room with pump equipment and Aspire Tower in the background",
     },
   },
   qcdd: {

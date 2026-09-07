@@ -4,6 +4,8 @@ import { CoreServices } from "@/components/home/CoreServices";
 import { Hero } from "@/components/home/Hero";
 import { ComplianceSection } from "@/components/home/ComplianceSection";
 import { FeaturedProjects } from "@/components/home/FeaturedProjects";
+import { ProjectCta } from "@/components/home/ProjectCta";
+import { WhyChooseOms } from "@/components/home/WhyChooseOms";
 import { OmsInNumbers } from "@/components/home/OmsInNumbers";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getLocaleParam } from "@/lib/i18n/locale-param";
@@ -30,6 +32,8 @@ export default async function Home({ params }: Props) {
       <OmsInNumbers locale={locale} dict={dict} />
       <ComplianceSection locale={locale} dict={dict} />
       <FeaturedProjects locale={locale} dict={dict} />
+      <WhyChooseOms locale={locale} dict={dict} />
+      <ProjectCta locale={locale} dict={dict} />
     </main>
   );
 }
