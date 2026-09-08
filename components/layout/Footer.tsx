@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
+import { FooterHashLink } from "@/components/layout/FooterHashLink";
 import { SiteLogo } from "@/components/layout/SiteLogo";
 import { Container } from "@/components/ui/Container";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
@@ -72,12 +73,12 @@ export function Footer({ locale, dict }: FooterProps) {
           <ul className="oms-footer-list">
             {footerServicesColumnItems.map((item) => (
               <li key={item.key}>
-                <Link
+                <FooterHashLink
                   href={localizedHref(locale, item.path)}
                   className="oms-footer-link"
                 >
                   {columns.services[item.key]}
-                </Link>
+                </FooterHashLink>
               </li>
             ))}
           </ul>
@@ -86,16 +87,20 @@ export function Footer({ locale, dict }: FooterProps) {
         <nav className="oms-footer-column" aria-label={dict.footer.support}>
           <p className="oms-footer-heading">{dict.footer.support}</p>
           <ul className="oms-footer-list">
-            {footerSupportItems.map((item) => (
-              <li key={item.key}>
-                <Link
-                  href={localizedHref(locale, item.path)}
-                  className="oms-footer-link"
-                >
-                  {columns.support[item.key]}
-                </Link>
-              </li>
-            ))}
+            {footerSupportItems.map((item) => {
+              const href = localizedHref(locale, item.path);
+              const LinkComponent = item.path.includes("#")
+                ? FooterHashLink
+                : Link;
+
+              return (
+                <li key={item.key}>
+                  <LinkComponent href={href} className="oms-footer-link">
+                    {columns.support[item.key]}
+                  </LinkComponent>
+                </li>
+              );
+            })}
           </ul>
         </nav>
 

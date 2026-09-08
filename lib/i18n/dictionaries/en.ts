@@ -827,6 +827,55 @@ export const en = {
         "OMS engineers in an industrial plant room with pump equipment and Aspire Tower in the background",
     },
   },
+  projectsPage: {
+    hero: {
+      eyebrow: "FEATURED PROJECT",
+      viewProject: "VIEW PROJECT",
+      viewProjectArrow: "→",
+      prevLabel: "Previous project",
+      nextLabel: "Next project",
+      carouselLabel: "Featured projects",
+      dotsLabel: "Select a featured project",
+      closeLabel: "Close project details",
+      modalLabel: "Project details",
+      scopeHeading: "SCOPE OF WORK",
+      metroLocationsHeading: "METRO & TRAM LOCATIONS",
+      projectLocationsHeading: "PROJECT LOCATIONS",
+      systemsHeading: "SYSTEMS / AREAS COVERED",
+    },
+    ongoing: {
+      eyebrow: "OUR PROJECTS",
+      heading: "ONGOING PROJECTS",
+      intro:
+        "A selection of current OMS projects across Qatar.",
+      view: "VIEW",
+      viewArrow: "→",
+      viewLabel: "View {name}",
+    },
+    completed: {
+      eyebrow: "OUR PROJECTS",
+      heading: "COMPLETED PROJECTS",
+      intro: "A selection of completed OMS projects across Qatar.",
+      view: "VIEW",
+      viewArrow: "→",
+      viewLabel: "View {name}",
+    },
+    clients: {
+      eyebrow: "TRUSTED RELATIONSHIPS",
+      heading: "OUR CLIENTS",
+      intro: "Trusted by organizations across Qatar.",
+    },
+    cta: {
+      eyebrow: "LET'S WORK TOGETHER",
+      titleLead: "LET’S BUILD A ",
+      titleAccent: "SAFER",
+      titleTrail: " TOMORROW.",
+      description:
+        "Talk to our team about your project requirements and the right OMS solution.",
+      quoteCta: "REQUEST A QUOTE",
+      contactCta: "CONTACT OMS",
+    },
+  },
   qcdd: {
     title: "Qatar Civil Defence Department (QCDD) Services",
     intro:

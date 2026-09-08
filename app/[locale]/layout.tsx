@@ -72,7 +72,7 @@ export default async function LocaleLayout({
       }`}
     >
       <body className="min-h-full flex flex-col bg-oms-white text-oms-dark">
-        <HeaderPreloadScript locale={locale} />
+        <HeaderPreloadScript />
         <Header locale={locale} dict={dict} />
         {children}
         <Footer locale={locale} dict={dict} />

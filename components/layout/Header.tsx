@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -12,6 +12,21 @@ import { Container } from "@/components/ui/Container";
 import { PrimaryButton } from "@/components/ui/PrimaryButton";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
 import type { Locale } from "@/lib/i18n/config";
+import {
+  applyHeaderPathAttributes,
+  isHomePath,
+} from "@/lib/layout/header-state";
+import {
+  LOGO_DESKTOP_MQ,
+  LOGO_ORIGIN_SELECTOR,
+  LOGO_REDUCED_MOTION_MQ,
+  LOGO_SLOT_SELECTOR,
+  consumeRememberedScroll,
+  clearRememberedScroll,
+  measureLogoTravel,
+  setLogoTravelOwned,
+  syncLogoScrollProgress,
+} from "@/lib/layout/logo-travel";
 import { localizedHref } from "@/lib/i18n/path";
 import { primaryNavItems } from "@/lib/navigation";
 
@@ -34,96 +49,64 @@ function normalizePathname(pathname: string) {
   return pathname;
 }
 
-function syncHeaderPathAttributes(pathname: string, locale: Locale) {
-  const root = document.documentElement;
-  const isHome = pathname === `/${locale}`;
-  root.dataset.omsHeader = isHome ? "home" : "inner";
-  root.dataset.omsPath = pathname;
-}
-
 export function Header({ locale, dict }: HeaderProps) {
   const pathname = normalizePathname(usePathname());
   const [menuOpen, setMenuOpen] = useState(false);
   const homeHref = localizedHref(locale, "/");
   const quoteHref = localizedHref(locale, "/request-quote");
 
-  // Keep React markup pathname-stable for chrome classes. Sync document
-  // attributes after mount / on client navigations for CSS variants.
-  // Path sync and logo-travel listeners share one effect so the dependency
-  // array size/order never changes across renders or Fast Refresh.
-  useEffect(() => {
-    syncHeaderPathAttributes(pathname, locale);
-
+  useLayoutEffect(() => {
     const root = document.documentElement;
-    const range = 280;
-    const reduceQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const desktopQuery = window.matchMedia("(min-width: 1024px)");
+    const isHome = isHomePath(pathname, locale);
+    const reduceQuery = window.matchMedia(LOGO_REDUCED_MOTION_MQ);
+    const desktopQuery = window.matchMedia(LOGO_DESKTOP_MQ);
+    const visualViewport = window.visualViewport;
+    const observer = new ResizeObserver(() => {
+      onReflow();
+    });
+    const attrObserver = new MutationObserver(onReflow);
+
     let cancelled = false;
     let scrollRaf = 0;
     let reflowRaf = 0;
     let bootRaf = 0;
-    const visualViewport = window.visualViewport;
+    let pendingRaf = 0;
+    let pendingAttempts = 0;
+    let observedOrigin: Element | null = null;
+    let observedSlot: Element | null = null;
+    let observedMain: Element | null = null;
 
-    const readScrollY = () =>
-      window.scrollY || document.documentElement.scrollTop || 0;
+    setLogoTravelOwned(true);
+    consumeRememberedScroll();
+    applyHeaderPathAttributes(pathname, locale);
 
-    const resetTravel = () => {
-      root.style.setProperty("--oms-logo-dx", "0px");
-      root.style.setProperty("--oms-logo-dy", "0px");
-      root.style.removeProperty("--oms-logo-x");
-      root.style.removeProperty("--oms-logo-y");
-    };
+    const bindMeasuredSlots = () => {
+      const origin = document.querySelector(LOGO_ORIGIN_SELECTOR);
+      const slot = document.querySelector(LOGO_SLOT_SELECTOR);
+      const main = document.querySelector("main");
 
-    const measureLogoTravel = () => {
-      const origin = document.querySelector<HTMLElement>(".oms-hero-brand");
-      const slot = document.querySelector<HTMLElement>(".oms-header-logo-link");
-      const canTravel =
-        root.dataset.omsHeader === "home" &&
-        desktopQuery.matches &&
-        origin !== null &&
-        slot !== null;
-
-      if (!canTravel || !origin || !slot) {
-        resetTravel();
+      if (
+        origin === observedOrigin &&
+        slot === observedSlot &&
+        main === observedMain
+      ) {
         return;
       }
 
-      const start = origin.getBoundingClientRect();
-      const end = slot.getBoundingClientRect();
+      observer.disconnect();
+      observedOrigin = origin;
+      observedSlot = slot;
+      observedMain = main;
 
-      if (start.width < 1 || end.width < 1) {
-        return;
+      if (origin) {
+        observer.observe(origin);
       }
-
-      // Placeholder is in document flow; the traveling mark is position:fixed.
-      // Convert the placeholder to the viewport box it has at scrollY === 0.
-      const startTop = start.top + readScrollY();
-      const startInline =
-        root.dir === "rtl" ? root.clientWidth - start.right : start.left;
-
-      root.style.setProperty("--oms-logo-x", `${startInline.toFixed(2)}px`);
-      root.style.setProperty("--oms-logo-y", `${startTop.toFixed(2)}px`);
-      root.style.setProperty(
-        "--oms-logo-dx",
-        `${(end.left - start.left).toFixed(2)}px`,
-      );
-      root.style.setProperty(
-        "--oms-logo-dy",
-        `${(end.top - startTop).toFixed(2)}px`,
-      );
-    };
-
-    const syncScroll = () => {
-      const y = readScrollY();
-      const reduce = reduceQuery.matches;
-      const progress = reduce
-        ? y > 8
-          ? 1
-          : 0
-        : Math.min(1, Math.max(0, y / range));
-
-      root.dataset.omsScrolled = progress > 0.08 ? "true" : "false";
-      root.style.setProperty("--oms-logo-progress", progress.toFixed(4));
+      if (slot) {
+        observer.observe(slot);
+      }
+      if (main) {
+        observer.observe(main);
+      }
     };
 
     const applyLogoTravel = () => {
@@ -131,8 +114,26 @@ export function Header({ locale, dict }: HeaderProps) {
         return;
       }
 
-      syncScroll();
-      measureLogoTravel();
+      consumeRememberedScroll();
+      applyHeaderPathAttributes(pathname, locale);
+      syncLogoScrollProgress(root, isHome);
+      const result = measureLogoTravel(root);
+      bindMeasuredSlots();
+
+      if (result === "pending" && pendingAttempts < 16) {
+        pendingAttempts += 1;
+        if (!pendingRaf) {
+          pendingRaf = window.requestAnimationFrame(() => {
+            pendingRaf = 0;
+            applyLogoTravel();
+          });
+        }
+        return;
+      }
+
+      if (result === "applied") {
+        pendingAttempts = 0;
+      }
     };
 
     const onScroll = () => {
@@ -141,12 +142,12 @@ export function Header({ locale, dict }: HeaderProps) {
       }
 
       scrollRaf = window.requestAnimationFrame(() => {
-        syncScroll();
+        syncLogoScrollProgress(root, isHome);
         scrollRaf = 0;
       });
     };
 
-    const onReflow = () => {
+    function onReflow() {
       if (reflowRaf) {
         return;
       }
@@ -155,7 +156,7 @@ export function Header({ locale, dict }: HeaderProps) {
         applyLogoTravel();
         reflowRaf = 0;
       });
-    };
+    }
 
     applyLogoTravel();
     bootRaf = window.requestAnimationFrame(() => {
@@ -163,13 +164,16 @@ export function Header({ locale, dict }: HeaderProps) {
         return;
       }
 
+      consumeRememberedScroll();
       applyLogoTravel();
       bootRaf = window.requestAnimationFrame(() => {
         if (cancelled) {
           return;
         }
 
+        consumeRememberedScroll();
         applyLogoTravel();
+        clearRememberedScroll();
         bootRaf = 0;
       });
     });
@@ -180,27 +184,27 @@ export function Header({ locale, dict }: HeaderProps) {
     window.addEventListener("resize", onReflow, { passive: true });
     window.addEventListener("orientationchange", onReflow);
     window.addEventListener("pageshow", applyLogoTravel);
+    window.addEventListener("popstate", applyLogoTravel);
     window.addEventListener("load", applyLogoTravel);
     visualViewport?.addEventListener("resize", onReflow);
+    attrObserver.observe(root, {
+      attributes: true,
+      attributeFilter: ["dir", "lang"],
+    });
+    bindMeasuredSlots();
 
-    const origin = document.querySelector(".oms-hero-brand");
-    const slot = document.querySelector(".oms-header-logo-link");
-    const observer = new ResizeObserver(onReflow);
-    if (origin) {
-      observer.observe(origin);
-    }
-    if (slot) {
-      observer.observe(slot);
-    }
-
-    document.fonts?.ready.then(() => {
-      if (!cancelled) {
-        onReflow();
-      }
-    }).catch(() => {});
+    document.fonts?.ready
+      .then(() => {
+        if (!cancelled) {
+          onReflow();
+        }
+      })
+      .catch(() => {});
 
     return () => {
       cancelled = true;
+      setLogoTravelOwned(false);
+
       if (scrollRaf) {
         window.cancelAnimationFrame(scrollRaf);
       }
@@ -210,6 +214,9 @@ export function Header({ locale, dict }: HeaderProps) {
       if (bootRaf) {
         window.cancelAnimationFrame(bootRaf);
       }
+      if (pendingRaf) {
+        window.cancelAnimationFrame(pendingRaf);
+      }
 
       reduceQuery.removeEventListener("change", onReflow);
       desktopQuery.removeEventListener("change", onReflow);
@@ -217,9 +224,11 @@ export function Header({ locale, dict }: HeaderProps) {
       window.removeEventListener("resize", onReflow);
       window.removeEventListener("orientationchange", onReflow);
       window.removeEventListener("pageshow", applyLogoTravel);
+      window.removeEventListener("popstate", applyLogoTravel);
       window.removeEventListener("load", applyLogoTravel);
       visualViewport?.removeEventListener("resize", onReflow);
       observer.disconnect();
+      attrObserver.disconnect();
     };
   }, [pathname, locale]);
 

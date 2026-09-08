@@ -12,8 +12,8 @@ export type ShowcaseSlide = {
   image: string;
 };
 
-export const SHOWCASE_AUTOPLAY_MS = 5500;
-export const SHOWCASE_TRANSITION_MS = 720;
+export const SHOWCASE_AUTOPLAY_MS = 4000;
+export const SHOWCASE_TRANSITION_MS = 650;
 export const SHOWCASE_SWIPE_THRESHOLD_PX = 48;
 
 export const SHOWCASE_SLIDES: readonly ShowcaseSlide[] = [

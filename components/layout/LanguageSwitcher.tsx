@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { switchLocalePath } from "@/lib/i18n/path";
+import { rememberScrollForLocaleSwitch } from "@/lib/layout/logo-travel";
 import type { Locale } from "@/lib/i18n/config";
 
 type LanguageSwitcherProps = {
@@ -29,6 +30,8 @@ export function LanguageSwitcher({
         href={href}
         hrefLang={nextLocale}
         lang={nextLocale}
+        scroll={false}
+        onClick={rememberScrollForLocaleSwitch}
         className="oms-header-lang text-sm font-medium whitespace-nowrap transition-colors hover:text-oms-burgundy"
       >
         {label}

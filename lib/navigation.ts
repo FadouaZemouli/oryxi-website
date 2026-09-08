@@ -1,3 +1,5 @@
+import { SHOWCASE_SLIDES, type ShowcaseSlideKey } from "@/lib/services/showcase-data";
+
 export const primaryNavItems = [
   { path: "/", key: "home" },
   { path: "/about", key: "about" },
@@ -28,16 +30,21 @@ export const footerCompanyItems = [
   { path: "/projects", key: "projects" },
 ] as const;
 
+function servicesShowcasePath(key: ShowcaseSlideKey) {
+  const slide = SHOWCASE_SLIDES.find((item) => item.key === key);
+  return `/services#${slide?.hash ?? key}`;
+}
+
 export const footerServicesColumnItems = [
-  { path: "/services", key: "mep" },
-  { path: "/services", key: "electromechanical" },
-  { path: "/services", key: "engineering" },
-  { path: "/services", key: "hvac" },
-  { path: "/qcdd-services", key: "qcdd" },
+  { path: servicesShowcasePath("mep"), key: "mep" },
+  { path: servicesShowcasePath("electromechanical"), key: "electromechanical" },
+  { path: servicesShowcasePath("engineering"), key: "engineering" },
+  { path: servicesShowcasePath("hvac"), key: "hvac" },
+  { path: servicesShowcasePath("qcdd"), key: "qcdd" },
 ] as const;
 
 export const footerSupportItems = [
-  { path: "/services#amc-contracts", key: "amcContracts" },
+  { path: servicesShowcasePath("amc"), key: "amcContracts" },
   { path: "/request-quote", key: "requestQuote" },
   { path: "/contact", key: "contact" },
 ] as const;

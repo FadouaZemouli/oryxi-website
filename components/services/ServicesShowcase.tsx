@@ -9,7 +9,6 @@ import {
   useEffect,
   useRef,
   useState,
-  type FocusEvent,
   type KeyboardEvent,
   type TouchEvent,
 } from "react";
@@ -17,6 +16,7 @@ import { Container } from "@/components/ui/Container";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
 import type { Locale } from "@/lib/i18n/config";
 import { localizedHref } from "@/lib/i18n/path";
+import { useCarouselAutoplay } from "@/lib/carousel/use-carousel-autoplay";
 import {
   SHOWCASE_AUTOPLAY_MS,
   SHOWCASE_SLIDES,
@@ -39,52 +39,6 @@ type ServicesShowcaseProps = {
   dict: Dictionary;
 };
 
-function subscribeMatchMedia(
-  mediaQuery: MediaQueryList,
-  onChange: () => void,
-): () => void {
-  if (typeof mediaQuery.addEventListener === "function") {
-    mediaQuery.addEventListener("change", onChange);
-    return () => {
-      mediaQuery.removeEventListener("change", onChange);
-    };
-  }
-
-  // Safari < 14
-  mediaQuery.addListener(onChange);
-  return () => {
-    mediaQuery.removeListener(onChange);
-  };
-}
-
-function usePrefersReducedMotion() {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const updatePreference = () => {
-      setPrefersReducedMotion(mediaQuery.matches);
-    };
-
-    updatePreference();
-    return subscribeMatchMedia(mediaQuery, updatePreference);
-  }, []);
-
-  return prefersReducedMotion;
-}
-
-function canHoverPause(): boolean {
-  if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
-    return false;
-  }
-
-  try {
-    return window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-  } catch {
-    return false;
-  }
-}
-
 function normalizeShowcaseIndex(index: number): number {
   return (
     ((index % SHOWCASE_SLIDE_COUNT) + SHOWCASE_SLIDE_COUNT) % SHOWCASE_SLIDE_COUNT
@@ -94,12 +48,9 @@ function normalizeShowcaseIndex(index: number): number {
 export function ServicesShowcase({ locale, dict }: ServicesShowcaseProps) {
   const copy = dict.servicesPage.showcase;
   const quoteHref = localizedHref(locale, "/request-quote");
-  const prefersReducedMotion = usePrefersReducedMotion();
 
   // Always hydrate from a stable index; read location.hash only after mount.
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const [pageVisible, setPageVisible] = useState(true);
   const [timerEpoch, setTimerEpoch] = useState(0);
 
   const touchStartX = useRef<number | null>(null);
@@ -134,12 +85,40 @@ export function ServicesShowcase({ locale, dict }: ServicesShowcaseProps) {
     [goTo],
   );
 
+  const {
+    prefersReducedMotion,
+    onPointerEnter,
+    onPointerLeave,
+    onPointerCancel,
+  } = useCarouselAutoplay({
+    intervalMs: SHOWCASE_AUTOPLAY_MS,
+    resetKey: timerEpoch,
+    onAdvance: () => {
+      setActiveIndex((current) => normalizeShowcaseIndex(current + 1));
+    },
+  });
+
   useEffect(() => {
+    const scrollToHashTarget = (id: string) => {
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.requestAnimationFrame(() => {
+        document.getElementById(id)?.scrollIntoView({
+          behavior: reduce ? "auto" : "smooth",
+          block: "start",
+        });
+      });
+    };
+
     const syncFromHash = () => {
-      const index = showcaseIndexFromHash(window.location.hash);
+      const hash = window.location.hash;
+      const index = showcaseIndexFromHash(hash);
       if (index != null) {
         setActiveIndex(index);
         setTimerEpoch((value) => value + 1);
+        const slide = SHOWCASE_SLIDES[index];
+        if (slide) {
+          scrollToHashTarget(slide.hash);
+        }
       }
     };
 
@@ -150,68 +129,6 @@ export function ServicesShowcase({ locale, dict }: ServicesShowcaseProps) {
       window.removeEventListener("hashchange", syncFromHash);
     };
   }, []);
-
-  useEffect(() => {
-    const syncVisibility = () => {
-      setPageVisible(document.visibilityState === "visible");
-    };
-
-    syncVisibility();
-    document.addEventListener("visibilitychange", syncVisibility);
-    return () => {
-      document.removeEventListener("visibilitychange", syncVisibility);
-    };
-  }, []);
-
-  useEffect(() => {
-    // Reduced motion / pause / hidden tab affect AUTOPLAY only — never manual nav.
-    if (prefersReducedMotion || isPaused || !pageVisible) {
-      return;
-    }
-
-    const intervalId = window.setInterval(() => {
-      setActiveIndex((current) => normalizeShowcaseIndex(current + 1));
-    }, SHOWCASE_AUTOPLAY_MS);
-
-    return () => {
-      window.clearInterval(intervalId);
-    };
-  }, [prefersReducedMotion, isPaused, pageVisible, timerEpoch]);
-
-  const pauseAutoplay = () => {
-    setIsPaused(true);
-  };
-
-  const resumeAutoplay = () => {
-    setIsPaused(false);
-  };
-
-  const onPointerEnter = () => {
-    // Touch / coarse pointers can fire mouseenter without a reliable mouseleave.
-    if (!canHoverPause()) {
-      return;
-    }
-    pauseAutoplay();
-  };
-
-  const onPointerLeave = () => {
-    if (!canHoverPause()) {
-      return;
-    }
-    resumeAutoplay();
-  };
-
-  const onFocusCapture = () => {
-    pauseAutoplay();
-  };
-
-  const onBlurCapture = (event: FocusEvent<HTMLDivElement>) => {
-    const next = event.relatedTarget;
-    if (next instanceof Node && event.currentTarget.contains(next)) {
-      return;
-    }
-    resumeAutoplay();
-  };
 
   const onTouchStart = (event: TouchEvent<HTMLDivElement>) => {
     // Never treat touch as a sticky hover-pause.
@@ -273,10 +190,9 @@ export function ServicesShowcase({ locale, dict }: ServicesShowcaseProps) {
           ref={frameRef}
           className="oms-services-showcase-frame"
           tabIndex={0}
-          onMouseEnter={onPointerEnter}
-          onMouseLeave={onPointerLeave}
-          onFocusCapture={onFocusCapture}
-          onBlurCapture={onBlurCapture}
+          onPointerEnter={onPointerEnter}
+          onPointerLeave={onPointerLeave}
+          onPointerCancel={onPointerCancel}
           onTouchStart={onTouchStart}
           onTouchEnd={onTouchEnd}
           onKeyDown={onFrameKeyDown}

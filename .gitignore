@@ -17,6 +17,9 @@
 /.next/
 /out/
 
+# local verification artifacts (Chrome profiles / screenshots)
+/.tmp-screens/
+
 # production
 /build
 

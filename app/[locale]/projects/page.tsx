@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
-import { PagePlaceholder } from "@/components/ui/PagePlaceholder";
+import { ClientsMarquee } from "@/components/projects/ClientsMarquee";
+import { CompletedProjects } from "@/components/projects/CompletedProjects";
+import { OngoingProjects } from "@/components/projects/OngoingProjects";
+import { ProjectsCta } from "@/components/projects/ProjectsCta";
+import { ProjectsHero } from "@/components/projects/ProjectsHero";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getLocaleParam } from "@/lib/i18n/locale-param";
 import { buildPageMetadata } from "@/lib/seo/metadata";
@@ -18,10 +22,12 @@ export default async function ProjectsPage({ params }: Props) {
   const dict = getDictionary(locale);
 
   return (
-    <PagePlaceholder
-      title={dict.nav.projects}
-      description={dict.placeholder.description}
-      comingSoon={dict.placeholder.comingSoon}
-    />
+    <main className="oms-projects-page flex-1 bg-oms-white">
+      <ProjectsHero locale={locale} dict={dict} />
+      <OngoingProjects locale={locale} dict={dict} />
+      <CompletedProjects locale={locale} dict={dict} />
+      <ClientsMarquee locale={locale} dict={dict} />
+      <ProjectsCta locale={locale} dict={dict} />
+    </main>
   );
 }
