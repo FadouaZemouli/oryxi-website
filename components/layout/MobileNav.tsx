@@ -102,7 +102,7 @@ export function MobileNav({
             labels={languageLabels}
             pathname={pathname}
           />
-          <PrimaryButton href={quoteHref} className="w-full">
+          <PrimaryButton href={quoteHref} className="w-full" onClick={onClose}>
             {quoteLabel}
           </PrimaryButton>
         </div>

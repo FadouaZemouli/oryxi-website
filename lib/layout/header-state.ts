@@ -6,6 +6,7 @@ export const INNER_HERO_PATHS = [
   "/services",
   "/pump-selection",
   "/projects",
+  "/contact",
 ] as const;
 
 export function localePathSuffix(pathname: string, locale: Locale) {

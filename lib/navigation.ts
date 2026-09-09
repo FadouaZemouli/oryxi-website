@@ -1,4 +1,5 @@
 import { SHOWCASE_SLIDES, type ShowcaseSlideKey } from "@/lib/services/showcase-data";
+import { CONTACT_FORM_PATH } from "@/lib/i18n/path";
 
 export const primaryNavItems = [
   { path: "/", key: "home" },
@@ -45,7 +46,7 @@ export const footerServicesColumnItems = [
 
 export const footerSupportItems = [
   { path: servicesShowcasePath("amc"), key: "amcContracts" },
-  { path: "/request-quote", key: "requestQuote" },
+  { path: CONTACT_FORM_PATH, key: "requestQuote" },
   { path: "/contact", key: "contact" },
 ] as const;
 

@@ -5,7 +5,7 @@ import { PrimaryButton } from "@/components/ui/PrimaryButton";
 import { SecondaryButton } from "@/components/ui/SecondaryButton";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
 import type { Locale } from "@/lib/i18n/config";
-import { localizedHref } from "@/lib/i18n/path";
+import { localizedContactFormHref, localizedHref } from "@/lib/i18n/path";
 
 const ctaSans = Montserrat({
   subsets: ["latin"],
@@ -21,7 +21,7 @@ type AboutCtaProps = {
 
 export function AboutCta({ locale, dict }: AboutCtaProps) {
   const copy = dict.aboutPage.cta;
-  const quoteHref = localizedHref(locale, "/request-quote");
+  const quoteHref = localizedContactFormHref(locale);
   const contactHref = localizedHref(locale, "/contact");
 
   return (

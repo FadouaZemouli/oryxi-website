@@ -7,6 +7,7 @@ type FooterHashLinkProps = {
   href: string;
   className?: string;
   children: ReactNode;
+  onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
 };
 
 function samePathHashTarget(href: string) {
@@ -22,25 +23,39 @@ export function FooterHashLink({
   href,
   className,
   children,
+  onClick,
 }: FooterHashLinkProps) {
-  const onClick = (event: MouseEvent<HTMLAnchorElement>) => {
+  const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    onClick?.(event);
+
     const hash = samePathHashTarget(href);
-    if (hash == null) {
+    if (hash == null || hash === "") {
       return;
     }
 
     event.preventDefault();
+
+    const target = document.querySelector(hash);
+    if (target instanceof HTMLElement) {
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)")
+        .matches;
+      target.scrollIntoView({
+        behavior: reduce ? "auto" : "smooth",
+        block: "start",
+      });
+    }
 
     if (window.location.hash === hash) {
       window.dispatchEvent(new Event("hashchange"));
       return;
     }
 
-    window.location.hash = hash;
+    window.history.pushState(null, "", hash);
+    window.dispatchEvent(new Event("hashchange"));
   };
 
   return (
-    <Link href={href} className={className} onClick={onClick}>
+    <Link href={href} className={className} onClick={handleClick}>
       {children}
     </Link>
   );

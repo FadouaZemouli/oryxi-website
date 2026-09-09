@@ -500,7 +500,7 @@ export const en = {
       titleLine1: "ENGINEERED SOLUTIONS.",
       titleAccent: "BUILT TO PERFORM.",
       supporting:
-        "Integrated MEP, electromechanical, HVAC, fire protection and maintenance solutions delivered across the complete system lifecycle.",
+        "Integrated MEP, electromechanical, engineering, HVAC, fire protection and maintenance solutions delivered across the complete system lifecycle.",
       cta: "EXPLORE OUR SERVICES",
     },
     nav: {
@@ -874,6 +874,103 @@ export const en = {
         "Talk to our team about your project requirements and the right OMS solution.",
       quoteCta: "REQUEST A QUOTE",
       contactCta: "CONTACT OMS",
+    },
+  },
+  contactPage: {
+    hero: {
+      eyebrow: "GET IN TOUCH",
+      titleLead: "Contact",
+      titleAccent: "Us",
+      description:
+        "We are here to support your projects, answer your questions, and provide the right solutions for your needs.",
+      statement: ["SAFE", "BUILDINGS", "STRONGER", "TOMORROW"],
+    },
+    info: {
+      ariaLabel: "Contact information",
+      cards: {
+        call: {
+          eyebrow: "CALL US",
+          value: "+974 4039 7445",
+          href: "tel:+97440397445",
+          supporting:
+            "Speak with our team about your project requirements.",
+        },
+        email: {
+          eyebrow: "EMAIL US",
+          value: "info@oms.com.qa",
+          href: "mailto:info@oms.com.qa",
+          supporting:
+            "Send us your enquiry and our team will get back to you.",
+        },
+        visit: {
+          eyebrow: "VISIT US",
+          value: "Doha, Qatar",
+          supporting: "Connect with our team in Qatar.",
+          directionsLabel: "Get Directions",
+        },
+        work: {
+          eyebrow: "WORK WITH US",
+          value: "Explore opportunities with OMS",
+          supporting: "Interested in becoming part of our team?",
+        },
+      },
+    },
+    message: {
+      eyebrow: "SEND US A MESSAGE",
+      titleLead: "Let’s",
+      titleAccent: "Talk",
+      description:
+        "Fill in the form below and our team will get back to you shortly.",
+      fullName: "Full Name",
+      companyName: "Company Name",
+      email: "Email Address",
+      phone: "Phone Number",
+      inquiryType: "Inquiry Type",
+      selectInquiry: "Select inquiry type",
+      message: "Your Message",
+      messagePlaceholder: "How can we help you?",
+      submit: "Send Message",
+      required: "required",
+      optional: "optional",
+      notConnected:
+        "This form is not connected yet. Your message has not been sent.",
+      inquiryTypes: {
+        general: "General Enquiry",
+        mep: "MEP Services",
+        electromechanical: "Electromechanical Services",
+        engineering: "Engineering Services",
+        hvac: "HVAC Systems",
+        qcdd: "QCDD Consultation",
+        amc: "AMC / Maintenance",
+        peerless: "Peerless Pump Solutions",
+        project: "Project Enquiry",
+        other: "Other",
+      },
+      errors: {
+        fullName: "Please enter your full name.",
+        email: "Please enter your email address.",
+        emailInvalid: "Please enter a valid email address.",
+        inquiryType: "Please select an inquiry type.",
+        message: "Please enter your message.",
+      },
+    },
+    location: {
+      eyebrow: "OUR LOCATION",
+      titleLead: "Find",
+      titleAccent: "Us",
+      description:
+        "Visit our team in Doha and speak with us about your project requirements.",
+      mapsCta: "Open in Google Maps",
+      mapEmbedTitle: "OMS office location on Google Maps",
+    },
+    values: {
+      lines: ["BUILDING", "SAFER SPACES", "TOGETHER"],
+      items: {
+        safety: "Safety First",
+        partnerships: "Trusted Partnerships",
+        excellence: "Technical Excellence",
+        growth: "Sustainable Growth",
+      },
     },
   },
   qcdd: {

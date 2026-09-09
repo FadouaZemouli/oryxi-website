@@ -6,7 +6,7 @@ import { PrimaryButton } from "@/components/ui/PrimaryButton";
 import { SecondaryButton } from "@/components/ui/SecondaryButton";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
 import type { Locale } from "@/lib/i18n/config";
-import { localizedHref } from "@/lib/i18n/path";
+import { localizedContactFormHref, localizedHref } from "@/lib/i18n/path";
 
 const heroSans = Montserrat({
   subsets: ["latin"],
@@ -25,7 +25,7 @@ type HeroProps = {
 
 export function Hero({ locale, dict }: HeroProps) {
   const servicesHref = localizedHref(locale, "/services");
-  const quoteHref = localizedHref(locale, "/request-quote");
+  const quoteHref = localizedContactFormHref(locale);
 
   return (
     <section

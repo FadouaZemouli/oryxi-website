@@ -501,7 +501,7 @@ export const ar: typeof en = {
       titleLine1: "حلول هندسية.",
       titleAccent: "مصممة للأداء.",
       supporting:
-        "حلول متكاملة في الميكانيكا والكهرباء والتكييف والحماية من الحرائق والصيانة، نقدمها عبر دورة حياة النظام بالكامل.",
+        "حلول متكاملة في أنظمة MEP والخدمات الكهروميكانيكية والهندسية وأنظمة التكييف والحماية من الحرائق والصيانة، يتم تنفيذها عبر دورة حياة النظام بالكامل.",
       cta: "استكشف خدماتنا",
     },
     nav: {
@@ -866,6 +866,99 @@ export const ar: typeof en = {
         "تواصل مع فريقنا لمناقشة متطلبات مشروعك والحصول على الحل المناسب من OMS.",
       quoteCta: "اطلب عرض سعر",
       contactCta: "تواصل مع OMS",
+    },
+  },
+  contactPage: {
+    hero: {
+      eyebrow: "تواصل معنا",
+      titleLead: "تواصل",
+      titleAccent: "معنا",
+      description:
+        "نحن هنا لدعم مشاريعكم والإجابة عن استفساراتكم وتقديم الحلول المناسبة لاحتياجاتكم.",
+      statement: ["مبانٍ آمنة", "مستقبل أقوى"],
+    },
+    info: {
+      ariaLabel: "بيانات التواصل",
+      cards: {
+        call: {
+          eyebrow: "اتصل بنا",
+          value: "+974 4039 7445",
+          href: "tel:+97440397445",
+          supporting: "تحدث مع فريقنا حول متطلبات مشروعك.",
+        },
+        email: {
+          eyebrow: "راسلنا",
+          value: "info@oms.com.qa",
+          href: "mailto:info@oms.com.qa",
+          supporting: "أرسل استفسارك وسيتواصل معك فريقنا.",
+        },
+        visit: {
+          eyebrow: "زورونا",
+          value: "الدوحة، قطر",
+          supporting: "تواصل مع فريقنا في قطر.",
+          directionsLabel: "الاتجاهات",
+        },
+        work: {
+          eyebrow: "انضم إلينا",
+          value: "اكتشف فرص العمل لدى OMS",
+          supporting: "هل ترغب في الانضمام إلى فريقنا؟",
+        },
+      },
+    },
+    message: {
+      eyebrow: "أرسل لنا رسالة",
+      titleLead: "لنتحدث",
+      titleAccent: "",
+      description: "املأ النموذج أدناه وسيتواصل معك فريقنا قريبًا.",
+      fullName: "الاسم الكامل",
+      companyName: "اسم الشركة",
+      email: "البريد الإلكتروني",
+      phone: "رقم الهاتف",
+      inquiryType: "نوع الاستفسار",
+      selectInquiry: "اختر نوع الاستفسار",
+      message: "رسالتك",
+      messagePlaceholder: "كيف يمكننا مساعدتك؟",
+      submit: "إرسال الرسالة",
+      required: "إلزامي",
+      optional: "اختياري",
+      notConnected: "هذا النموذج غير متصل حالياً. لم تُرسل رسالتك.",
+      inquiryTypes: {
+        general: "استفسار عام",
+        mep: "خدمات MEP",
+        electromechanical: "الخدمات الكهروميكانيكية",
+        engineering: "الخدمات الهندسية",
+        hvac: "أنظمة HVAC",
+        qcdd: "استشارة QCDD",
+        amc: "AMC / الصيانة",
+        peerless: "حلول مضخات Peerless",
+        project: "استفسار عن مشروع",
+        other: "أخرى",
+      },
+      errors: {
+        fullName: "يُرجى إدخال الاسم الكامل.",
+        email: "يُرجى إدخال البريد الإلكتروني.",
+        emailInvalid: "يُرجى إدخال بريد إلكتروني صالح.",
+        inquiryType: "يُرجى اختيار نوع الاستفسار.",
+        message: "يُرجى إدخال رسالتك.",
+      },
+    },
+    location: {
+      eyebrow: "موقعنا",
+      titleLead: "اعثر",
+      titleAccent: "علينا",
+      description:
+        "تفضل بزيارة فريقنا في الدوحة وتحدث معنا حول متطلبات مشروعك.",
+      mapsCta: "فتح في خرائط Google",
+      mapEmbedTitle: "موقع مكتب OMS على خرائط Google",
+    },
+    values: {
+      lines: ["نبني", "مساحات أكثر أمانًا", "معًا"],
+      items: {
+        safety: "السلامة أولًا",
+        partnerships: "شراكات موثوقة",
+        excellence: "التميز التقني",
+        growth: "نمو مستدام",
+      },
     },
   },
   qcdd: {

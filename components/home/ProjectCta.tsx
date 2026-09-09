@@ -9,7 +9,7 @@ import {
 import { Container } from "@/components/ui/Container";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
 import type { Locale } from "@/lib/i18n/config";
-import { localizedHref } from "@/lib/i18n/path";
+import { localizedContactFormHref } from "@/lib/i18n/path";
 
 const PROJECT_CTA_IMAGE = "/images/footer/oms-fire-system-wide.jpg";
 
@@ -29,7 +29,7 @@ type ActionConfig = {
 export function ProjectCta({ locale, dict }: ProjectCtaProps) {
   const copy = dict.home.projectCta;
   const contact = dict.footer.contactDetails;
-  const quoteHref = localizedHref(locale, "/request-quote");
+  const quoteHref = localizedContactFormHref(locale);
 
   const actions: ActionConfig[] = [
     {

@@ -27,7 +27,7 @@ import {
   setLogoTravelOwned,
   syncLogoScrollProgress,
 } from "@/lib/layout/logo-travel";
-import { localizedHref } from "@/lib/i18n/path";
+import { localizedContactFormHref, localizedHref } from "@/lib/i18n/path";
 import { primaryNavItems } from "@/lib/navigation";
 
 const TRAVELING_LOGO = {
@@ -53,7 +53,7 @@ export function Header({ locale, dict }: HeaderProps) {
   const pathname = normalizePathname(usePathname());
   const [menuOpen, setMenuOpen] = useState(false);
   const homeHref = localizedHref(locale, "/");
-  const quoteHref = localizedHref(locale, "/request-quote");
+  const quoteHref = localizedContactFormHref(locale);
 
   useLayoutEffect(() => {
     const root = document.documentElement;

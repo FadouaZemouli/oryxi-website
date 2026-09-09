@@ -5,7 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { SecondaryButton } from "@/components/ui/SecondaryButton";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
 import type { Locale } from "@/lib/i18n/config";
-import { localizedHref } from "@/lib/i18n/path";
+import { localizedContactFormHref } from "@/lib/i18n/path";
 
 const pumpHeroSans = Montserrat({
   subsets: ["latin"],
@@ -22,7 +22,7 @@ type PumpSelectionHeroProps = {
 
 export function PumpSelectionHero({ locale, dict }: PumpSelectionHeroProps) {
   const copy = dict.pumpSelectionPage.hero;
-  const quoteHref = localizedHref(locale, "/request-quote");
+  const quoteHref = localizedContactFormHref(locale);
   const heroImageSrc = locale === "ar" ? HERO_IMAGE_SRC_AR : HERO_IMAGE_SRC;
 
   return (

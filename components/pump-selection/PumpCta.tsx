@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Montserrat } from "next/font/google";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
 import type { Locale } from "@/lib/i18n/config";
-import { localizedHref } from "@/lib/i18n/path";
+import { localizedContactFormHref } from "@/lib/i18n/path";
 
 const ctaSans = Montserrat({
   subsets: ["latin"],
@@ -19,7 +19,7 @@ type PumpCtaProps = {
 
 export function PumpCta({ locale, dict }: PumpCtaProps) {
   const copy = dict.pumpSelectionPage.cta;
-  const quoteHref = localizedHref(locale, "/request-quote");
+  const quoteHref = localizedContactFormHref(locale);
 
   return (
     <section

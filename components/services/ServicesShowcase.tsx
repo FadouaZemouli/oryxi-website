@@ -15,7 +15,7 @@ import {
 import { Container } from "@/components/ui/Container";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
 import type { Locale } from "@/lib/i18n/config";
-import { localizedHref } from "@/lib/i18n/path";
+import { localizedContactFormHref } from "@/lib/i18n/path";
 import { useCarouselAutoplay } from "@/lib/carousel/use-carousel-autoplay";
 import {
   SHOWCASE_AUTOPLAY_MS,
@@ -47,7 +47,7 @@ function normalizeShowcaseIndex(index: number): number {
 
 export function ServicesShowcase({ locale, dict }: ServicesShowcaseProps) {
   const copy = dict.servicesPage.showcase;
-  const quoteHref = localizedHref(locale, "/request-quote");
+  const quoteHref = localizedContactFormHref(locale);
 
   // Always hydrate from a stable index; read location.hash only after mount.
   const [activeIndex, setActiveIndex] = useState(0);
