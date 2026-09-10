@@ -8,7 +8,7 @@ const qcddSans = Montserrat({
   variable: "--font-montserrat",
 });
 
-const QCDD_LOGO_SRC = "/images/compliance/qcdd-logo.png.png";
+const QCDD_LOGO_SRC = "/images/compliance/civil-defence-compliance-emblem.png";
 
 type QcddComplianceProps = {
   dict: Dictionary;
@@ -29,8 +29,8 @@ export function QcddCompliance({ dict }: QcddComplianceProps) {
           <Image
             src={QCDD_LOGO_SRC}
             alt={copy.imageAlt}
-            width={160}
-            height={160}
+            width={320}
+            height={320}
             className="oms-about-qcdd-image"
           />
         </div>

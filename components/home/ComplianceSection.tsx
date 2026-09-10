@@ -11,7 +11,7 @@ import type { Dictionary } from "@/lib/i18n/get-dictionary";
 import type { Locale } from "@/lib/i18n/config";
 import { localizedHref } from "@/lib/i18n/path";
 
-const QCDD_LOGO_SRC = "/images/compliance/qcdd-logo.png.png";
+const QCDD_LOGO_SRC = "/images/compliance/civil-defence-compliance-emblem.png";
 const ISO_9001_BADGE_SRC = "/images/compliance/iso-9001-certified.png.png";
 
 type ComplianceSectionProps = {
@@ -50,8 +50,8 @@ export function ComplianceSection({ locale, dict }: ComplianceSectionProps) {
                 <Image
                   src={QCDD_LOGO_SRC}
                   alt={copy.qcdd.imageAlt}
-                  width={140}
-                  height={140}
+                  width={280}
+                  height={280}
                   className="oms-compliance-feature-image"
                 />
               </span>

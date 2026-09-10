@@ -179,7 +179,7 @@ export const en = {
         title: "QCDD COMPLIANCE",
         body: "Solutions and technical support aligned with Qatar Civil Defence requirements for fire protection and life-safety systems.",
         cta: "LEARN MORE",
-        imageAlt: "Qatar Civil Defence emblem",
+        imageAlt: "Civil Defence compliance illustration",
       },
       iso: {
         title: "ISO CERTIFICATE",
@@ -424,7 +424,7 @@ export const en = {
     qcdd: {
       eyebrow: "QCDD COMPLIANCE",
       title: "SUPPORTING COMPLIANCE WITH QATAR CIVIL DEFENCE REQUIREMENTS.",
-      imageAlt: "Qatar Civil Defence emblem",
+      imageAlt: "Civil Defence compliance illustration",
       paragraphs: [
         "OMS supports fire protection and life-safety projects with engineering, technical documentation, inspection coordination and system support aligned with Qatar Civil Defence requirements.",
         "Our team works across fire alarm, firefighting and related life-safety systems to help clients move projects through technical review, inspection and compliance processes efficiently and professionally.",
