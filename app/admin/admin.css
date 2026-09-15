@@ -17,21 +17,36 @@ html.oms-admin body {
 }
 
 .oms-admin-login {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
   min-height: 100vh;
+  min-height: 100dvh;
   display: grid;
   place-items: center;
-  padding: 1.5rem;
-  background:
-    radial-gradient(circle at top left, rgb(21 34 51 / 0.95), #0b1726 48%),
-    #0b1726;
+  padding: 1.25rem;
+  overflow-x: clip;
+  background-color: #c9d6e4;
+  background-image:
+    linear-gradient(rgb(11 23 38 / 0.06), rgb(11 23 38 / 0.06)),
+    url("/images/admin/oms-admin-login-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .oms-admin-login-card {
+  position: relative;
+  z-index: 1;
   width: min(100%, 26.5rem);
   padding: 2rem 1.75rem 1.75rem;
   background: #ffffff;
-  border: 1px solid color-mix(in srgb, #babdc0 55%, transparent);
-  box-shadow: 0 24px 48px -28px rgb(11 23 38 / 0.55);
+  border: 1px solid color-mix(in srgb, #0b1726 9%, #ffffff);
+  border-radius: 0.65rem;
+  box-shadow:
+    0 1px 2px rgb(11 23 38 / 0.05),
+    0 16px 36px -18px rgb(11 23 38 / 0.28);
 }
 
 .oms-admin-login-brand {
@@ -398,6 +413,17 @@ html.oms-admin body {
   margin: 0.7rem 0 0;
   color: #5d6772;
   line-height: 1.6;
+}
+
+@media (max-width: 699px) {
+  .oms-admin-login {
+    padding: 1.25rem;
+    background-position: center 38%;
+  }
+
+  .oms-admin-login-card {
+    padding: 1.7rem 1.25rem 1.5rem;
+  }
 }
 
 @media (min-width: 700px) {

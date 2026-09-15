@@ -5,17 +5,6 @@ import { useRouter } from "next/navigation";
 import { resolveAdminAccess } from "@/lib/admin/is-admin";
 import { createClient } from "@/lib/supabase/client";
 
-function logLoginDiagnostic(
-  label: string,
-  details: Record<string, boolean | string | null>,
-) {
-  if (process.env.NODE_ENV === "production") {
-    return;
-  }
-
-  console.info(label, details);
-}
-
 export function LoginForm() {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -39,13 +28,6 @@ export function LoginForm() {
         password,
       });
 
-      const signInSucceeded = !signInError && Boolean(data.user) && Boolean(data.session);
-      logLoginDiagnostic("OMS admin login", {
-        "signIn succeeded": signInSucceeded,
-        "user present": Boolean(data.user?.id),
-        "session present": Boolean(data.session),
-      });
-
       if (signInError || !data.user) {
         setError("Invalid email or password.");
         return;
@@ -57,13 +39,6 @@ export function LoginForm() {
       }
 
       const access = await resolveAdminAccess(supabase);
-
-      logLoginDiagnostic("OMS admin login RPC", {
-        "RPC returned true": access.rpcReturnedTrue,
-        "RPC returned false": access.rpcReturnedFalse,
-        "RPC error code": access.rpcErrorCode,
-        "RPC error message": access.rpcErrorMessage,
-      });
 
       if (access.status === "error") {
         setError("Unable to verify admin access. Please try again.");
