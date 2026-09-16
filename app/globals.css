@@ -10435,6 +10435,7 @@ html[lang="ar"] .oms-contact-info-directions {
 }
 
 .oms-contact-message-form {
+  position: relative;
   margin-block-start: 1.75rem;
 }
 
@@ -10489,6 +10490,25 @@ html[lang="ar"] .oms-contact-info-directions {
   line-height: 1.55;
 }
 
+.oms-contact-message-status-error {
+  border-color: color-mix(in srgb, var(--oms-burgundy) 28%, transparent);
+  background: color-mix(in srgb, var(--oms-burgundy) 7%, var(--oms-white));
+  color: var(--oms-burgundy);
+}
+
+.oms-contact-honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
 .oms-contact-message-submit,
 .oms-contact-location-maps {
   display: inline-flex;
@@ -10517,6 +10537,13 @@ html[lang="ar"] .oms-contact-info-directions {
 .oms-contact-location-maps:hover,
 .oms-contact-location-maps:focus-visible {
   background: color-mix(in srgb, var(--oms-burgundy) 86%, var(--oms-dark));
+}
+
+.oms-contact-message-submit:disabled,
+.oms-contact-message-submit:disabled:hover {
+  cursor: wait;
+  opacity: 0.72;
+  background: var(--oms-burgundy);
 }
 
 .oms-contact-message-submit:focus-visible,

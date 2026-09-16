@@ -930,10 +930,12 @@ export const en = {
       message: "Your Message",
       messagePlaceholder: "How can we help you?",
       submit: "Send Message",
+      submitting: "Sending…",
       required: "required",
       optional: "optional",
-      notConnected:
-        "This form is not connected yet. Your message has not been sent.",
+      success:
+        "Thank you. Your enquiry has been received. Our team will get back to you shortly.",
+      submitError: "Your enquiry could not be sent. Please try again.",
       inquiryTypes: {
         general: "General Enquiry",
         mep: "MEP Services",

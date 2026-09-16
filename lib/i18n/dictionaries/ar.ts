@@ -919,9 +919,12 @@ export const ar: typeof en = {
       message: "رسالتك",
       messagePlaceholder: "كيف يمكننا مساعدتك؟",
       submit: "إرسال الرسالة",
+      submitting: "جاري الإرسال…",
       required: "إلزامي",
       optional: "اختياري",
-      notConnected: "هذا النموذج غير متصل حالياً. لم تُرسل رسالتك.",
+      success:
+        "شكراً لك. تم استلام استفسارك بنجاح، وسيتواصل معك فريقنا في أقرب وقت.",
+      submitError: "تعذر إرسال استفسارك. يُرجى المحاولة مرة أخرى.",
       inquiryTypes: {
         general: "استفسار عام",
         mep: "خدمات MEP",

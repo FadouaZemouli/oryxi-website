@@ -18,3 +18,19 @@ export function isContactInquiryTypeId(
 ): value is ContactInquiryTypeId {
   return contactInquiryTypeIds.includes(value as ContactInquiryTypeId);
 }
+
+export const CONTACT_INQUIRY_TYPE_LABELS_EN: Record<
+  ContactInquiryTypeId,
+  string
+> = {
+  general: "General Enquiry",
+  mep: "MEP Services",
+  electromechanical: "Electromechanical Services",
+  engineering: "Engineering Services",
+  hvac: "HVAC Systems",
+  qcdd: "QCDD Consultation",
+  amc: "AMC / Maintenance",
+  peerless: "Peerless Pump Solutions",
+  project: "Project Enquiry",
+  other: "Other",
+};

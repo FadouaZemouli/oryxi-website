@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useState, type FormEvent } from "react";
+import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import { Montserrat } from "next/font/google";
 import { ArrowRight } from "lucide-react";
 import { FormField } from "@/components/forms/FormField";
@@ -8,6 +8,7 @@ import { SelectField } from "@/components/forms/SelectField";
 import { TextArea } from "@/components/forms/TextArea";
 import { TextInput } from "@/components/forms/TextInput";
 import { Container } from "@/components/ui/Container";
+import { submitContactEnquiryAction } from "@/lib/contact/actions";
 import { contactInquiryTypeIds } from "@/lib/contact/inquiry-types";
 import {
   getOmsGoogleMapsEmbedUrl,
@@ -45,9 +46,13 @@ export function ContactMessage({ locale, dict }: ContactMessageProps) {
   const copy = dict.contactPage.message;
   const location = dict.contactPage.location;
   const formId = useId();
+  const submittingRef = useRef(false);
   const [values, setValues] = useState<ContactMessageValues>(initialValues);
+  const [honeypot, setHoneypot] = useState("");
   const [errors, setErrors] = useState<ContactMessageFieldErrors>({});
+  const [statusKind, setStatusKind] = useState<"success" | "error" | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
   const mapsArrow = locale === "ar" ? "←" : "→";
 
   useEffect(() => {
@@ -103,16 +108,21 @@ export function ContactMessage({ locale, dict }: ContactMessageProps) {
       delete next[name as keyof ContactMessageFieldErrors];
       return next;
     });
+    setStatusKind(null);
     setStatusMessage(null);
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (submittingRef.current) {
+      return;
+    }
 
     const nextErrors = validateContactMessage(values, copy.errors);
     setErrors(nextErrors);
 
     if (hasContactMessageErrors(nextErrors)) {
+      setStatusKind(null);
       setStatusMessage(null);
       const firstError = Object.keys(nextErrors)[0];
       if (firstError) {
@@ -121,7 +131,35 @@ export function ContactMessage({ locale, dict }: ContactMessageProps) {
       return;
     }
 
-    setStatusMessage(copy.notConnected);
+    submittingRef.current = true;
+    setSubmitting(true);
+    setStatusKind(null);
+    setStatusMessage(null);
+
+    try {
+      const result = await submitContactEnquiryAction({
+        ...values,
+        companyWebsite: honeypot,
+      });
+
+      if (!result.ok) {
+        setStatusKind("error");
+        setStatusMessage(copy.submitError);
+        return;
+      }
+
+      setValues(initialValues);
+      setHoneypot("");
+      setErrors({});
+      setStatusKind("success");
+      setStatusMessage(copy.success);
+    } catch {
+      setStatusKind("error");
+      setStatusMessage(copy.submitError);
+    } finally {
+      submittingRef.current = false;
+      setSubmitting(false);
+    }
   }
 
   const inquiryOptions = contactInquiryTypeIds.map((id) => ({
@@ -157,10 +195,24 @@ export function ContactMessage({ locale, dict }: ContactMessageProps) {
               noValidate
               onSubmit={handleSubmit}
               className="oms-contact-message-form"
+              aria-busy={submitting}
               aria-describedby={
                 statusMessage ? `${formId}-status` : undefined
               }
             >
+              <div className="oms-contact-honeypot" aria-hidden="true">
+                <label htmlFor={fieldId("companyWebsite")}>Company website</label>
+                <input
+                  id={fieldId("companyWebsite")}
+                  name="companyWebsite"
+                  type="text"
+                  value={honeypot}
+                  onChange={(event) => setHoneypot(event.target.value)}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
+
               <div className="oms-contact-message-fields">
                 <FormField
                   id={fieldId("fullName")}
@@ -288,15 +340,23 @@ export function ContactMessage({ locale, dict }: ContactMessageProps) {
               {statusMessage ? (
                 <p
                   id={`${formId}-status`}
-                  className="oms-contact-message-status"
-                  role="status"
+                  className={
+                    statusKind === "error"
+                      ? "oms-contact-message-status oms-contact-message-status-error"
+                      : "oms-contact-message-status"
+                  }
+                  role={statusKind === "error" ? "alert" : "status"}
                 >
                   {statusMessage}
                 </p>
               ) : null}
 
-              <button type="submit" className="oms-contact-message-submit">
-                <span>{copy.submit}</span>
+              <button
+                type="submit"
+                className="oms-contact-message-submit"
+                disabled={submitting}
+              >
+                <span>{submitting ? copy.submitting : copy.submit}</span>
                 <ArrowRight
                   className="oms-contact-message-submit-arrow"
                   strokeWidth={1.8}
