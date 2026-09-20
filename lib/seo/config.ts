@@ -1,4 +1,4 @@
-export const siteOrigin = "https://oms.com.qa";
+export const siteOrigin = "https://www.oms.com.qa";
 export const siteName = "ORYXI Maintenance Services";
 
 export const ogImage = {
