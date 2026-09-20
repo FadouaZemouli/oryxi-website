@@ -466,3 +466,549 @@ html.oms-admin body {
     padding-top: 0.35rem;
   }
 }
+
+/* —— Projects listing redesign helpers (isolated commit) —— */
+
+.oms-admin-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.oms-admin-add-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1.05rem;
+  text-decoration: none;
+}
+
+.oms-admin-projects .oms-admin-cards {
+  margin-top: 0.35rem;
+}
+
+/* â€”â€” Projects listing redesign (scoped) â€”â€” */
+
+.oms-admin-projects {
+  display: grid;
+  gap: 1.15rem;
+}
+
+.oms-admin-projects-hero {
+  position: relative;
+  overflow: hidden;
+  margin: 0 0 0.15rem;
+  padding: 1.15rem 1.25rem 1.25rem;
+  border: 1px solid color-mix(in srgb, #0b1726 8%, transparent);
+  border-radius: 0.875rem;
+  background:
+    linear-gradient(
+      105deg,
+      color-mix(in srgb, #fff 92%, #edf0f3) 0%,
+      color-mix(in srgb, #891746 5%, #fff) 100%
+    );
+  box-shadow: 0 8px 22px -18px rgb(11 23 38 / 0.28);
+}
+
+.oms-admin-projects-hero-media {
+  position: absolute;
+  inset: 0;
+  background-image: url("/images/admin/oms-admin-login-bg.png");
+  background-size: cover;
+  background-position: 72% 40%;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.oms-admin-projects-hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.oms-admin-projects-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0 0 0.85rem;
+  color: #5d6772;
+  font-size: 0.78rem;
+  font-weight: 650;
+}
+
+.oms-admin-projects-breadcrumb a {
+  color: #891746;
+  text-decoration: none;
+}
+
+.oms-admin-projects-breadcrumb a:hover,
+.oms-admin-projects-breadcrumb a:focus-visible {
+  text-decoration: underline;
+}
+
+.oms-admin-projects-hero-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem 1.25rem;
+}
+
+.oms-admin-projects-hero .oms-admin-heading {
+  margin: 0;
+  font-size: clamp(1.85rem, 2.4vw, 2.25rem);
+}
+
+.oms-admin-projects-hero .oms-admin-welcome {
+  max-width: 36rem;
+}
+
+.oms-admin-projects-add {
+  border-radius: 0.55rem;
+  box-shadow: 0 10px 22px -16px rgb(137 23 70 / 0.7);
+}
+
+.oms-admin-projects-kpis {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.9rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.oms-admin-projects-kpi {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.9rem;
+  align-items: start;
+  min-height: 6.5rem;
+  padding: 1.15rem 1.15rem 1.05rem;
+  background: #fff;
+  border: 1px solid color-mix(in srgb, #0b1726 8%, transparent);
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 22px -18px rgb(11 23 38 / 0.28);
+  text-decoration: none;
+  color: inherit;
+}
+
+.oms-admin-projects-kpi-icon {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.7rem;
+}
+
+.oms-admin-projects-kpi-navy .oms-admin-projects-kpi-icon {
+  background: color-mix(in srgb, #0b1726 10%, #fff);
+  color: #0b1726;
+}
+
+.oms-admin-projects-kpi-blue .oms-admin-projects-kpi-icon {
+  background: color-mix(in srgb, #2563eb 12%, #fff);
+  color: #1d4ed8;
+}
+
+.oms-admin-projects-kpi-green .oms-admin-projects-kpi-icon {
+  background: color-mix(in srgb, #15803d 12%, #fff);
+  color: #15803d;
+}
+
+.oms-admin-projects-kpi-burgundy .oms-admin-projects-kpi-icon {
+  background: color-mix(in srgb, #891746 12%, #fff);
+  color: #891746;
+}
+
+.oms-admin-projects-kpi-copy {
+  display: grid;
+  gap: 0.28rem;
+  min-width: 0;
+}
+
+.oms-admin-projects-kpi-label {
+  color: #5d6772;
+  font-size: 0.8rem;
+  font-weight: 650;
+}
+
+.oms-admin-projects-kpi-value {
+  color: #0b1726;
+  font-size: 1.85rem;
+  font-weight: 750;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.oms-admin-projects-kpi-hint {
+  color: #7a8490;
+  font-size: 0.78rem;
+  font-weight: 550;
+}
+
+.oms-admin-projects-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0.95rem 1rem;
+  background: #fff;
+  border: 1px solid color-mix(in srgb, #0b1726 8%, transparent);
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 22px -18px rgb(11 23 38 / 0.22);
+}
+
+.oms-admin-projects-filter-search {
+  flex: 1 1 16rem;
+  min-width: min(100%, 14rem);
+}
+
+.oms-admin-projects-filter-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+  margin-inline-start: auto;
+}
+
+.oms-admin-projects-filter-select {
+  flex: 0 1 11.5rem;
+  min-width: 9.5rem;
+}
+
+.oms-admin-projects-filter-submit,
+.oms-admin-projects-filter-reset {
+  min-height: 2.75rem;
+  padding: 0 0.95rem;
+  border: 1px solid color-mix(in srgb, #0b1726 14%, transparent);
+  border-radius: 0.5rem;
+  background: #fff;
+  color: #0b1726;
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 650;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.oms-admin-projects-filter-submit:hover,
+.oms-admin-projects-filter-submit:focus-visible,
+.oms-admin-projects-filter-reset:hover,
+.oms-admin-projects-filter-reset:focus-visible {
+  border-color: #891746;
+  color: #891746;
+}
+
+.oms-admin-projects-filter-reset:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.oms-admin-projects-filter-reset-idle {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.oms-admin-projects-empty {
+  border-radius: 0.75rem;
+}
+
+.oms-admin-projects-table-block {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.oms-admin-projects-table-wrap {
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 22px -18px rgb(11 23 38 / 0.28);
+}
+
+.oms-admin-projects-table th {
+  background: color-mix(in srgb, #0b1726 3%, #fff);
+}
+
+.oms-admin-projects-table tbody tr:hover td {
+  background: color-mix(in srgb, #891746 3%, #fff);
+}
+
+.oms-admin-projects-location {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #0b1726;
+  font-size: 0.9rem;
+}
+
+.oms-admin-projects-location-icon {
+  flex-shrink: 0;
+  color: #891746;
+}
+
+.oms-admin-projects-order {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.75rem;
+  color: #0b1726;
+  font-weight: 650;
+}
+
+.oms-admin-projects-actions {
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  gap: 0.35rem;
+}
+
+.oms-admin-projects-edit {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0 0.7rem;
+  border: 1px solid color-mix(in srgb, #891746 28%, transparent);
+  border-radius: 0.45rem;
+  background: color-mix(in srgb, #891746 6%, #fff);
+  color: #891746;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.oms-admin-projects-edit:hover,
+.oms-admin-projects-edit:focus-visible {
+  background: color-mix(in srgb, #891746 12%, #fff);
+  text-decoration: none;
+}
+
+.oms-admin-projects-menu {
+  position: relative;
+}
+
+.oms-admin-projects-menu-trigger {
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  margin: 0;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, #0b1726 12%, transparent);
+  border-radius: 0.45rem;
+  background: #fff;
+  color: #0b1726;
+  cursor: pointer;
+}
+
+.oms-admin-projects-menu-trigger:hover,
+.oms-admin-projects-menu-trigger:focus-visible {
+  border-color: #891746;
+  color: #891746;
+}
+
+.oms-admin-projects-menu-panel {
+  position: absolute;
+  z-index: 20;
+  inset-inline-end: 0;
+  top: calc(100% + 0.35rem);
+  min-width: 9.5rem;
+  padding: 0.35rem;
+  background: #fff;
+  border: 1px solid color-mix(in srgb, #0b1726 10%, transparent);
+  border-radius: 0.55rem;
+  box-shadow: 0 14px 28px -16px rgb(11 23 38 / 0.35);
+}
+
+.oms-admin-projects-menu-panel[hidden] {
+  display: none;
+}
+
+.oms-admin-projects-menu-item {
+  display: grid;
+}
+
+.oms-admin-projects-menu-item .oms-admin-table-action {
+  display: block;
+  width: 100%;
+  padding: 0.55rem 0.65rem;
+  border-radius: 0.4rem;
+  text-align: start;
+}
+
+.oms-admin-projects-menu-item .oms-admin-table-action:hover,
+.oms-admin-projects-menu-item .oms-admin-table-action:focus-visible {
+  background: color-mix(in srgb, #891746 7%, #fff);
+  text-decoration: none;
+}
+
+.oms-admin-projects .oms-admin-pill {
+  border-radius: 999px;
+  letter-spacing: 0.03em;
+}
+
+.oms-admin-projects .oms-admin-pill-ongoing {
+  background: color-mix(in srgb, #2563eb 12%, #fff);
+  color: #1d4ed8;
+}
+
+.oms-admin-projects .oms-admin-pill-completed {
+  background: color-mix(in srgb, #15803d 12%, #fff);
+  color: #15803d;
+}
+
+.oms-admin-projects .oms-admin-pill-published {
+  background: color-mix(in srgb, #15803d 12%, #fff);
+  color: #15803d;
+}
+
+.oms-admin-projects .oms-admin-pill-draft {
+  background: #edf0f3;
+  color: #5d6772;
+}
+
+.oms-admin-projects-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+}
+
+.oms-admin-projects-pagination-summary {
+  margin: 0;
+  color: #5d6772;
+  font-size: 0.86rem;
+}
+
+.oms-admin-projects-pagination-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-inline-start: auto;
+}
+
+.oms-admin-projects-page-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 2.15rem;
+  height: 2.15rem;
+  margin: 0;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, #0b1726 12%, transparent);
+  border-radius: 0.45rem;
+  background: #fff;
+  color: #0b1726;
+  cursor: pointer;
+}
+
+.oms-admin-projects-page-btn:hover:not(:disabled),
+.oms-admin-projects-page-btn:focus-visible:not(:disabled) {
+  border-color: #891746;
+  color: #891746;
+}
+
+.oms-admin-projects-page-btn:disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+
+.oms-admin-projects-page-status {
+  min-width: 6.5rem;
+  color: #0b1726;
+  font-size: 0.82rem;
+  font-weight: 650;
+  text-align: center;
+}
+
+.oms-admin-projects-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 1.25rem;
+  margin-top: 0.2rem;
+  padding: 1.25rem 1.3rem;
+  border: 1px solid color-mix(in srgb, #891746 14%, transparent);
+  border-radius: 0.875rem;
+  background:
+    linear-gradient(
+      110deg,
+      color-mix(in srgb, #891746 7%, #fff) 0%,
+      color-mix(in srgb, #891746 3%, #fff) 55%,
+      #fff 100%
+    ),
+    url("/images/admin/oms-admin-sidebar-bg.png");
+  background-size: cover, 180px;
+  background-position: center, right -20px bottom -30px;
+  background-repeat: no-repeat, no-repeat;
+}
+
+.oms-admin-projects-cta-copy {
+  max-width: 36rem;
+}
+
+.oms-admin-projects-cta h2 {
+  margin: 0;
+  color: #0b1726;
+  font-size: 1.2rem;
+  font-weight: 750;
+}
+
+.oms-admin-projects-cta p {
+  margin: 0.45rem 0 0;
+  color: #5d6772;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.oms-admin-projects-cta-btn {
+  border-radius: 0.55rem;
+}
+
+@media (min-width: 700px) {
+  .oms-admin-projects-kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .oms-admin-projects-kpis {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .oms-admin-projects-filters {
+    flex-wrap: nowrap;
+  }
+
+  .oms-admin-projects-filter-search {
+    flex: 1 1 auto;
+  }
+}
+
+@media (max-width: 699px) {
+  .oms-admin-projects-hero {
+    padding: 1rem 1rem 1.1rem;
+  }
+
+  .oms-admin-projects-filter-controls {
+    width: 100%;
+    margin-inline-start: 0;
+  }
+
+  .oms-admin-projects-filter-select,
+  .oms-admin-projects-filter-submit,
+  .oms-admin-projects-filter-reset {
+    flex: 1 1 calc(50% - 0.35rem);
+  }
+
+  .oms-admin-projects-pagination-controls {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
