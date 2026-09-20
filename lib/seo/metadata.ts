@@ -34,20 +34,20 @@ export function ogLocale(locale: Locale): string {
   return locale === "ar" ? "ar_QA" : "en_QA";
 }
 
+const pageDescriptionKeys = {
+  home: "siteDescription",
+  about: "aboutDescription",
+  services: "servicesDescription",
+  projects: "projectsDescription",
+  qcddServices: "qcddServicesDescription",
+  pumpSelection: "pumpSelectionDescription",
+  amcContracts: "amcContractsDescription",
+  contact: "contactDescription",
+  requestQuote: "requestQuoteDescription",
+} as const satisfies Record<PageKey, keyof Dictionary["meta"]>;
+
 function pageDescription(dict: Dictionary, page: PageKey): string {
-  if (page === "home") {
-    return dict.meta.siteDescription;
-  }
-
-  if (page === "about") {
-    return dict.meta.aboutDescription;
-  }
-
-  if (page === "qcddServices") {
-    return dict.meta.qcddServicesDescription;
-  }
-
-  return dict.placeholder.metaDescription;
+  return dict.meta[pageDescriptionKeys[page]];
 }
 
 export function buildPageMetadata(

@@ -65,7 +65,7 @@ export const en = {
       phoneTel: "+97440397445",
       email: "info@oms.com.qa",
       website: "www.oms.com.qa",
-      websiteHref: "https://oms.com.qa",
+      websiteHref: "https://www.oms.com.qa",
     },
     serviceLabels: {
       engineeringServices: "Engineering Services",
@@ -681,20 +681,32 @@ export const en = {
   },
   meta: {
     siteDescription:
-      "Fire protection, engineering and electromechanical maintenance services in Qatar.",
-    home: "ORYXI Maintenance Services",
-    about: "About OMS | ORYXI Maintenance Services",
+      "OMS provides fire protection, life-safety, MEP, HVAC, engineering and maintenance solutions in Qatar, including QCDD support and AMC services.",
+    home: "Oryxi Maintenance Services | Fire Protection & MEP Qatar",
+    about: "About OMS | Engineering & Maintenance Company Qatar",
     aboutDescription:
-      "Learn about ORYXI Maintenance Services, our engineering expertise, safety-focused approach, QCDD compliance support and ISO 9001:2015 quality management system in Qatar.",
-    services: "Services | ORYXI Maintenance Services",
-    projects: "Projects | ORYXI Maintenance Services",
-    pumpSelection: "Pump Selection | ORYXI Maintenance Services",
-    amcContracts: "AMC Contracts | ORYXI Maintenance Services",
-    contact: "Contact Us | ORYXI Maintenance Services",
-    requestQuote: "Request a Quote | ORYXI Maintenance Services",
-    qcddServices: "QCDD Services | ORYXI Maintenance Services",
+      "Learn about Oryxi Maintenance Services, providing fire protection, MEP, engineering and maintenance solutions for facilities and projects across Qatar.",
+    services: "Fire Protection, MEP & Engineering Services Qatar | OMS",
+    servicesDescription:
+      "Explore OMS fire protection, MEP, electromechanical, HVAC, engineering and maintenance services for commercial and residential projects in Qatar.",
+    projects: "Engineering & Fire Protection Projects Qatar | OMS",
+    projectsDescription:
+      "Explore OMS projects across Qatar covering fire protection, MEP, HVAC, engineering, maintenance and life-safety systems.",
+    pumpSelection: "Fire Pump Selection & Engineering Support Qatar | OMS",
+    pumpSelectionDescription:
+      "Get fire pump selection and engineering support from OMS for fire protection systems and project requirements in Qatar.",
+    amcContracts: "AMC Maintenance Contracts Qatar | OMS",
+    amcContractsDescription:
+      "OMS provides annual maintenance contracts in Qatar for fire protection, MEP, HVAC and engineering systems with planned inspections and maintenance support.",
+    contact: "Contact Oryxi Maintenance Services | Qatar",
+    contactDescription:
+      "Contact OMS in Qatar for fire protection, MEP, HVAC, engineering, maintenance, QCDD support and project enquiries.",
+    requestQuote: "Request a Quote | Oryxi Maintenance Services Qatar",
+    requestQuoteDescription:
+      "Request a quotation from OMS for fire protection, MEP, HVAC, engineering, maintenance, AMC and related services in Qatar.",
+    qcddServices: "QCDD Services & Civil Defence Support Qatar | OMS",
     qcddServicesDescription:
-      "OMS provides support for obtaining Qatar Civil Defence certificates for buildings, towers, warehouses, and other facilities, including the required application and documentation procedures.",
+      "OMS provides QCDD support in Qatar, including Civil Defence application assistance, documentation preparation, coordination and certificate-related services.",
   },
   quote: {
     title: "Request a Quote",

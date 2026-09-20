@@ -4,6 +4,7 @@ import { Geist, Geist_Mono, Noto_Sans_Arabic } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { HeaderPreloadScript } from "@/components/layout/HeaderPreloadScript";
+import { OrganizationJsonLd } from "@/components/seo/OrganizationJsonLd";
 import { localeDir, locales } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getLocaleParam } from "@/lib/i18n/locale-param";
@@ -74,6 +75,7 @@ export default async function LocaleLayout({
       }`}
     >
       <body className="min-h-full flex flex-col bg-oms-white text-oms-dark">
+        <OrganizationJsonLd />
         <HeaderPreloadScript />
         <Header locale={locale} dict={dict} />
         {children}

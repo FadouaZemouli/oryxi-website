@@ -67,7 +67,7 @@ export const ar: typeof en = {
       phoneTel: "+97440397445",
       email: "info@oms.com.qa",
       website: "www.oms.com.qa",
-      websiteHref: "https://oms.com.qa",
+      websiteHref: "https://www.oms.com.qa",
     },
     serviceLabels: {
       engineeringServices: "الخدمات الهندسية",
@@ -677,20 +677,32 @@ export const ar: typeof en = {
   },
   meta: {
     siteDescription:
-      "خدمات الحماية من الحرائق والخدمات الهندسية والصيانة الكهروميكانيكية في قطر.",
-    home: "ORYXI Maintenance Services",
-    about: "عن OMS | ORYXI Maintenance Services",
+      "تقدم OMS حلول الحماية من الحرائق والسلامة وأنظمة MEP والتكييف والهندسة والصيانة في قطر، بالإضافة إلى خدمات QCDD وعقود الصيانة AMC.",
+    home: "أوريكسي لخدمات الصيانة | أنظمة الحريق وMEP في قطر",
+    about: "عن OMS | شركة هندسة وصيانة في قطر",
     aboutDescription:
-      "تعرّف على ORYXI Maintenance Services وخبرتنا الهندسية ونهجنا المرتكز على السلامة ودعم امتثال الدفاع المدني ونظام إدارة الجودة ISO 9001:2015 في قطر.",
-    services: "خدماتنا | ORYXI Maintenance Services",
-    projects: "المشاريع | ORYXI Maintenance Services",
-    pumpSelection: "اختيار المضخات | ORYXI Maintenance Services",
-    amcContracts: "عقود الصيانة السنوية | ORYXI Maintenance Services",
-    contact: "اتصل بنا | ORYXI Maintenance Services",
-    requestQuote: "طلب عرض سعر | ORYXI Maintenance Services",
-    qcddServices: "خدمات الدفاع المدني | ORYXI Maintenance Services",
+      "تعرّف على أوريكسي لخدمات الصيانة، التي تقدم حلول الحماية من الحرائق وأنظمة MEP والهندسة والصيانة للمنشآت والمشاريع في قطر.",
+    services: "خدمات الحماية من الحرائق وMEP والهندسة في قطر | OMS",
+    servicesDescription:
+      "استكشف خدمات OMS في الحماية من الحرائق وأنظمة MEP والكهروميكانيك والتكييف والهندسة والصيانة للمشاريع التجارية والسكنية في قطر.",
+    projects: "مشاريع هندسية وأنظمة حريق في قطر | OMS",
+    projectsDescription:
+      "استكشف مشاريع OMS في قطر في مجالات الحماية من الحرائق وأنظمة MEP والتكييف والهندسة والصيانة وأنظمة السلامة.",
+    pumpSelection: "اختيار مضخات الحريق والدعم الهندسي في قطر | OMS",
+    pumpSelectionDescription:
+      "احصل على دعم اختيار مضخات الحريق والهندسة من OMS لأنظمة الحماية من الحرائق ومتطلبات المشاريع في قطر.",
+    amcContracts: "عقود الصيانة السنوية AMC في قطر | OMS",
+    amcContractsDescription:
+      "تقدم OMS عقود صيانة سنوية في قطر لأنظمة الحماية من الحرائق وMEP والتكييف والهندسة، مع فحوصات مخططة ودعم صيانة مستمر.",
+    contact: "اتصل بأوريكسي لخدمات الصيانة | قطر",
+    contactDescription:
+      "تواصل مع OMS في قطر بشأن الحماية من الحرائق وأنظمة MEP والتكييف والهندسة والصيانة وخدمات QCDD واستفسارات المشاريع.",
+    requestQuote: "اطلب عرض سعر | أوريكسي لخدمات الصيانة قطر",
+    requestQuoteDescription:
+      "اطلب عرض سعر من OMS لخدمات الحماية من الحرائق وأنظمة MEP والتكييف والهندسة والصيانة وعقود AMC والخدمات ذات الصلة في قطر.",
+    qcddServices: "خدمات الدفاع المدني QCDD في قطر | OMS",
     qcddServicesDescription:
-      "تقدم ORYXI Maintenance Services خدمات ومتابعة إجراءات الحصول على شهادات الدفاع المدني للمباني والأبراج والمستودعات والمنشآت الأخرى، بما في ذلك إجراءات التقديم والمستندات المطلوبة.",
+      "تقدم OMS دعم خدمات الدفاع المدني في قطر، بما في ذلك المساعدة في تقديم الطلبات وإعداد المستندات والتنسيق والخدمات المتعلقة بالشهادات.",
   },
   quote: {
     title: "طلب عرض سعر",
