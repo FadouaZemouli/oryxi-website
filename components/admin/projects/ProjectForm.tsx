@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -26,11 +26,27 @@ import { ProjectDetailsEditor } from "@/components/admin/projects/ProjectDetails
 type ProjectFormProps = {
   project?: AdminProject;
   notice?: string | null;
+  variant?: "page" | "modal";
+  formId?: string;
+  hideActions?: boolean;
+  onCancel?: () => void;
+  onCreated?: () => void;
+  onPendingChange?: (pending: boolean) => void;
 };
 
-export function ProjectForm({ project, notice = null }: ProjectFormProps) {
+export function ProjectForm({
+  project,
+  notice = null,
+  variant = "page",
+  formId,
+  hideActions = false,
+  onCancel,
+  onCreated,
+  onPendingChange,
+}: ProjectFormProps) {
   const router = useRouter();
   const isEdit = Boolean(project);
+  const isModal = variant === "modal";
   const mediaRef = useRef<ProjectMediaFieldsHandle>(null);
   const [titleEn, setTitleEn] = useState(project?.title_en ?? "");
   const [slug, setSlug] = useState(project?.slug ?? "");
@@ -44,6 +60,12 @@ export function ProjectForm({ project, notice = null }: ProjectFormProps) {
   const [pending, setPending] = useState(false);
   const [mediaBusy, setMediaBusy] = useState(false);
   const [published, setPublished] = useState(project?.published ?? false);
+
+  const saving = pending || mediaBusy;
+
+  useEffect(() => {
+    onPendingChange?.(saving);
+  }, [saving, onPendingChange]);
 
   function handleTitleEnChange(value: string) {
     setTitleEn(value);
@@ -123,17 +145,20 @@ export function ProjectForm({ project, notice = null }: ProjectFormProps) {
           );
 
           if (mediaResult.error || uploaded.error) {
+            onCreated?.();
             router.replace(`/admin/projects/${created.id}/edit?notice=media`);
             router.refresh();
             return;
           }
         } else if (uploaded.error) {
+          onCreated?.();
           router.replace(`/admin/projects/${created.id}/edit?notice=media`);
           router.refresh();
           return;
         }
       }
 
+      onCreated?.();
       router.replace("/admin/projects?notice=created");
       router.refresh();
     } catch {
@@ -143,10 +168,17 @@ export function ProjectForm({ project, notice = null }: ProjectFormProps) {
     }
   }
 
-  const saving = pending || mediaBusy;
-
   return (
-    <form className="oms-admin-project-form" onSubmit={handleSubmit} noValidate>
+    <form
+      id={formId}
+      className={
+        isModal
+          ? "oms-admin-project-form oms-admin-project-form-modal"
+          : "oms-admin-project-form"
+      }
+      onSubmit={handleSubmit}
+      noValidate
+    >
       {error ? (
         <p className="oms-admin-error" role="alert">
           {error}
@@ -393,14 +425,27 @@ export function ProjectForm({ project, notice = null }: ProjectFormProps) {
         </div>
       </section>
 
-      <div className="oms-admin-form-actions">
-        <button className="oms-admin-submit" type="submit" disabled={saving}>
-          {pending ? "Saving…" : isEdit ? "Save Project" : "Create Project"}
-        </button>
-        <Link className="oms-admin-aux-link" href="/admin/projects">
-          Cancel
-        </Link>
-      </div>
+      {hideActions || isModal ? null : (
+        <div className="oms-admin-form-actions">
+          <button className="oms-admin-submit" type="submit" disabled={saving}>
+            {pending ? "Saving…" : isEdit ? "Save Project" : "Create Project"}
+          </button>
+          {onCancel ? (
+            <button
+              className="oms-admin-aux-link"
+              type="button"
+              onClick={onCancel}
+              disabled={saving}
+            >
+              Cancel
+            </button>
+          ) : (
+            <Link className="oms-admin-aux-link" href="/admin/projects">
+              Cancel
+            </Link>
+          )}
+        </div>
+      )}
     </form>
   );
 }

@@ -10,6 +10,10 @@ import { ProjectsFilters } from "@/components/admin/projects/ProjectsFilters";
 import { ProjectsKpiCards } from "@/components/admin/projects/ProjectsKpiCards";
 import { ProjectsShowcaseCta } from "@/components/admin/projects/ProjectsShowcaseCta";
 import { ProjectsTable } from "@/components/admin/projects/ProjectsTable";
+import {
+  AddProjectButton,
+  ProjectsAddProjectProvider,
+} from "@/components/admin/projects/ProjectsAddProject";
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -73,92 +77,94 @@ export default async function AdminProjectsPage({
   );
 
   return (
-    <section
-      className="oms-admin-projects"
-      aria-labelledby="oms-admin-projects-heading"
-    >
-      <header className="oms-admin-projects-hero">
-        <div className="oms-admin-projects-hero-media" aria-hidden="true" />
-        <div className="oms-admin-projects-hero-content">
-          <nav className="oms-admin-projects-breadcrumb" aria-label="Breadcrumb">
-            <Link href="/admin">Dashboard</Link>
-            <span aria-hidden="true">/</span>
-            <span aria-current="page">Projects</span>
-          </nav>
+    <ProjectsAddProjectProvider>
+      <section
+        className="oms-admin-projects"
+        aria-labelledby="oms-admin-projects-heading"
+      >
+        <header className="oms-admin-projects-hero">
+          <div className="oms-admin-projects-hero-media" aria-hidden="true" />
+          <div className="oms-admin-projects-hero-content">
+            <nav
+              className="oms-admin-projects-breadcrumb"
+              aria-label="Breadcrumb"
+            >
+              <Link href="/admin">Dashboard</Link>
+              <span aria-hidden="true">/</span>
+              <span aria-current="page">Projects</span>
+            </nav>
 
-          <div className="oms-admin-projects-hero-row">
-            <div>
-              <h1 id="oms-admin-projects-heading" className="oms-admin-heading">
-                Projects
-              </h1>
-              <p className="oms-admin-welcome">
-                Manage projects displayed across the OMS website.
-              </p>
+            <div className="oms-admin-projects-hero-row">
+              <div>
+                <h1
+                  id="oms-admin-projects-heading"
+                  className="oms-admin-heading"
+                >
+                  Projects
+                </h1>
+                <p className="oms-admin-welcome">
+                  Manage projects displayed across the OMS website.
+                </p>
+              </div>
+              <AddProjectButton className="oms-admin-submit oms-admin-add-link oms-admin-projects-add">
+                + Add Project
+              </AddProjectButton>
             </div>
-            <Link
-              className="oms-admin-submit oms-admin-add-link oms-admin-projects-add"
-              href="/admin/projects/new"
-            >
-              + Add Project
-            </Link>
           </div>
-        </div>
-      </header>
+        </header>
 
-      {notice ? (
-        <p
-          className={
-            params.notice === "error" || params.notice === "deleted-media"
-              ? "oms-admin-error"
-              : "oms-admin-success"
-          }
-          role="status"
-        >
-          {notice}
-        </p>
-      ) : null}
-
-      {error ? (
-        <div className="oms-admin-error" role="alert">
-          <p>Projects could not be loaded. Please try again.</p>
-          {process.env.NODE_ENV !== "production" ? (
-            <p className="oms-admin-empty">
-              {[error.code, error.message, error.hint, error.details]
-                .filter(Boolean)
-                .join(" — ")}
-            </p>
-          ) : null}
-        </div>
-      ) : null}
-
-      <ProjectsKpiCards counts={counts} />
-
-      <ProjectsFilters filters={filters} />
-
-      {projects.length === 0 ? (
-        <div className="oms-admin-empty-panel oms-admin-projects-empty">
-          <h2 className="oms-admin-panel-title">
-            {hasFilters ? "No matching projects" : "No projects yet"}
-          </h2>
-          <p className="oms-admin-empty">
-            {hasFilters
-              ? "Try a different search or clear the status and website filters."
-              : "Add a project to manage what can be displayed on the OMS website."}
+        {notice ? (
+          <p
+            className={
+              params.notice === "error" || params.notice === "deleted-media"
+                ? "oms-admin-error"
+                : "oms-admin-success"
+            }
+            role="status"
+          >
+            {notice}
           </p>
-          {!hasFilters ? (
-            <Link
-              className="oms-admin-submit oms-admin-add-link"
-              href="/admin/projects/new"
-            >
-              + Add Project
-            </Link>
-          ) : null}
-        </div>
-      ) : (
-        <ProjectsTable projects={projects} canReorder={!hasFilters} />
-      )}
+        ) : null}
 
-      <ProjectsShowcaseCta />
-    </section>
+        {error ? (
+          <div className="oms-admin-error" role="alert">
+            <p>Projects could not be loaded. Please try again.</p>
+            {process.env.NODE_ENV !== "production" ? (
+              <p className="oms-admin-empty">
+                {[error.code, error.message, error.hint, error.details]
+                  .filter(Boolean)
+                  .join(" — ")}
+              </p>
+            ) : null}
+          </div>
+        ) : null}
+
+        <ProjectsKpiCards counts={counts} />
+
+        <ProjectsFilters filters={filters} />
+
+        {projects.length === 0 ? (
+          <div className="oms-admin-empty-panel oms-admin-projects-empty">
+            <h2 className="oms-admin-panel-title">
+              {hasFilters ? "No matching projects" : "No projects yet"}
+            </h2>
+            <p className="oms-admin-empty">
+              {hasFilters
+                ? "Try a different search or clear the status and website filters."
+                : "Add a project to manage what can be displayed on the OMS website."}
+            </p>
+            {!hasFilters ? (
+              <AddProjectButton className="oms-admin-submit oms-admin-add-link">
+                + Add Project
+              </AddProjectButton>
+            ) : null}
+          </div>
+        ) : (
+          <ProjectsTable projects={projects} canReorder={!hasFilters} />
+        )}
+
+        <ProjectsShowcaseCta />
+      </section>
+    </ProjectsAddProjectProvider>
   );
 }
