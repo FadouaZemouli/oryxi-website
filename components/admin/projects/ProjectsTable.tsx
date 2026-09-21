@@ -8,7 +8,6 @@ import {
   type DragEvent,
   type KeyboardEvent,
 } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 import type { AdminProject } from "@/lib/admin/projects/types";
@@ -20,6 +19,7 @@ import {
 } from "@/components/admin/projects/ProjectBadges";
 import { ProjectActionsMenu } from "@/components/admin/projects/ProjectActionsMenu";
 import { ProjectMediaThumb } from "@/components/admin/projects/ProjectMediaThumb";
+import { useEditProject } from "@/components/admin/projects/ProjectsEditProject";
 
 const PAGE_SIZE = 10;
 
@@ -146,6 +146,7 @@ export function ProjectsTable({
   canReorder: boolean;
 }) {
   const router = useRouter();
+  const { open: openEdit } = useEditProject();
   const hintId = useId();
   const savingRef = useRef(false);
   const [rows, setRows] = useState(() => sortProjects(projects));
@@ -436,12 +437,13 @@ export function ProjectsTable({
                   <td>{formatDate(project.updated_at || project.created_at)}</td>
                   <td>
                     <div className="oms-admin-table-actions oms-admin-projects-actions">
-                      <Link
+                      <button
+                        type="button"
                         className="oms-admin-table-action oms-admin-projects-edit"
-                        href={`/admin/projects/${project.id}/edit`}
+                        onClick={() => openEdit(project)}
                       >
                         Edit
-                      </Link>
+                      </button>
                       <ProjectActionsMenu
                         id={project.id}
                         title={project.title_en}

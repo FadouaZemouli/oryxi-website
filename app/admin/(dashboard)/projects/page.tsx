@@ -14,6 +14,7 @@ import {
   AddProjectButton,
   ProjectsAddProjectProvider,
 } from "@/components/admin/projects/ProjectsAddProject";
+import { ProjectsEditProjectProvider } from "@/components/admin/projects/ProjectsEditProject";
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
 const notices: Record<string, string> = {
   created: "Project created.",
   saved: "Project saved.",
+  completed: "Project marked as completed.",
   deleted: "Project deleted.",
   "deleted-media":
     "Project deleted. Some images could not be removed from storage.",
@@ -78,10 +80,11 @@ export default async function AdminProjectsPage({
 
   return (
     <ProjectsAddProjectProvider>
-      <section
-        className="oms-admin-projects"
-        aria-labelledby="oms-admin-projects-heading"
-      >
+      <ProjectsEditProjectProvider>
+        <section
+          className="oms-admin-projects"
+          aria-labelledby="oms-admin-projects-heading"
+        >
         <header className="oms-admin-projects-hero">
           <div className="oms-admin-projects-hero-media" aria-hidden="true" />
           <div className="oms-admin-projects-hero-content">
@@ -164,7 +167,8 @@ export default async function AdminProjectsPage({
         )}
 
         <ProjectsShowcaseCta />
-      </section>
+        </section>
+      </ProjectsEditProjectProvider>
     </ProjectsAddProjectProvider>
   );
 }

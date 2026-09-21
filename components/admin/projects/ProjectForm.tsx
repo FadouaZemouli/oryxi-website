@@ -31,6 +31,7 @@ type ProjectFormProps = {
   hideActions?: boolean;
   onCancel?: () => void;
   onCreated?: () => void;
+  onSaved?: () => void;
   onPendingChange?: (pending: boolean) => void;
 };
 
@@ -42,6 +43,7 @@ export function ProjectForm({
   hideActions = false,
   onCancel,
   onCreated,
+  onSaved,
   onPendingChange,
 }: ProjectFormProps) {
   const router = useRouter();
@@ -113,6 +115,7 @@ export function ProjectForm({
           return;
         }
 
+        onSaved?.();
         router.replace("/admin/projects?notice=saved");
         router.refresh();
         return;

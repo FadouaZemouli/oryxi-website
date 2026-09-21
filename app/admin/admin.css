@@ -2029,6 +2029,82 @@ html.oms-admin body {
   }
 }
 
+/* —— Edit Project modal (reuses Add Project shell) —— */
+
+.oms-admin-edit-project-footer-actions {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-inline-start: auto;
+}
+
+.oms-admin-edit-project-footer-actions .oms-admin-add-project-modal-submit {
+  margin-inline-start: 0;
+}
+
+.oms-admin-edit-project-mark-completed {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.75rem;
+  margin: 0;
+  padding: 0.45rem 0.35rem;
+  border: 0;
+  border-radius: 0.45rem;
+  background: transparent;
+  color: #891746;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.oms-admin-edit-project-mark-completed:hover,
+.oms-admin-edit-project-mark-completed:focus-visible {
+  color: #6e1238;
+  background: color-mix(in srgb, #891746 8%, #fff);
+  outline: none;
+}
+
+.oms-admin-edit-project-mark-completed:focus-visible {
+  outline: 2px solid color-mix(in srgb, #891746 45%, transparent);
+  outline-offset: 2px;
+}
+
+.oms-admin-edit-project-mark-completed:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.oms-admin-edit-project-mark-icon {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex-shrink: 0;
+}
+
+@media (max-width: 720px) {
+  .oms-admin-edit-project-footer-actions {
+    flex: 1 1 auto;
+    min-width: 0;
+    gap: 0.65rem;
+  }
+
+  .oms-admin-edit-project-footer-actions .oms-admin-add-project-modal-submit {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .oms-admin-edit-project-mark-completed {
+    flex: 0 1 auto;
+    min-width: 0;
+    padding-inline: 0.15rem;
+    font-size: 0.82rem;
+  }
+}
 /* -- Clients listing (scoped) -- */
 
 .oms-admin-clients {

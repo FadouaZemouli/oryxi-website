@@ -19,6 +19,9 @@ import {
   removeOwnedProjectStorageMedia,
 } from "@/lib/admin/projects/media";
 
+const PROJECT_ID_PATTERN =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 function refreshProjectViews() {
   revalidatePath("/admin");
   revalidatePath("/admin/projects");
@@ -81,6 +84,62 @@ export async function updateProjectAction(
 
   refreshProjectViews();
   return { error: null, success: "Project saved.", id };
+}
+
+export async function markProjectCompletedAction(
+  id: string,
+): Promise<{ error: string | null }> {
+  await requireAdmin();
+
+  if (!id || !PROJECT_ID_PATTERN.test(id)) {
+    return { error: "This project could not be found." };
+  }
+
+  const supabase = await createClient();
+  const { data, error: loadError } = await supabase
+    .from("projects")
+    .select("id, project_status")
+    .eq("id", id)
+    .maybeSingle();
+
+  if (loadError || !data || typeof data.id !== "string") {
+    if (loadError) {
+      logSafeSupabaseError(
+        "OMS admin project mark-completed load failed",
+        toSafeSupabaseError(loadError),
+      );
+    }
+    return { error: "This project could not be found." };
+  }
+
+  if (data.project_status === "completed") {
+    refreshProjectViews();
+    return { error: null };
+  }
+
+  if (data.project_status !== "ongoing") {
+    return { error: "Only ongoing projects can be marked as completed." };
+  }
+
+  const { error } = await supabase
+    .from("projects")
+    .update({
+      project_status: "completed",
+      updated_at: new Date().toISOString(),
+    })
+    .eq("id", id)
+    .eq("project_status", "ongoing");
+
+  if (error) {
+    logSafeSupabaseError(
+      "OMS admin project mark-completed failed",
+      toSafeSupabaseError(error),
+    );
+    return { error: formatProjectError(error.message) };
+  }
+
+  refreshProjectViews();
+  return { error: null };
 }
 
 export async function updateProjectMediaAction(
@@ -211,9 +270,6 @@ export async function setProjectPublishedAction(formData: FormData) {
       : `/admin/projects?notice=${published ? "published" : "unpublished"}`,
   );
 }
-
-const PROJECT_ID_PATTERN =
-  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 export async function reorderProjectsAction(
   orderedIds: string[],
