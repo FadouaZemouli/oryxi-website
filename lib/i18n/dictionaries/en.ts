@@ -63,7 +63,7 @@ export const en = {
     contactDetails: {
       phone: "+974 4039 7445",
       phoneTel: "+97440397445",
-      email: "info@oms.com.qa",
+      email: "marketing@oms.com.qa",
       website: "www.oms.com.qa",
       websiteHref: "https://www.oms.com.qa",
     },
@@ -909,8 +909,8 @@ export const en = {
         },
         email: {
           eyebrow: "EMAIL US",
-          value: "info@oms.com.qa",
-          href: "mailto:info@oms.com.qa",
+          value: "marketing@oms.com.qa",
+          href: "mailto:marketing@oms.com.qa",
           supporting:
             "Send us your enquiry and our team will get back to you.",
         },

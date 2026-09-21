@@ -7,7 +7,7 @@ const organizationJsonLd = {
   alternateName: "OMS",
   url: siteOrigin,
   telephone: "+974 4039 7445",
-  email: "info@oms.com.qa",
+  email: "marketing@oms.com.qa",
   logo: `${siteOrigin}/logos/oms-logo.png`,
   address: {
     "@type": "PostalAddress",

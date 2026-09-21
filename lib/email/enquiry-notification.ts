@@ -2,7 +2,7 @@ import { Resend } from "resend";
 import { CONTACT_INQUIRY_TYPE_LABELS_EN } from "@/lib/contact/inquiry-types";
 import type { ContactEnquiryPayload } from "@/lib/contact/validate";
 
-const NOTIFICATION_TO = "info@oms.com.qa";
+const NOTIFICATION_TO = "marketing@oms.com.qa";
 const NOTIFICATION_FROM = "OMS Website <noreply@oms.com.qa>";
 const OMS_BURGUNDY = "#891746";
 
