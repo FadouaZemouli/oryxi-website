@@ -12,10 +12,15 @@ import { updateProjectMediaAction } from "@/lib/admin/projects/actions";
 import {
   coverObjectPath,
   galleryObjectPath,
+  cleanupFailedGalleryBatchUploads,
   removeManagedProjectImage,
   uploadProjectImage,
   validateProjectImage,
 } from "@/lib/admin/projects/media";
+import {
+  logSafeSupabaseError,
+  toSafeSupabaseError,
+} from "@/lib/admin/projects/log-error";
 
 export type ProjectMediaFieldsHandle = {
   pendingCoverFile: () => File | null;
@@ -218,21 +223,48 @@ export function ProjectMediaFields({
         return;
       }
 
+      const ownedProjectId = projectId;
       const supabase = createClient();
       const uploadedItems: GalleryItem[] = [];
+      const batchUploadedUrls: string[] = [];
+
+      async function rollbackBatch(primaryError: string) {
+        if (batchUploadedUrls.length === 0) {
+          setError(primaryError);
+          return;
+        }
+
+        const cleanup = await cleanupFailedGalleryBatchUploads(
+          supabase,
+          ownedProjectId,
+          batchUploadedUrls,
+        );
+
+        if (cleanup.error) {
+          logSafeSupabaseError(
+            `OMS admin gallery batch cleanup failed | project=${ownedProjectId} | objects=${batchUploadedUrls.length}`,
+            toSafeSupabaseError(cleanup.error),
+          );
+        }
+
+        setError(primaryError);
+      }
 
       for (const file of selected) {
         const uploaded = await uploadProjectImage(
           supabase,
-          galleryObjectPath(projectId, file),
+          galleryObjectPath(ownedProjectId, file),
           file,
         );
 
         if (!uploaded.url) {
-          setError(uploaded.error);
+          await rollbackBatch(
+            uploaded.error ?? "The image could not be uploaded. Please try again.",
+          );
           return;
         }
 
+        batchUploadedUrls.push(uploaded.url);
         uploadedItems.push({
           key: newKey(),
           url: uploaded.url,
@@ -244,11 +276,9 @@ export function ProjectMediaFields({
       const nextGallery = [...gallery, ...uploadedItems];
       const saved = await persistMedia(coverUrl, nextGallery);
       if (!saved) {
-        for (const item of uploadedItems) {
-          if (item.url) {
-            await removeManagedProjectImage(supabase, item.url, projectId);
-          }
-        }
+        await rollbackBatch(
+          "Gallery images uploaded but could not be saved. Please try again.",
+        );
         return;
       }
 

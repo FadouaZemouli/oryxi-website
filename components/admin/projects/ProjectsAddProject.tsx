@@ -9,6 +9,7 @@ import {
   type ReactNode,
 } from "react";
 import { AddProjectModal } from "@/components/admin/projects/AddProjectModal";
+import type { ProjectClientOption } from "@/lib/admin/projects/types";
 
 type ProjectsAddProjectContextValue = {
   open: () => void;
@@ -19,8 +20,10 @@ const ProjectsAddProjectContext =
 
 export function ProjectsAddProjectProvider({
   children,
+  clientOptions,
 }: {
   children: ReactNode;
+  clientOptions: ProjectClientOption[];
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -37,7 +40,11 @@ export function ProjectsAddProjectProvider({
   return (
     <ProjectsAddProjectContext.Provider value={value}>
       {children}
-      <AddProjectModal open={isOpen} onClose={close} />
+      <AddProjectModal
+        open={isOpen}
+        onClose={close}
+        clientOptions={clientOptions}
+      />
     </ProjectsAddProjectContext.Provider>
   );
 }

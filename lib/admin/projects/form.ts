@@ -40,6 +40,7 @@ export function parseProjectForm(formData: FormData):
   const gallery = parseGallery(readString(formData, "gallery"));
   const sortRaw = readString(formData, "sort_order");
   const published = formData.get("published") === "on";
+  const clientIdRaw = readString(formData, "client_id");
   const qcddYear = parseQcddYear(formData.get("qcdd_year"));
   const projectDetails = parseProjectDetailsInput(formData.get("project_details"));
 
@@ -75,6 +76,15 @@ export function parseProjectForm(formData: FormData):
     return { ok: false, error: "Display order must be a whole number." };
   }
 
+  if (
+    clientIdRaw &&
+    !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+      clientIdRaw,
+    )
+  ) {
+    return { ok: false, error: "Select a valid client." };
+  }
+
   if (!qcddYear.ok) {
     return { ok: false, error: qcddYear.error };
   }
@@ -100,6 +110,7 @@ export function parseProjectForm(formData: FormData):
       published,
       qcdd_year: qcddYear.value,
       project_details: projectDetails.value,
+      client_id: clientIdRaw || null,
     },
   };
 }

@@ -16,6 +16,12 @@ export type ProjectDetailsSection = {
 
 export type ProjectDetails = ProjectDetailsSection[];
 
+export type ProjectClientOption = {
+  id: string;
+  name: string;
+  status: "active" | "inactive";
+};
+
 export type AdminProject = {
   id: string;
   slug: string;
@@ -32,6 +38,8 @@ export type AdminProject = {
   published: boolean;
   qcdd_year: string | null;
   project_details: ProjectDetails;
+  client_id: string | null;
+  client_name: string | null;
   created_at: string | null;
   updated_at: string | null;
 };
@@ -51,7 +59,8 @@ export type ProjectWritePayload = {
   published: boolean;
   qcdd_year: string | null;
   project_details: ProjectDetails;
+  client_id: string | null;
 };
 
 export const PROJECT_SELECT =
-  "id, slug, title_en, title_ar, location_en, location_ar, scope_en, scope_ar, project_status, cover_image_url, gallery, sort_order, published, qcdd_year, project_details, created_at, updated_at";
+  "id, slug, title_en, title_ar, location_en, location_ar, scope_en, scope_ar, project_status, cover_image_url, gallery, sort_order, published, qcdd_year, project_details, client_id, created_at, updated_at";

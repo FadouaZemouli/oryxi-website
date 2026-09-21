@@ -768,6 +768,15 @@ html.oms-admin body {
   color: #0b1726;
   font-weight: 650;
 }
+.oms-admin-projects-client {
+  display: inline-block;
+  max-width: 10rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #0b1726;
+  font-size: 0.9rem;
+}
 
 .oms-admin-projects-actions {
   align-items: center;

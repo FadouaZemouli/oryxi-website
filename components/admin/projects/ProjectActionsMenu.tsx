@@ -74,7 +74,7 @@ export function ProjectActionsMenu({
         hidden={!open}
       >
         <div className="oms-admin-projects-menu-item" role="menuitem">
-          <PublishToggle id={id} published={published} />
+          <PublishToggle id={id} title={title} published={published} />
         </div>
         <div className="oms-admin-projects-menu-item" role="menuitem">
           <DeleteProjectButton id={id} title={title} />

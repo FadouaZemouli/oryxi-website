@@ -277,6 +277,33 @@ export async function removeOwnedProjectStorageMedia(
   return { removed: unique, error: null };
 }
 
+/**
+ * Removes Storage objects that were uploaded in a failed gallery batch.
+ * Only owned project paths are touched; existing gallery URLs are never passed in.
+ */
+export async function cleanupFailedGalleryBatchUploads(
+  supabase: SupabaseClient,
+  projectId: string,
+  uploadedUrls: string[],
+) {
+  const paths = collectOwnedProjectStoragePaths(projectId, null, uploadedUrls);
+  if (paths.length === 0) {
+    return { cleaned: 0, error: null };
+  }
+
+  const result = await removeOwnedProjectStorageMedia(
+    supabase,
+    projectId,
+    paths,
+  );
+
+  if (result.error) {
+    return { cleaned: 0, error: result.error };
+  }
+
+  return { cleaned: result.removed.length, error: null };
+}
+
 export async function uploadPendingProjectMedia(
   supabase: SupabaseClient,
   projectId: string,

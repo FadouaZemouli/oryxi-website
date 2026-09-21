@@ -24,13 +24,17 @@ export type ProjectQueryError = {
   hint: string | null;
 };
 
-function asProject(row: Record<string, unknown>): AdminProject | null {
+function asProject(
+  row: Record<string, unknown>,
+  clientName: string | null = null,
+): AdminProject | null {
   const id = typeof row.id === "string" ? row.id : "";
   if (!id) {
     return null;
   }
 
   const status = row.project_status === "completed" ? "completed" : "ongoing";
+  const clientId = typeof row.client_id === "string" ? row.client_id : null;
 
   return {
     id,
@@ -54,9 +58,49 @@ function asProject(row: Record<string, unknown>): AdminProject | null {
       ? row.qcdd_year.trim()
       : null,
     project_details: readProjectDetails(row.project_details),
+    client_id: clientId,
+    client_name: clientName,
     created_at: typeof row.created_at === "string" ? row.created_at : null,
     updated_at: typeof row.updated_at === "string" ? row.updated_at : null,
   };
+}
+
+async function clientNamesById(clientIds: string[]) {
+  const unique = [...new Set(clientIds.filter(Boolean))];
+  if (unique.length === 0) {
+    return new Map<string, string>();
+  }
+
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("clients")
+    .select("id, name")
+    .in("id", unique);
+
+  if (error) {
+    logSafeSupabaseError(
+      "OMS admin projects client-name lookup failed",
+      toSafeSupabaseError(error),
+    );
+    return new Map<string, string>();
+  }
+
+  const names = new Map<string, string>();
+  for (const row of data ?? []) {
+    const id =
+      row && typeof row === "object" && "id" in row
+        ? (row as { id: unknown }).id
+        : null;
+    const name =
+      row && typeof row === "object" && "name" in row
+        ? (row as { name: unknown }).name
+        : null;
+    if (typeof id === "string" && typeof name === "string" && name.trim()) {
+      names.set(id, name.trim());
+    }
+  }
+
+  return names;
 }
 
 function sanitizeSearch(value: string) {
@@ -98,8 +142,21 @@ export async function listAdminProjects(filters: ProjectListFilters = {}) {
     return { projects: [] as AdminProject[], error: safeError };
   }
 
-  const projects = (data ?? [])
-    .map((row) => asProject((row ?? {}) as Record<string, unknown>))
+  const rows = (data ?? []) as Record<string, unknown>[];
+  const clientIds = rows.flatMap((row) =>
+    typeof row.client_id === "string" ? [row.client_id] : [],
+  );
+  const clientNames = await clientNamesById(clientIds);
+
+  const projects = rows
+    .map((row) =>
+      asProject(
+        row ?? {},
+        typeof row.client_id === "string"
+          ? (clientNames.get(row.client_id) ?? null)
+          : null,
+      ),
+    )
     .filter((row): row is AdminProject => Boolean(row));
 
   return { projects, error: null };
@@ -123,8 +180,21 @@ export async function listAdminProjectsBySlugs(slugs: readonly string[]) {
     return { projects: [] as AdminProject[], error: safeError };
   }
 
-  const projects = (data ?? [])
-    .map((row) => asProject((row ?? {}) as Record<string, unknown>))
+  const rows = (data ?? []) as Record<string, unknown>[];
+  const clientIds = rows.flatMap((row) =>
+    typeof row.client_id === "string" ? [row.client_id] : [],
+  );
+  const clientNames = await clientNamesById(clientIds);
+
+  const projects = rows
+    .map((row) =>
+      asProject(
+        row ?? {},
+        typeof row.client_id === "string"
+          ? (clientNames.get(row.client_id) ?? null)
+          : null,
+      ),
+    )
     .filter((row): row is AdminProject => Boolean(row));
 
   return { projects, error: null };
@@ -145,8 +215,21 @@ export async function listRecentAdminProjects(limit = 5) {
     return { projects: [] as AdminProject[], error: safeError };
   }
 
-  const projects = (data ?? [])
-    .map((row) => asProject((row ?? {}) as Record<string, unknown>))
+  const rows = (data ?? []) as Record<string, unknown>[];
+  const clientIds = rows.flatMap((row) =>
+    typeof row.client_id === "string" ? [row.client_id] : [],
+  );
+  const clientNames = await clientNamesById(clientIds);
+
+  const projects = rows
+    .map((row) =>
+      asProject(
+        row ?? {},
+        typeof row.client_id === "string"
+          ? (clientNames.get(row.client_id) ?? null)
+          : null,
+      ),
+    )
     .filter((row): row is AdminProject => Boolean(row));
 
   return { projects, error: null };
@@ -170,7 +253,16 @@ export async function getAdminProject(id: string) {
     return null;
   }
 
-  return asProject(data as Record<string, unknown>);
+  const row = data as Record<string, unknown>;
+  const clientId = typeof row.client_id === "string" ? row.client_id : null;
+  const clientNames = clientId
+    ? await clientNamesById([clientId])
+    : new Map<string, string>();
+
+  return asProject(
+    row,
+    clientId ? (clientNames.get(clientId) ?? null) : null,
+  );
 }
 
 export async function getAdminProjectCounts() {

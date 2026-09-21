@@ -18,6 +18,7 @@ import {
   collectOwnedProjectStoragePaths,
   removeOwnedProjectStorageMedia,
 } from "@/lib/admin/projects/media";
+import { assertProjectClientId } from "@/lib/admin/projects/client-options";
 
 const PROJECT_ID_PATTERN =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -25,6 +26,7 @@ const PROJECT_ID_PATTERN =
 function refreshProjectViews() {
   revalidatePath("/admin");
   revalidatePath("/admin/projects");
+  revalidatePath("/admin/clients");
 }
 
 export async function createProjectAction(
@@ -38,10 +40,15 @@ export async function createProjectAction(
     return { error: parsed.error, success: null, id: null };
   }
 
+  const clientCheck = await assertProjectClientId(parsed.payload.client_id);
+  if (!clientCheck.ok) {
+    return { error: clientCheck.error, success: null, id: null };
+  }
+
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("projects")
-    .insert(parsed.payload)
+    .insert({ ...parsed.payload, client_id: clientCheck.clientId })
     .select("id")
     .single();
 
@@ -69,11 +76,17 @@ export async function updateProjectAction(
     return { error: parsed.error, success: null, id };
   }
 
+  const clientCheck = await assertProjectClientId(parsed.payload.client_id);
+  if (!clientCheck.ok) {
+    return { error: clientCheck.error, success: null, id };
+  }
+
   const supabase = await createClient();
   const { error } = await supabase
     .from("projects")
     .update({
       ...parsed.payload,
+      client_id: clientCheck.clientId,
       updated_at: new Date().toISOString(),
     })
     .eq("id", id);

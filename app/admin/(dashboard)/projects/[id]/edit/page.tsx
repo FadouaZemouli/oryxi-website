@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { requireAdmin } from "@/lib/admin/require-admin";
+import { listProjectClientOptions } from "@/lib/admin/projects/client-options";
 import { getAdminProject } from "@/lib/admin/projects/queries";
 import { ProjectForm } from "@/components/admin/projects/ProjectForm";
 
@@ -18,7 +19,10 @@ export default async function EditAdminProjectPage({
   await requireAdmin();
   const { id } = await params;
   const { notice } = await searchParams;
-  const project = await getAdminProject(id);
+  const [project, clientOptionsResult] = await Promise.all([
+    getAdminProject(id),
+    listProjectClientOptions(),
+  ]);
 
   if (!project) {
     notFound();
@@ -32,11 +36,16 @@ export default async function EditAdminProjectPage({
             Edit Project
           </h1>
           <p className="oms-admin-welcome">
-            {project.title_en || "Update this project’s details and website settings."}
+            {project.title_en ||
+              "Update this project's details and website settings."}
           </p>
         </div>
       </header>
-      <ProjectForm project={project} notice={notice} />
+      <ProjectForm
+        project={project}
+        clientOptions={clientOptionsResult.clients}
+        notice={notice}
+      />
     </section>
   );
 }

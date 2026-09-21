@@ -343,6 +343,7 @@ export function ProjectsTable({
               </th>
               <th scope="col">Project</th>
               <th scope="col">Location</th>
+              <th scope="col">Client</th>
               <th scope="col">Status</th>
               <th scope="col">Website</th>
               <th scope="col">Order</th>
@@ -422,6 +423,11 @@ export function ProjectsTable({
                       />
                       <span>{location || "—"}</span>
                     </div>
+                  </td>
+                  <td>
+                    <span className="oms-admin-projects-client">
+                      {project.client_name?.trim() || "—"}
+                    </span>
                   </td>
                   <td>
                     <ProjectStatusBadge status={project.project_status} />

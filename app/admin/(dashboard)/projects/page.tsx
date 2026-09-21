@@ -6,6 +6,7 @@ import {
   listAdminProjects,
   type ProjectListFilters,
 } from "@/lib/admin/projects/queries";
+import { listProjectClientOptions } from "@/lib/admin/projects/client-options";
 import { ProjectsFilters } from "@/components/admin/projects/ProjectsFilters";
 import { ProjectsKpiCards } from "@/components/admin/projects/ProjectsKpiCards";
 import { ProjectsShowcaseCta } from "@/components/admin/projects/ProjectsShowcaseCta";
@@ -67,10 +68,12 @@ export default async function AdminProjectsPage({
     status: asStatus(params.status),
     publication: asPublication(params.publication),
   };
-  const [{ projects, error }, counts] = await Promise.all([
+  const [{ projects, error }, counts, clientOptionsResult] = await Promise.all([
     listAdminProjects(filters),
     getAdminProjectCounts(),
+    listProjectClientOptions(),
   ]);
+  const clientOptions = clientOptionsResult.clients;
   const notice = params.notice ? notices[params.notice] : null;
   const hasFilters = Boolean(
     filters.q ||
@@ -79,8 +82,8 @@ export default async function AdminProjectsPage({
   );
 
   return (
-    <ProjectsAddProjectProvider>
-      <ProjectsEditProjectProvider>
+    <ProjectsAddProjectProvider clientOptions={clientOptions}>
+      <ProjectsEditProjectProvider clientOptions={clientOptions}>
         <section
           className="oms-admin-projects"
           aria-labelledby="oms-admin-projects-heading"

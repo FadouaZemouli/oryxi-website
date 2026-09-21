@@ -16,7 +16,7 @@ import {
 } from "@/lib/admin/projects/details";
 import { uploadPendingProjectMedia } from "@/lib/admin/projects/media";
 import { createClient } from "@/lib/supabase/client";
-import type { AdminProject } from "@/lib/admin/projects/types";
+import type { AdminProject, ProjectClientOption } from "@/lib/admin/projects/types";
 import {
   ProjectMediaFields,
   type ProjectMediaFieldsHandle,
@@ -25,6 +25,7 @@ import { ProjectDetailsEditor } from "@/components/admin/projects/ProjectDetails
 
 type ProjectFormProps = {
   project?: AdminProject;
+  clientOptions?: ProjectClientOption[];
   notice?: string | null;
   variant?: "page" | "modal";
   formId?: string;
@@ -37,6 +38,7 @@ type ProjectFormProps = {
 
 export function ProjectForm({
   project,
+  clientOptions = [],
   notice = null,
   variant = "page",
   formId,
@@ -62,8 +64,26 @@ export function ProjectForm({
   const [pending, setPending] = useState(false);
   const [mediaBusy, setMediaBusy] = useState(false);
   const [published, setPublished] = useState(project?.published ?? false);
+  const [clientId, setClientId] = useState(project?.client_id ?? "");
 
   const saving = pending || mediaBusy;
+
+  const clientChoices = (() => {
+    if (
+      project?.client_id &&
+      !clientOptions.some((client) => client.id === project.client_id)
+    ) {
+      return [
+        {
+          id: project.client_id,
+          name: project.client_name?.trim() || "Assigned client",
+          status: "inactive" as const,
+        },
+        ...clientOptions,
+      ];
+    }
+    return clientOptions;
+  })();
 
   useEffect(() => {
     onPendingChange?.(saving);
@@ -254,6 +274,35 @@ export function ProjectForm({
               <option value="ongoing">Ongoing</option>
               <option value="completed">Completed</option>
             </select>
+          </div>
+          <div className="oms-admin-field">
+            <label className="oms-admin-label" htmlFor="client_id">
+              Client
+            </label>
+            <select
+              id="client_id"
+              className="oms-admin-input"
+              name="client_id"
+              value={clientId}
+              onChange={(event) => setClientId(event.target.value)}
+              aria-describedby={
+                clientChoices.length === 0
+                  ? "oms-project-client-hint"
+                  : undefined
+              }
+            >
+              <option value="">No client assigned</option>
+              {clientChoices.map((client) => (
+                <option key={client.id} value={client.id}>
+                  {client.name}
+                </option>
+              ))}
+            </select>
+            {clientChoices.length === 0 ? (
+              <p id="oms-project-client-hint" className="oms-admin-field-hint">
+                Add clients from the Clients section.
+              </p>
+            ) : null}
           </div>
         </div>
       </section>

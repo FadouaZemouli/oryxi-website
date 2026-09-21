@@ -4,7 +4,10 @@ import { useEffect, useId, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { ProjectForm } from "@/components/admin/projects/ProjectForm";
 import { markProjectCompletedAction } from "@/lib/admin/projects/actions";
-import type { AdminProject } from "@/lib/admin/projects/types";
+import type {
+  AdminProject,
+  ProjectClientOption,
+} from "@/lib/admin/projects/types";
 
 const FORM_ID = "oms-admin-edit-project-form";
 
@@ -12,6 +15,7 @@ type EditProjectModalProps = {
   project: AdminProject | null;
   open: boolean;
   onClose: () => void;
+  clientOptions: ProjectClientOption[];
 };
 
 function CheckIcon() {
@@ -34,6 +38,7 @@ export function EditProjectModal({
   project,
   open,
   onClose,
+  clientOptions,
 }: EditProjectModalProps) {
   const router = useRouter();
   const titleId = useId();
@@ -235,6 +240,7 @@ export function EditProjectModal({
             <ProjectForm
               key={formKey}
               project={project}
+              clientOptions={clientOptions}
               variant="modal"
               formId={FORM_ID}
               hideActions

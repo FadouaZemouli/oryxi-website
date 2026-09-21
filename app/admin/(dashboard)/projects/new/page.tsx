@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { requireAdmin } from "@/lib/admin/require-admin";
+import { listProjectClientOptions } from "@/lib/admin/projects/client-options";
 import { ProjectForm } from "@/components/admin/projects/ProjectForm";
 
 export const metadata: Metadata = {
@@ -8,6 +9,7 @@ export const metadata: Metadata = {
 
 export default async function NewAdminProjectPage() {
   await requireAdmin();
+  const { clients: clientOptions } = await listProjectClientOptions();
 
   return (
     <section aria-labelledby="oms-admin-new-project-heading">
@@ -21,7 +23,7 @@ export default async function NewAdminProjectPage() {
           </p>
         </div>
       </header>
-      <ProjectForm />
+      <ProjectForm clientOptions={clientOptions} />
     </section>
   );
 }

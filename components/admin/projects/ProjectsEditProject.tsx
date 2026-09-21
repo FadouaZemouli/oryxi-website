@@ -9,7 +9,10 @@ import {
   type ReactNode,
 } from "react";
 import { EditProjectModal } from "@/components/admin/projects/EditProjectModal";
-import type { AdminProject } from "@/lib/admin/projects/types";
+import type {
+  AdminProject,
+  ProjectClientOption,
+} from "@/lib/admin/projects/types";
 
 type ProjectsEditProjectContextValue = {
   open: (project: AdminProject) => void;
@@ -20,8 +23,10 @@ const ProjectsEditProjectContext =
 
 export function ProjectsEditProjectProvider({
   children,
+  clientOptions,
 }: {
   children: ReactNode;
+  clientOptions: ProjectClientOption[];
 }) {
   const [project, setProject] = useState<AdminProject | null>(null);
 
@@ -42,6 +47,7 @@ export function ProjectsEditProjectProvider({
         project={project}
         open={Boolean(project)}
         onClose={close}
+        clientOptions={clientOptions}
       />
     </ProjectsEditProjectContext.Provider>
   );

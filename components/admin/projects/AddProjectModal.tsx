@@ -2,15 +2,21 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import { ProjectForm } from "@/components/admin/projects/ProjectForm";
+import type { ProjectClientOption } from "@/lib/admin/projects/types";
 
 const FORM_ID = "oms-admin-add-project-form";
 
 type AddProjectModalProps = {
   open: boolean;
   onClose: () => void;
+  clientOptions: ProjectClientOption[];
 };
 
-export function AddProjectModal({ open, onClose }: AddProjectModalProps) {
+export function AddProjectModal({
+  open,
+  onClose,
+  clientOptions,
+}: AddProjectModalProps) {
   const titleId = useId();
   const subtitleId = useId();
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -140,6 +146,7 @@ export function AddProjectModal({ open, onClose }: AddProjectModalProps) {
             variant="modal"
             formId={FORM_ID}
             hideActions
+            clientOptions={clientOptions}
             onPendingChange={setBusy}
             onCreated={onClose}
             onCancel={requestClose}
