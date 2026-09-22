@@ -99,7 +99,7 @@ export function AdminSidebar() {
         <div className="oms-admin-sidebar-art-spacer" aria-hidden="true" />
 
         <div className="oms-admin-sidebar-foot">
-          <a className="oms-admin-nav-link" href="mailto:marketing@oms.com.qa">
+          <a className="oms-admin-nav-link" href="mailto:admin@oms.com.qa">
             <CircleHelp size={16} strokeWidth={1.85} aria-hidden="true" />
             Help &amp; Support
           </a>
