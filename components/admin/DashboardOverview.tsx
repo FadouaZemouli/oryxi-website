@@ -23,16 +23,21 @@ import type {
   DashboardCounts,
   DashboardEnquiry,
 } from "@/lib/admin/dashboard-data";
-import type { AdminProject } from "@/lib/admin/projects/types";
+import type { AdminProject, ProjectClientOption } from "@/lib/admin/projects/types";
 import { asEnquiryStatus } from "@/lib/admin/enquiries/types";
 import { DashboardTopBar } from "@/components/admin/dashboard/DashboardTopBar";
 import { ProjectOverviewChart } from "@/components/admin/dashboard/ProjectOverviewChart";
+import {
+  AddProjectButton,
+  ProjectsAddProjectProvider,
+} from "@/components/admin/projects/ProjectsAddProject";
 
 type DashboardOverviewProps = {
   identity: AdminIdentity;
   counts: DashboardCounts;
   recentProjects: AdminProject[];
   recentEnquiries: DashboardEnquiry[];
+  clientOptions: ProjectClientOption[];
 };
 
 const PUBLIC_HERO_PHOTO = "/images/hero/oms-hero-engineering-team.png.png";
@@ -72,13 +77,14 @@ const kpiCards = [
   },
 ];
 
-const quickActions = [
-  {
-    href: "/admin/projects/new",
-    label: "Add Project",
-    description: "Create a new OMS project.",
-    icon: FolderPlus,
-  },
+const addProjectAction = {
+  key: "add-project",
+  label: "Add Project",
+  description: "Create a new OMS project.",
+  icon: FolderPlus,
+} as const;
+
+const quickLinkActions = [
   {
     href: "/admin/clients",
     label: "Clients",
@@ -97,7 +103,7 @@ const quickActions = [
     description: "Manage admin settings.",
     icon: Settings,
   },
-];
+] as const;
 
 function formatDate(value: string | null) {
   if (!value) {
@@ -122,8 +128,12 @@ export function DashboardOverview({
   counts,
   recentProjects,
   recentEnquiries,
+  clientOptions,
 }: DashboardOverviewProps) {
+  const AddProjectIcon = addProjectAction.icon;
+
   return (
+    <ProjectsAddProjectProvider clientOptions={clientOptions}>
     <div className="oms-dash">
       <DashboardTopBar
         identity={identity}
@@ -188,9 +198,9 @@ export function DashboardOverview({
               <h2 id="oms-dash-recent-projects-heading">Recent Projects</h2>
               <p>Your latest projects and their status.</p>
             </div>
-            <Link className="oms-dash-add" href="/admin/projects/new">
+            <AddProjectButton className="oms-dash-add">
               + Add Project
-            </Link>
+            </AddProjectButton>
           </header>
 
           {recentProjects.length === 0 ? (
@@ -348,7 +358,28 @@ export function DashboardOverview({
             </div>
           </header>
           <ul className="oms-dash-actions">
-            {quickActions.map((action) => {
+            <li key={addProjectAction.key}>
+              <AddProjectButton className="oms-dash-action">
+                <span className="oms-dash-action-icon" aria-hidden="true">
+                  <AddProjectIcon size={20} strokeWidth={1.85} />
+                </span>
+                <span className="oms-dash-action-copy">
+                  <span className="oms-dash-action-title">
+                    {addProjectAction.label}
+                  </span>
+                  <span className="oms-dash-action-desc">
+                    {addProjectAction.description}
+                  </span>
+                </span>
+                <ArrowRight
+                  className="oms-dash-action-arrow"
+                  size={16}
+                  strokeWidth={1.85}
+                  aria-hidden="true"
+                />
+              </AddProjectButton>
+            </li>
+            {quickLinkActions.map((action) => {
               const Icon = action.icon;
 
               return (
@@ -384,5 +415,6 @@ export function DashboardOverview({
         <p className="oms-dash-footer-mark">Built for a safer tomorrow.</p>
       </footer>
     </div>
+    </ProjectsAddProjectProvider>
   );
 }

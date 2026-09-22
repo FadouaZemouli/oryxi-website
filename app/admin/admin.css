@@ -2123,6 +2123,16 @@ html.oms-admin body {
 }
 
 @media (min-width: 900px) {
+  /* Center Add Project modal in the content area (right of sticky 16.75rem sidebar). */
+  .oms-admin-add-project-overlay {
+    inset: 0 0 0 16.75rem;
+  }
+
+  .oms-admin-add-project-modal {
+    width: min(1180px, calc(100% - 4rem));
+    max-width: min(1180px, calc(100% - 4rem));
+  }
+
   .oms-admin-add-project-modal .oms-admin-media {
     grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
     align-items: start;
@@ -3586,6 +3596,22 @@ html.oms-admin body {
 .oms-dash-add:hover,
 .oms-dash-add:focus-visible {
   background: #6e1238;
+}
+
+button.oms-dash-add,
+button.oms-dash-action {
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+button.oms-dash-add {
+  border: none;
+}
+
+button.oms-dash-action {
+  width: 100%;
+  appearance: none;
 }
 
 .oms-dash-view-all {
