@@ -1572,7 +1572,7 @@ html[lang="ar"] .oms-expertise-text {
 
 @media (min-width: 1280px) {
   .oms-core-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.15rem;
   }
 }
@@ -4977,15 +4977,15 @@ html[lang="ar"] .oms-services-nav-title {
   background:
     linear-gradient(
       90deg,
-      rgb(11 23 38 / 0.88) 0%,
-      rgb(11 23 38 / 0.72) 28%,
-      rgb(11 23 38 / 0.28) 52%,
-      rgb(11 23 38 / 0.08) 72%,
+      rgb(11 23 38 / 0.92) 0%,
+      rgb(11 23 38 / 0.8) 26%,
+      rgb(11 23 38 / 0.42) 48%,
+      rgb(11 23 38 / 0.12) 70%,
       transparent 100%
     ),
     linear-gradient(
       180deg,
-      rgb(11 23 38 / 0.18) 0%,
+      rgb(11 23 38 / 0.2) 0%,
       transparent 28%,
       transparent 62%,
       rgb(11 23 38 / 0.55) 100%
@@ -4996,15 +4996,15 @@ html[dir="rtl"] .oms-services-showcase-gradient {
   background:
     linear-gradient(
       270deg,
-      rgb(11 23 38 / 0.88) 0%,
-      rgb(11 23 38 / 0.72) 28%,
-      rgb(11 23 38 / 0.28) 52%,
-      rgb(11 23 38 / 0.08) 72%,
+      rgb(11 23 38 / 0.92) 0%,
+      rgb(11 23 38 / 0.8) 26%,
+      rgb(11 23 38 / 0.42) 48%,
+      rgb(11 23 38 / 0.12) 70%,
       transparent 100%
     ),
     linear-gradient(
       180deg,
-      rgb(11 23 38 / 0.18) 0%,
+      rgb(11 23 38 / 0.2) 0%,
       transparent 28%,
       transparent 62%,
       rgb(11 23 38 / 0.55) 100%
@@ -5016,16 +5016,16 @@ html[dir="rtl"] .oms-services-showcase-gradient {
     background:
       linear-gradient(
         180deg,
-        rgb(11 23 38 / 0.72) 0%,
-        rgb(11 23 38 / 0.42) 34%,
-        rgb(11 23 38 / 0.55) 68%,
-        rgb(11 23 38 / 0.82) 100%
+        rgb(11 23 38 / 0.76) 0%,
+        rgb(11 23 38 / 0.48) 34%,
+        rgb(11 23 38 / 0.58) 68%,
+        rgb(11 23 38 / 0.84) 100%
       ),
       linear-gradient(
         90deg,
-        rgb(11 23 38 / 0.78) 0%,
-        rgb(11 23 38 / 0.45) 48%,
-        rgb(11 23 38 / 0.2) 100%
+        rgb(11 23 38 / 0.84) 0%,
+        rgb(11 23 38 / 0.52) 48%,
+        rgb(11 23 38 / 0.22) 100%
       );
   }
 
@@ -5033,16 +5033,16 @@ html[dir="rtl"] .oms-services-showcase-gradient {
     background:
       linear-gradient(
         180deg,
-        rgb(11 23 38 / 0.72) 0%,
-        rgb(11 23 38 / 0.42) 34%,
-        rgb(11 23 38 / 0.55) 68%,
-        rgb(11 23 38 / 0.82) 100%
+        rgb(11 23 38 / 0.76) 0%,
+        rgb(11 23 38 / 0.48) 34%,
+        rgb(11 23 38 / 0.58) 68%,
+        rgb(11 23 38 / 0.84) 100%
       ),
       linear-gradient(
         270deg,
-        rgb(11 23 38 / 0.78) 0%,
-        rgb(11 23 38 / 0.45) 48%,
-        rgb(11 23 38 / 0.2) 100%
+        rgb(11 23 38 / 0.84) 0%,
+        rgb(11 23 38 / 0.52) 48%,
+        rgb(11 23 38 / 0.22) 100%
       );
   }
 }

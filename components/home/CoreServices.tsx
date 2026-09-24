@@ -4,39 +4,36 @@ import { Container } from "@/components/ui/Container";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
 import type { Locale } from "@/lib/i18n/config";
 import { localizedHref } from "@/lib/i18n/path";
+import {
+  SHOWCASE_SLIDES,
+  type ShowcaseSlideKey,
+} from "@/lib/services/showcase-data";
 
 type CoreServicesProps = {
   locale: Locale;
   dict: Dictionary;
 };
 
-type CoreServiceKey =
-  | "mep"
-  | "electromechanical"
-  | "engineering"
-  | "hvac";
+type CoreServiceKey = ShowcaseSlideKey;
+
+const CORE_SERVICE_IMAGES: Record<CoreServiceKey, string> = {
+  mep: "/images/Services/mep-services.png.png",
+  electromechanical: "/images/Services/electromechanical-services.png.png",
+  engineering: "/images/Services/engineering-services.png.png",
+  hvac: "/images/Services/hvac-services.png.png",
+  qcdd: "/images/Services/showcase/05-qcdd-consultation-services.png",
+  amc: "/images/Services/showcase/06-amc-services.png",
+};
 
 const coreServiceItems: {
   key: CoreServiceKey;
   src: string;
-}[] = [
-  {
-    key: "mep",
-    src: "/images/Services/mep-services.png.png",
-  },
-  {
-    key: "electromechanical",
-    src: "/images/Services/electromechanical-services.png.png",
-  },
-  {
-    key: "engineering",
-    src: "/images/Services/engineering-services.png.png",
-  },
-  {
-    key: "hvac",
-    src: "/images/Services/hvac-services.png.png",
-  },
-];
+  hash: string;
+}[] = SHOWCASE_SLIDES.map((slide) => ({
+  key: slide.key,
+  src: CORE_SERVICE_IMAGES[slide.key],
+  hash: slide.hash,
+}));
 
 export function CoreServices({ locale, dict }: CoreServicesProps) {
   const servicesHref = localizedHref(locale, "/services");
@@ -76,13 +73,16 @@ export function CoreServices({ locale, dict }: CoreServicesProps) {
 
             return (
               <li key={item.key} className="oms-core-item">
-                <Link href={servicesHref} className="oms-core-card">
+                <Link
+                  href={`${servicesHref}#${item.hash}`}
+                  className="oms-core-card"
+                >
                   <span className="oms-core-card-media">
                     <Image
                       src={item.src}
                       alt={itemCopy.imageAlt}
                       fill
-                      sizes="(min-width: 1280px) 22vw, (min-width: 768px) 44vw, 100vw"
+                      sizes="(min-width: 1280px) 30vw, (min-width: 768px) 44vw, 100vw"
                       className="oms-core-card-image"
                     />
                   </span>

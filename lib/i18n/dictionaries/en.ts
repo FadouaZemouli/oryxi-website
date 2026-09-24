@@ -55,7 +55,7 @@ export const en = {
         qcdd: "QCDD Services",
       },
       support: {
-        amcContracts: "AMC Contracts",
+        amcContracts: "AMC Services",
         requestQuote: "Request a Quote",
         contact: "Contact Us",
       },
@@ -71,7 +71,7 @@ export const en = {
       engineeringServices: "Engineering Services",
       fireLifeSafety: "Fire & Life Safety",
       qcddServices: "QCDD Services",
-      amcContractsFooter: "AMC / Maintenance Contracts",
+      amcContractsFooter: "AMC Services",
       pumpSolutions: "Pump Solutions",
     },
     peerless: {
@@ -322,7 +322,7 @@ export const en = {
           titleLine1: "MEP",
           titleLine2: "SERVICES",
           description:
-            "Integrated MEP solutions for modern buildings.",
+            "Coordinated mechanical, electrical, plumbing and fire protection systems for complete building performance.",
           imageAlt:
             "MEP plant room with insulated piping, industrial pumps, and control panels.",
         },
@@ -330,7 +330,7 @@ export const en = {
           titleLine1: "ELECTROMECHANICAL",
           titleLine2: "SERVICES",
           description:
-            "Integrated electrical and mechanical solutions for efficient, safe, and reliable operations.",
+            "Pumps, motors and control panels installed, integrated and maintained for reliable facility operations.",
           imageAlt:
             "Electromechanical plant room with electrical switchgear, pumps, and service piping.",
         },
@@ -338,7 +338,7 @@ export const en = {
           titleLine1: "ENGINEERING",
           titleLine2: "SERVICES",
           description:
-            "End-to-end engineering services from design to commissioning across all disciplines.",
+            "Design, calculations, drawings and technical submittals that turn complex requirements into buildable solutions.",
           imageAlt:
             "Engineering plant corridor with pumps, insulated pipework, and control cabinets.",
         },
@@ -346,9 +346,25 @@ export const en = {
           titleLine1: "HVAC",
           titleLine2: "SERVICES",
           description:
-            "Ventilation, cooling, and air quality solutions for every space.",
+            "HVAC design, installation and maintenance engineered for Qatar's climate and lasting comfort.",
           imageAlt:
             "HVAC plant room with air handling units, supply and return ductwork, and chilled-water piping.",
+        },
+        qcdd: {
+          titleLine1: "QCDD",
+          titleLine2: "SERVICES",
+          description:
+            "Coordinated fire and life safety drawings, submissions and inspection support through the QCDD review process.",
+          imageAlt:
+            "Fire protection and QCDD consultation supporting life-safety compliance.",
+        },
+        amc: {
+          titleLine1: "AMC",
+          titleLine2: "SERVICES",
+          description:
+            "Planned inspections, preventive maintenance and responsive support to keep critical systems performing year-round.",
+          imageAlt:
+            "OMS technicians performing annual maintenance on building systems.",
         },
       },
     },
@@ -500,7 +516,7 @@ export const en = {
       titleLine1: "ENGINEERED SOLUTIONS.",
       titleAccent: "BUILT TO PERFORM.",
       supporting:
-        "Integrated MEP, electromechanical, engineering, HVAC, fire protection and maintenance solutions delivered across the complete system lifecycle.",
+        "Integrated MEP, electromechanical, engineering, HVAC, QCDD and AMC solutions delivered across the complete system lifecycle.",
       cta: "EXPLORE OUR SERVICES",
     },
     nav: {
@@ -509,9 +525,9 @@ export const en = {
         mep: "MEP Services",
         electromechanical: "Electromechanical Services",
         engineering: "Engineering Services",
-        hvac: "HVAC Systems",
-        fire: "Fire Protection & QCDD Services",
-        amc: "AMC & Maintenance",
+        hvac: "HVAC Services",
+        fire: "QCDD Services",
+        amc: "AMC Services",
       },
     },
     showcase: {
@@ -532,81 +548,90 @@ export const en = {
       slides: {
         mep: {
           eyebrow: "MEP SERVICES",
-          heading: "INTEGRATED MEP SOLUTIONS FOR COMPLETE BUILDING PERFORMANCE.",
+          heading:
+            "INTEGRATED MEP SOLUTIONS FOR COMPLETE BUILDING PERFORMANCE.",
           description:
-            "Mechanical, electrical and plumbing systems designed to support safe, efficient and reliable building performance.",
+            "From concept to handover, we bring mechanical, electrical, plumbing, drainage and fire protection systems together as one coordinated solution. Our team focuses on practical engineering, smooth installation and reliable performance—helping reduce clashes, avoid costly rework and deliver building systems that work efficiently from day one.",
           imageAlt:
             "Integrated MEP systems including pumps, piping and mechanical plant equipment",
           capabilities: [
             "MECHANICAL",
             "ELECTRICAL",
             "PLUMBING",
-            "COMMISSIONING",
+            "INTEGRATION",
           ],
         },
         electromechanical: {
           eyebrow: "ELECTROMECHANICAL SERVICES",
-          heading: "RELIABLE SYSTEMS. ENGINEERED FOR PERFORMANCE.",
+          heading: "RELIABLE SYSTEMS THAT KEEP YOUR OPERATIONS MOVING.",
           description:
-            "Integrated electromechanical solutions supporting reliable operation, system efficiency and long-term performance.",
+            "Behind every dependable facility are pumps, motors, control panels and equipment working exactly when they are needed. We install, integrate, maintain and troubleshoot electromechanical systems with a focus on reliability, performance and continuity—helping reduce unexpected failures and keep critical equipment operating with confidence.",
           imageAlt:
             "Electromechanical systems and equipment installed for building performance",
           capabilities: [
-            "POWER SYSTEMS",
-            "CONTROL SYSTEMS",
-            "EQUIPMENT",
-            "TESTING",
+            "PUMPS",
+            "MOTORS",
+            "CONTROL PANELS",
+            "MAINTENANCE",
           ],
         },
         engineering: {
           eyebrow: "ENGINEERING SERVICES",
-          heading: "ENGINEERING SOLUTIONS BUILT AROUND YOUR PROJECT.",
+          heading: "ENGINEERING CLARITY FROM DESIGN TO DELIVERY.",
           description:
-            "Professional engineering, design and technical coordination supporting projects from planning through implementation.",
+            "Good projects begin with good engineering. We transform project requirements into practical, coordinated and buildable solutions through design, calculations, equipment selection, shop drawings and technical submittals. From resolving design challenges to supporting construction teams on site, our engineering helps turn complex requirements into clear paths forward.",
           imageAlt:
             "OMS engineering team coordinating technical systems on a project site",
           capabilities: [
             "DESIGN",
-            "PLANNING",
-            "COORDINATION",
-            "TECHNICAL SUPPORT",
+            "DRAWINGS",
+            "CALCULATIONS",
+            "SUBMITTALS",
           ],
         },
         hvac: {
-          eyebrow: "HVAC SYSTEMS",
-          heading: "COMFORT, EFFICIENCY AND PERFORMANCE.",
+          eyebrow: "HVAC SERVICES",
+          heading:
+            "ENGINEERED FOR QATAR'S CLIMATE. BUILT FOR LASTING COMFORT.",
           description:
-            "HVAC solutions designed to deliver dependable climate control, energy efficiency and long-term system performance.",
+            "In Qatar, dependable cooling is essential. We design, install, test and maintain HVAC systems that deliver consistent comfort and reliable operation in demanding conditions. From cooling and ventilation to ductwork, equipment and system balancing, we focus on performance that occupants can feel and facility teams can depend on.",
           imageAlt:
             "HVAC equipment and ducting systems for climate control and building comfort",
-          capabilities: ["COOLING", "VENTILATION", "CONTROLS", "MAINTENANCE"],
+          capabilities: [
+            "COOLING",
+            "VENTILATION",
+            "DUCTWORK",
+            "COMMISSIONING",
+          ],
         },
         qcdd: {
-          eyebrow: "QCDD CONSULTATION SERVICES",
-          heading: "NAVIGATING FIRE & LIFE SAFETY REQUIREMENTS WITH CONFIDENCE.",
+          eyebrow: "QCDD SERVICES",
+          heading:
+            "CLEARER COORDINATION. SMOOTHER CIVIL DEFENCE PROGRESS.",
           description:
-            "Professional consultation and technical coordination supporting fire and life-safety requirements and QCDD processes.",
+            "Civil Defence requirements can become one of the most challenging stages of a project. We support your team with coordinated fire and life safety drawings, technical submissions, authority comment responses and inspection preparation—helping identify issues early, organize the required actions and keep your project moving through the QCDD review process.",
           imageAlt:
             "Fire protection and QCDD consultation supporting life-safety compliance",
           capabilities: [
-            "FIRE SAFETY",
-            "DESIGN REVIEW",
-            "COMPLIANCE",
-            "QCDD COORDINATION",
+            "FIRE PROTECTION",
+            "FIRE ALARM",
+            "SUBMISSIONS",
+            "INSPECTIONS",
           ],
         },
         amc: {
           eyebrow: "AMC SERVICES",
-          heading: "PROACTIVE MAINTENANCE. RELIABLE PERFORMANCE.",
+          heading:
+            "PREVENT PROBLEMS BEFORE THEY INTERRUPT YOUR BUSINESS.",
           description:
-            "Annual maintenance services designed to protect system performance, improve reliability and support long-term asset operation.",
+            "Reliable facilities need more than repairs after something goes wrong. Our Annual Maintenance Contracts combine planned inspections, preventive maintenance, troubleshooting and responsive support to keep HVAC, electrical, plumbing and fire protection systems performing as intended—reducing unexpected breakdowns and helping protect your operations throughout the year.",
           imageAlt:
             "OMS technicians performing annual maintenance on building systems",
           capabilities: [
             "PREVENTIVE MAINTENANCE",
-            "INSPECTION",
-            "TESTING",
-            "SYSTEM RELIABILITY",
+            "INSPECTIONS",
+            "REPAIRS",
+            "SUPPORT",
           ],
         },
       },
@@ -686,9 +711,9 @@ export const en = {
     about: "About OMS | Engineering & Maintenance Company Qatar",
     aboutDescription:
       "Learn about Oryxi Maintenance Services, providing fire protection, MEP, engineering and maintenance solutions for facilities and projects across Qatar.",
-    services: "Fire Protection, MEP & Engineering Services Qatar | OMS",
+    services: "MEP, Electromechanical, HVAC, Engineering, QCDD & AMC Services Qatar | OMS",
     servicesDescription:
-      "Explore OMS fire protection, MEP, electromechanical, HVAC, engineering and maintenance services for commercial and residential projects in Qatar.",
+      "Explore OMS MEP, electromechanical, engineering, HVAC, QCDD and AMC services for commercial and residential projects in Qatar.",
     projects: "Engineering & Fire Protection Projects Qatar | OMS",
     projectsDescription:
       "Explore OMS projects across Qatar covering fire protection, MEP, HVAC, engineering, maintenance and life-safety systems.",
@@ -953,9 +978,9 @@ export const en = {
         mep: "MEP Services",
         electromechanical: "Electromechanical Services",
         engineering: "Engineering Services",
-        hvac: "HVAC Systems",
-        qcdd: "QCDD Consultation",
-        amc: "AMC / Maintenance",
+        hvac: "HVAC Services",
+        qcdd: "QCDD Services",
+        amc: "AMC Services",
         peerless: "Peerless Pump Solutions",
         project: "Project Enquiry",
         other: "Other",
