@@ -8990,6 +8990,57 @@ html[lang="ar"] .oms-projects-hero-counter {
   text-shadow: 0 1px 8px rgb(11 23 38 / 0.45);
 }
 
+.oms-projects-modal-gallery {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: safe center;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0.85rem 1.15rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  background: var(--oms-dark);
+  scrollbar-width: thin;
+  scrollbar-color: rgb(255 255 255 / 0.45) transparent;
+}
+
+.oms-projects-modal-gallery-item {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  width: 72px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid rgb(255 255 255 / 0.34);
+  background: rgb(11 23 38 / 0.55);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .oms-projects-modal-gallery-item {
+    width: 96px;
+    height: 60px;
+  }
+}
+
+.oms-projects-modal-gallery-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.oms-projects-modal-gallery-item[aria-current="true"] {
+  border: 2px solid var(--oms-burgundy);
+  box-shadow: 0 0 0 2px var(--oms-white);
+}
+
+.oms-projects-modal-gallery-item:focus-visible {
+  outline: 2px solid var(--oms-white);
+  outline-offset: 3px;
+}
+
 .oms-projects-modal-body {
   flex: 0 0 auto;
   padding: 1.35rem 1.2rem 1.5rem;

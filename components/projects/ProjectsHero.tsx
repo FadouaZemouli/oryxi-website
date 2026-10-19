@@ -17,6 +17,7 @@ import type { Dictionary } from "@/lib/i18n/get-dictionary";
 import type { Locale } from "@/lib/i18n/config";
 import { useCarouselAutoplay } from "@/lib/carousel/use-carousel-autoplay";
 import {
+  type ProjectDetail,
   PROJECTS_HERO_AUTOPLAY_MS,
   PROJECTS_HERO_PROJECTS,
   PROJECTS_HERO_TRANSITION_MS,
@@ -35,9 +36,10 @@ const projectsHeroSans = Montserrat({
 type ProjectsHeroProps = {
   locale: Locale;
   dict: Dictionary;
+  projects?: readonly ProjectDetail[];
 };
 
-export function ProjectsHero({ locale, dict }: ProjectsHeroProps) {
+export function ProjectsHero({ locale, dict, projects }: ProjectsHeroProps) {
   const copy = dict.projectsPage.hero;
   const headingId = useId();
   const viewTriggerRef = useRef<HTMLButtonElement | null>(null);
@@ -293,7 +295,7 @@ export function ProjectsHero({ locale, dict }: ProjectsHeroProps) {
       <ProjectDetailModal
         locale={locale}
         copy={copy}
-        project={activeProject ?? null}
+        project={projects ? (projects.find((project) => project.id === (activeProject?.id === "madina-centrale" ? "madina-central" : activeProject?.id)) ?? null) : (activeProject ?? null)}
         open={modalOpen}
         onClose={closeModal}
         onPrev={modalPrev}

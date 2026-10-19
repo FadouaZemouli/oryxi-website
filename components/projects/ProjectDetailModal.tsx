@@ -2,10 +2,11 @@
 
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import { useEffect, useRef, type KeyboardEvent, type MouseEvent } from "react";
+import { useEffect, useRef, useState, type KeyboardEvent, type MouseEvent } from "react";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
 import type { LocalizedText, ProjectDetail } from "@/lib/projects/projects-data";
+import { galleryFrames } from "@/lib/projects/public-project-image";
 
 type ModalProject = ProjectDetail & {
   completionYear?: LocalizedText | string;
@@ -63,7 +64,19 @@ export function ProjectDetailModal({
   counterLabel,
 }: ProjectDetailModalProps) {
   const dialogRef = useRef<HTMLDialogElement | null>(null);
+  const coverButtonRef = useRef<HTMLButtonElement | null>(null);
+  const focusCoverAfterFailure = useRef(false);
   const detail = project as ModalProject | null;
+  const projectKey = detail?.id ?? "";
+  const sessionKey = `${projectKey}:${open}`;
+  const [trackedSession, setTrackedSession] = useState(sessionKey);
+  const [selected, setSelected] = useState<string | null>(null);
+  const [failed, setFailed] = useState<Set<string>>(() => new Set());
+  if (trackedSession !== sessionKey) {
+    setTrackedSession(sessionKey);
+    setSelected(null);
+    setFailed(new Set());
+  }
 
   useEffect(() => {
     const node = dialogRef.current;
@@ -110,20 +123,22 @@ export function ProjectDetailModal({
   };
 
   const onDialogKeyDown = (event: KeyboardEvent<HTMLDialogElement>) => {
-    if (event.key === "ArrowRight") {
-      event.preventDefault();
-      if (locale === "ar") {
-        onPrev();
-      } else {
-        onNext();
-      }
-    } else if (event.key === "ArrowLeft") {
-      event.preventDefault();
-      if (locale === "ar") {
-        onNext();
-      } else {
-        onPrev();
-      }
+    if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") {
+      return;
+    }
+
+    event.preventDefault();
+    const target = event.target;
+    if (target instanceof HTMLElement && target.dataset.galleryUrl) {
+      focusCoverAfterFailure.current = true;
+    }
+
+    const backward =
+      locale === "ar" ? event.key === "ArrowRight" : event.key === "ArrowLeft";
+    if (backward) {
+      onPrev();
+    } else {
+      onNext();
     }
   };
 
@@ -167,7 +182,59 @@ export function ProjectDetailModal({
     ? readListItems(detail.projectLocations, locale)
     : [];
   const showDescription = Boolean(description) && scopeItems.length === 0;
-  const hasFacts = Boolean(location || locationDetail || completionYear);
+  const hasFacts = Boolean(location || locationDetail || completionYear || detail?.qcddYear);
+  const coverUrl = detail ? (galleryFrames(detail.image, undefined)[0] ?? "") : "";
+  const galleryUrls = (detail ? galleryFrames("", detail.gallery) : []).filter(
+    (url) => url !== coverUrl,
+  );
+  const visibleGallery = galleryUrls.filter((url) => !failed.has(url));
+  const displayed =
+    open && visibleGallery.length > 0
+      ? selected && visibleGallery.includes(selected)
+        ? selected
+        : visibleGallery[0]
+      : coverUrl;
+  const showGallery = open && visibleGallery.length > 0;
+  const imageLabel = (index: number) =>
+    locale === "ar" ? `${name}، صورة ${index + 1}` : `${name}, image ${index + 1}`;
+
+  const failImage = (url: string) => {
+    if (!coverUrl || url === coverUrl) {
+      return;
+    }
+
+    const active = document.activeElement;
+    const shouldMoveFocus =
+      selected === url ||
+      (active instanceof HTMLElement && active.dataset.galleryUrl === url);
+    if (shouldMoveFocus) {
+      focusCoverAfterFailure.current = true;
+    }
+
+    setFailed((current) => {
+      if (current.has(url)) {
+        return current;
+      }
+      const next = new Set(current);
+      next.add(url);
+      return next;
+    });
+    setSelected((current) => (current === url ? null : current));
+  };
+
+  useEffect(() => {
+    if (!focusCoverAfterFailure.current) {
+      return;
+    }
+    focusCoverAfterFailure.current = false;
+    if (coverButtonRef.current) {
+      coverButtonRef.current.focus();
+      return;
+    }
+    dialogRef.current
+      ?.querySelector<HTMLButtonElement>(".oms-projects-modal-close")
+      ?.focus();
+  }, [failed, selected, showGallery]);
 
   return (
     <dialog
@@ -182,18 +249,22 @@ export function ProjectDetailModal({
       {detail ? (
         <div className="oms-projects-modal-panel" dir={locale === "ar" ? "rtl" : "ltr"}>
           <div className="oms-projects-modal-media">
-            <Image
-              src={detail.image}
-              alt={detail.imageAlt[locale]}
-              fill
-              sizes="(min-width: 1200px) 72.5rem, 100vw"
-              className="oms-projects-modal-image"
-              style={{
-                objectFit: "contain",
-                objectPosition: "center",
-                transform: "none",
-              }}
-            />
+            {displayed ? (
+              <Image
+                src={displayed}
+                unoptimized={displayed.startsWith("https://")}
+                alt={detail.imageAlt[locale]}
+                fill
+                sizes="(min-width: 1200px) 72.5rem, 100vw"
+                className="oms-projects-modal-image"
+                style={{
+                  objectFit: "contain",
+                  objectPosition: "center",
+                  transform: "none",
+                }}
+                onError={() => failImage(displayed)}
+              />
+            ) : null}
 
             <button
               type="button"
@@ -226,6 +297,39 @@ export function ProjectDetailModal({
             ) : null}
           </div>
 
+          {showGallery ? (
+            <div
+              className="oms-projects-modal-gallery"
+              role="group"
+              aria-label={locale === "ar" ? "صور المشروع" : "Project images"}
+            >
+              {visibleGallery.map((url, index) => {
+                const current = url === displayed;
+                return (
+                  <button
+                    key={url}
+                    ref={index === 0 ? coverButtonRef : undefined}
+                    type="button"
+                    className="oms-projects-modal-gallery-item"
+                    data-gallery-url={url}
+                    aria-label={imageLabel(index)}
+                    aria-current={current ? "true" : undefined}
+                    onClick={() => setSelected(url)}
+                  >
+                    <Image
+                      src={url}
+                      alt=""
+                      width={96}
+                      height={60}
+                      unoptimized={url.startsWith("https://")}
+                      onError={() => failImage(url)}
+                    />
+                  </button>
+                );
+              })}
+            </div>
+          ) : null}
+
           <div className="oms-projects-modal-body">
             <div className="oms-projects-modal-intro">
               <div className="oms-projects-modal-heading">
@@ -248,6 +352,12 @@ export function ProjectDetailModal({
                           {locationDetail}
                         </dd>
                       ) : null}
+                    </div>
+                  ) : null}
+                  {detail.qcddYear ? (
+                    <div className="oms-projects-modal-fact">
+                      <dt>{locale === "ar" ? "سنة شهادة الدفاع المدني" : "QCDD Certificate Year"}</dt>
+                      <dd>{detail.qcddYear}</dd>
                     </div>
                   ) : null}
                   {completionYear ? (
@@ -282,6 +392,14 @@ export function ProjectDetailModal({
                 </div>
               ) : null}
 
+              {detail.detailSections?.map((section, index) => (
+                <div key={section.key + "-" + index} className={section.key === "systems" ? "oms-projects-modal-systems" : "oms-projects-modal-stations"}>
+                  <p className={section.key === "systems" ? "oms-projects-modal-systems-label" : "oms-projects-modal-stations-label"}>{section.label[locale]}</p>
+                  <ul className={section.key === "systems" ? "oms-projects-modal-systems-list" : "oms-projects-modal-stations-list"}>
+                    {section.items.map((item, itemIndex) => <li key={itemIndex}>{item[locale]}</li>)}
+                  </ul>
+                </div>
+              ))}
               {stationLocations.length > 0 ? (
                 <div className="oms-projects-modal-stations">
                   <p className="oms-projects-modal-stations-label">

@@ -1,3 +1,4 @@
+import { getPublishedProjects } from "@/lib/projects/published-projects";
 import type { Metadata } from "next";
 import { ClientsMarquee } from "@/components/projects/ClientsMarquee";
 import { CompletedProjects } from "@/components/projects/CompletedProjects";
@@ -20,12 +21,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ProjectsPage({ params }: Props) {
   const locale = await getLocaleParam(params);
   const dict = getDictionary(locale);
+  const projects = await getPublishedProjects();
 
   return (
     <main className="oms-projects-page flex-1 bg-oms-white">
-      <ProjectsHero locale={locale} dict={dict} />
-      <OngoingProjects locale={locale} dict={dict} />
-      <CompletedProjects locale={locale} dict={dict} />
+      <ProjectsHero locale={locale} dict={dict} projects={[...projects.ongoing, ...projects.completed]} />
+      <OngoingProjects locale={locale} dict={dict} projects={projects.ongoing} />
+      <CompletedProjects locale={locale} dict={dict} projects={projects.completed} />
       <ClientsMarquee locale={locale} dict={dict} />
       <ProjectsCta locale={locale} dict={dict} />
     </main>

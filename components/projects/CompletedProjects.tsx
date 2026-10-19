@@ -7,11 +7,8 @@ import { Container } from "@/components/ui/Container";
 import { ProjectDetailModal } from "@/components/projects/ProjectDetailModal";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
 import type { Locale } from "@/lib/i18n/config";
-import {
-  COMPLETED_PROJECTS,
-  COMPLETED_PROJECTS_COUNT,
-  normalizeCompletedIndex,
-} from "@/lib/projects/completed-projects-data";
+import { projectCardImage } from "@/lib/projects/public-project-image";
+import type { ProjectDetail } from "@/lib/projects/projects-data";
 
 const completedSans = Montserrat({
   subsets: ["latin"],
@@ -21,13 +18,14 @@ const completedSans = Montserrat({
 type CompletedProjectsProps = {
   locale: Locale;
   dict: Dictionary;
+  projects: readonly ProjectDetail[];
 };
 
 function viewLabel(template: string, name: string): string {
   return template.replace("{name}", name);
 }
 
-export function CompletedProjects({ locale, dict }: CompletedProjectsProps) {
+export function CompletedProjects({ locale, dict, projects }: CompletedProjectsProps) {
   const copy = dict.projectsPage.completed;
   const heroCopy = dict.projectsPage.hero;
   const [modalIndex, setModalIndex] = useState<number | null>(null);
@@ -42,26 +40,27 @@ export function CompletedProjects({ locale, dict }: CompletedProjectsProps) {
 
   const goPrev = useCallback(() => {
     setModalIndex((current) =>
-      current == null ? current : normalizeCompletedIndex(current - 1),
+      current == null ? current : projects.length === 0 ? null : ((current - 1) % projects.length + projects.length) % projects.length,
     );
-  }, []);
+  }, [projects.length]);
 
   const goNext = useCallback(() => {
     setModalIndex((current) =>
-      current == null ? current : normalizeCompletedIndex(current + 1),
+      current == null ? current : projects.length === 0 ? null : ((current + 1) % projects.length + projects.length) % projects.length,
     );
-  }, []);
+  }, [projects.length]);
 
   const activeProject =
-    modalIndex == null ? null : (COMPLETED_PROJECTS[modalIndex] ?? null);
+    modalIndex == null ? null : (projects[modalIndex] ?? null);
 
-  const firstRow = COMPLETED_PROJECTS.slice(0, 4);
-  const secondRow = COMPLETED_PROJECTS.slice(4, 8);
-  const thirdRow = COMPLETED_PROJECTS.slice(8, 11);
-  const fourthRow = COMPLETED_PROJECTS.slice(11);
+  const firstRow = projects.slice(0, 4);
+  const secondRow = projects.slice(4, 8);
+  const thirdRow = projects.slice(8, 11);
+  const fourthRow = projects.slice(11);
 
-  const renderCard = (project: (typeof COMPLETED_PROJECTS)[number], index: number) => {
+  const renderCard = (project: (typeof projects)[number], index: number) => {
     const name = project.name[locale];
+    const image = projectCardImage(project.image, project.gallery);
 
     return (
       <button
@@ -73,7 +72,8 @@ export function CompletedProjects({ locale, dict }: CompletedProjectsProps) {
       >
         <span className="oms-ongoing-card-media">
           <Image
-            src={project.image}
+            src={image}
+            unoptimized={image.startsWith("https://")}
             alt=""
             fill
             sizes="(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 100vw"
@@ -137,7 +137,7 @@ export function CompletedProjects({ locale, dict }: CompletedProjectsProps) {
         counterLabel={
           modalIndex == null
             ? undefined
-            : `${String(modalIndex + 1).padStart(2, "0")} / ${String(COMPLETED_PROJECTS_COUNT).padStart(2, "0")}`
+            : `${String(modalIndex + 1).padStart(2, "0")} / ${String(projects.length).padStart(2, "0")}`
         }
       />
     </section>

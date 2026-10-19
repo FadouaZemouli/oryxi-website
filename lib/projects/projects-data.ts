@@ -17,6 +17,13 @@ export type ProjectDetail = {
   location: LocalizedText;
   description?: LocalizedText;
   imageAlt: LocalizedText;
+  gallery?: readonly string[];
+  qcddYear?: string;
+  detailSections?: readonly {
+    key: string;
+    label: LocalizedText;
+    items: readonly LocalizedText[];
+  }[];
   scopeItems?: readonly (string | LocalizedText)[];
   locationDetail?: string | LocalizedText;
   stationLocations?: readonly LocalizedText[];

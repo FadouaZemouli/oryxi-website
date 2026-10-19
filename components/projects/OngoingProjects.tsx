@@ -7,11 +7,8 @@ import { Container } from "@/components/ui/Container";
 import { ProjectDetailModal } from "@/components/projects/ProjectDetailModal";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
 import type { Locale } from "@/lib/i18n/config";
-import {
-  ONGOING_PROJECTS,
-  ONGOING_PROJECTS_COUNT,
-  normalizeOngoingIndex,
-} from "@/lib/projects/ongoing-projects-data";
+import { projectCardImage } from "@/lib/projects/public-project-image";
+import type { ProjectDetail } from "@/lib/projects/projects-data";
 
 const ongoingSans = Montserrat({
   subsets: ["latin"],
@@ -21,13 +18,14 @@ const ongoingSans = Montserrat({
 type OngoingProjectsProps = {
   locale: Locale;
   dict: Dictionary;
+  projects: readonly ProjectDetail[];
 };
 
 function viewLabel(template: string, name: string): string {
   return template.replace("{name}", name);
 }
 
-export function OngoingProjects({ locale, dict }: OngoingProjectsProps) {
+export function OngoingProjects({ locale, dict, projects }: OngoingProjectsProps) {
   const copy = dict.projectsPage.ongoing;
   const heroCopy = dict.projectsPage.hero;
   const [modalIndex, setModalIndex] = useState<number | null>(null);
@@ -42,18 +40,18 @@ export function OngoingProjects({ locale, dict }: OngoingProjectsProps) {
 
   const goPrev = useCallback(() => {
     setModalIndex((current) =>
-      current == null ? current : normalizeOngoingIndex(current - 1),
+      current == null ? current : projects.length === 0 ? null : ((current - 1) % projects.length + projects.length) % projects.length,
     );
-  }, []);
+  }, [projects.length]);
 
   const goNext = useCallback(() => {
     setModalIndex((current) =>
-      current == null ? current : normalizeOngoingIndex(current + 1),
+      current == null ? current : projects.length === 0 ? null : ((current + 1) % projects.length + projects.length) % projects.length,
     );
-  }, []);
+  }, [projects.length]);
 
   const activeProject =
-    modalIndex == null ? null : (ONGOING_PROJECTS[modalIndex] ?? null);
+    modalIndex == null ? null : (projects[modalIndex] ?? null);
 
   return (
     <section
@@ -70,8 +68,9 @@ export function OngoingProjects({ locale, dict }: OngoingProjectsProps) {
         </div>
 
         <div className="oms-ongoing-grid">
-          {ONGOING_PROJECTS.map((project, index) => {
+          {projects.map((project, index) => {
             const name = project.name[locale];
+            const image = projectCardImage(project.image, project.gallery);
 
             return (
               <button
@@ -83,7 +82,8 @@ export function OngoingProjects({ locale, dict }: OngoingProjectsProps) {
               >
                 <span className="oms-ongoing-card-media">
                   <Image
-                    src={project.image}
+                    src={image}
+                    unoptimized={image.startsWith("https://")}
                     alt=""
                     fill
                     sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
@@ -119,7 +119,7 @@ export function OngoingProjects({ locale, dict }: OngoingProjectsProps) {
         counterLabel={
           modalIndex == null
             ? undefined
-            : `${String(modalIndex + 1).padStart(2, "0")} / ${String(ONGOING_PROJECTS_COUNT).padStart(2, "0")}`
+            : `${String(modalIndex + 1).padStart(2, "0")} / ${String(projects.length).padStart(2, "0")}`
         }
       />
     </section>
