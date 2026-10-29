@@ -10,7 +10,7 @@ const ctaSans = Montserrat({
   variable: "--font-montserrat",
 });
 
-const CTA_IMAGE_SRC = "/images/pump-selection/cta/oms-engineering-cta.png";
+const CTA_IMAGE_SRC = "/images/pump-selection/cta/oms-engineering-cta2.png";
 
 type PumpCtaProps = {
   locale: Locale;
